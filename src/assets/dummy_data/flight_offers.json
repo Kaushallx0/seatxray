@@ -1,0 +1,86 @@
+{
+    "meta": {
+        "count": 1
+    },
+    "data": [
+        {
+            "type": "flight-offer",
+            "id": "1",
+            "source": "GDS",
+            "instantTicketingRequired": false,
+            "nonHomogeneous": false,
+            "oneWay": true,
+            "lastTicketingDate": "2025-08-01",
+            "numberOfBookableSeats": 9,
+            "itineraries": [
+                {
+                    "duration": "PT1H30M",
+                    "segments": [
+                        {
+                            "departure": {
+                                "iataCode": "NCE",
+                                "terminal": "2",
+                                "at": "2023-08-01T06:45:00"
+                            },
+                            "arrival": {
+                                "iataCode": "ORY",
+                                "terminal": "2",
+                                "at": "2023-08-01T08:15:00"
+                            },
+                            "carrierCode": "AF",
+                            "number": "6201",
+                            "aircraft": {
+                                "code": "320"
+                            },
+                            "operating": {
+                                "carrierCode": "AF"
+                            },
+                            "duration": "PT1H30M",
+                            "id": "1",
+                            "numberOfStops": 0,
+                            "blacklistedInEU": false
+                        }
+                    ]
+                }
+            ],
+            "price": {
+                "currency": "JPY",
+                "total": "15400",
+                "base": "12000",
+                "fees": [],
+                "grandTotal": "15400"
+            },
+            "pricingOptions": {
+                "fareType": [
+                    "PUBLISHED"
+                ],
+                "includedCheckedBagsOnly": true
+            },
+            "validatingAirlineCodes": [
+                "AF"
+            ],
+            "travelerPricings": [
+                {
+                    "travelerId": "1",
+                    "fareOption": "STANDARD",
+                    "travelerType": "ADULT",
+                    "price": {
+                        "currency": "JPY",
+                        "total": "15400"
+                    },
+                    "fareDetailsBySegment": [
+                        {
+                            "segmentId": "1",
+                            "cabin": "ECONOMY",
+                            "fareBasis": "QSTANDARD",
+                            "class": "Q",
+                            "includedCheckedBags": {
+                                "quantity": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

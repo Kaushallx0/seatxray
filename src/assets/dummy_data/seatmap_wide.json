@@ -1,0 +1,1415 @@
+{
+    "data": [
+        {
+            "type": "seatmap",
+            "id": "1",
+            "flightOfferIds": [
+                "1"
+            ],
+            "decks": [
+                {
+                    "deckType": "MAIN",
+                    "deckConfiguration": {
+                        "width": 9,
+                        "length": 40
+                    },
+                    "facilities": [
+                        {
+                            "code": "LA",
+                            "coordinates": {
+                                "x": 0,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "LA",
+                            "coordinates": {
+                                "x": 0,
+                                "y": 8
+                            }
+                        },
+                        {
+                            "code": "G",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "G",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 8
+                            }
+                        },
+                        {
+                            "code": "LA",
+                            "coordinates": {
+                                "x": 38,
+                                "y": 0
+                            }
+                        },
+                        {
+                            "code": "LA",
+                            "coordinates": {
+                                "x": 38,
+                                "y": 8
+                            }
+                        }
+                    ],
+                    "seats": [
+                        {
+                            "number": "1A",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 1,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "1B",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 1,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "1J",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 1,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "1K",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 1,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "2A",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 2,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "2B",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 2,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "2J",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 2,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "2K",
+                            "cabin": "FIRST",
+                            "coordinates": {
+                                "x": 2,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "5A",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 5,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "K"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "5B",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 5,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "5D",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 5,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "5E",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 5,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "5F",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 5,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "5J",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 5,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "5K",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 5,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "6A",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 6,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "6B",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 6,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "6D",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 6,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "6E",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 6,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "6F",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 6,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "6J",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 6,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "6K",
+                            "cabin": "BUSINESS",
+                            "coordinates": {
+                                "x": 6,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10A",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "K",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10B",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10C",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 2
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10D",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10E",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10F",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10G",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 6
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10H",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "10K",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 10,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11A",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "L"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11B",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "L"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11C",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 2
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "L"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11D",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11E",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11F",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11G",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 6
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11H",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "11K",
+                            "cabin": "PREMIUM_ECONOMY",
+                            "coordinates": {
+                                "x": 11,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20A",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20B",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20C",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 2
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20D",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20E",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20F",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20G",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 6
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20H",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "20K",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 20,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "E"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21A",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21B",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21C",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 2
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21D",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21E",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21F",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21G",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 6
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21H",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "21K",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 21,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22A",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22B",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22C",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 2
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22D",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22E",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22F",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22G",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 6
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22H",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "22K",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 22,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30A",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30B",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30C",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 2
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30D",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30E",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30F",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30G",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 6
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30H",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "30K",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 30,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35A",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 0
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "CH"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35B",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 1
+                            },
+                            "characteristicsCodes": [
+                                "CH"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35C",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 2
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "CH"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35D",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 3
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35E",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 4
+                            },
+                            "characteristicsCodes": [],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35F",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 5
+                            },
+                            "characteristicsCodes": [
+                                "A"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "OCCUPIED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35G",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 6
+                            },
+                            "characteristicsCodes": [
+                                "A",
+                                "CH"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "BLOCKED"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35H",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 7
+                            },
+                            "characteristicsCodes": [
+                                "CH"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        },
+                        {
+                            "number": "35K",
+                            "cabin": "ECONOMY",
+                            "coordinates": {
+                                "x": 35,
+                                "y": 8
+                            },
+                            "characteristicsCodes": [
+                                "W",
+                                "CH"
+                            ],
+                            "travelerPricing": [
+                                {
+                                    "seatAvailabilityStatus": "AVAILABLE"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
