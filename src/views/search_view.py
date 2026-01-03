@@ -1,47 +1,175 @@
 import flet as ft
-from theme import glass_style, COLOR_ACCENT, COLOR_TEXT_PRIMARY, get_color_palette
+from theme import get_color_palette, COLOR_ACCENT
 from services.seat_service import SeatService
+from components.flight_card import FlightCard
 import json
 import os
 import asyncio
-from components.flight_card import FlightCard
-from datetime import datetime, timedelta
 from datetime import datetime, timedelta
 
-class SearchView(ft.Stack):
-    def __init__(self, page_ref: ft.Page, amadeus, on_offer_select, **kwargs):
-        super().__init__(**kwargs)
-        self.page_ref = page_ref
+
+class SearchContent(ft.Column):
+    """検索画面のコンテンツ"""
+    
+    def __init__(self, page: ft.Page, app_state, amadeus, on_navigate_seatmap, **kwargs):
+        self.page_ref = page
+        self.app_state = app_state
         self.amadeus = amadeus
-        self.on_offer_select = on_offer_select
-        self.expand = True
-        self.alignment = ft.Alignment(0, -1)
+        self.on_offer_select = on_navigate_seatmap
+        
+        self.is_dark = (app_state.theme_mode == "DARK")
+        self.palette = get_color_palette(self.is_dark)
         
         self.seat_service = SeatService()
         self.airports = self._load_airports()
+        self.flights = getattr(app_state, "offers", []) or []
+        self.has_searched = bool(self.flights) # 既に検索結果があればTrue
+        self.expanded_flight_id = None
+        self.saved_input_state = kwargs.get("input_state", {})
         
-        self.flights = [] 
-        self.is_dark = self.page_ref.theme_mode == ft.ThemeMode.DARK
-        self.palette = get_color_palette(self.is_dark)
-
-        # Components
-        self.origin_field = None
-        self.dest_field = None
-        self.date_field = None
-        self.time_field = None
-        self.window_field = None
+        # オートコンプリート用
+        self._active_field = None
+        self._suggestions_overlay = None
         
-        self.header_title = None
-        self.header_sub = None
-        self.search_bar_container = None
-        self.results_col = ft.Column(spacing=15, scroll=ft.ScrollMode.AUTO, expand=True)
-        self.loading_bar = ft.ProgressBar(width=200, color=COLOR_ACCENT, visible=False)
+        # Refs
+        self.origin_ref = ft.Ref[ft.TextField]()
+        self.dest_ref = ft.Ref[ft.TextField]()
+        self.date_ref = ft.Ref[ft.TextField]()
+        self.time_ref = ft.Ref[ft.TextField]()
+        self.window_ref = ft.Ref[ft.Dropdown]()
+        self.loading_ref = ft.Ref[ft.ProgressBar]()
+        self.results_ref = ft.Ref[ft.Column]()
         
-        self.suggestions_overlay = None
-        self.overlay_layer = None
-        self.suggestions_col = ft.Column(spacing=0)
+        p = self.palette
         
-        self._build_ui()
+        # デフォルト値
+        def_ori = self.saved_input_state.get("origin", "HND")
+        def_dst = self.saved_input_state.get("dest", "LHR")
+        default_date_obj = datetime.now() + timedelta(days=30)
+        def_dat = self.saved_input_state.get("date", default_date_obj.strftime("%Y-%m-%d"))
+        def_tim = self.saved_input_state.get("time", "10:00")
+        def_win = self.saved_input_state.get("window", "4H")
+        
+        # ヘッダー
+        header = ft.Column([
+            ft.Text("フライト検索", size=48, weight="bold", color=p["text"]),
+            ft.Text("便を選択して座席表を解析します", size=18, color=p["text_secondary"]),
+        ], spacing=5)
+        
+        # 検索バー
+        search_bar = ft.Container(
+            content=ft.Row([
+                ft.TextField(
+                    ref=self.origin_ref,
+                    label="出発地",
+                    value=def_ori,
+                    width=160,
+                    border_color=p["border"],
+                    color=p["text"],
+                    text_size=18,
+                    on_change=lambda e: self._on_airport_change(e, "origin"),
+                    on_focus=lambda e: self._on_airport_focus(e, "origin"),
+                ),
+                ft.TextField(
+                    ref=self.dest_ref,
+                    label="目的地",
+                    value=def_dst,
+                    width=160,
+                    border_color=p["border"],
+                    color=p["text"],
+                    text_size=18,
+                    on_change=lambda e: self._on_airport_change(e, "dest"),
+                    on_focus=lambda e: self._on_airport_focus(e, "dest"),
+                ),
+                ft.TextField(
+                    ref=self.date_ref,
+                    label="日付", 
+                    value=def_dat, 
+                    width=140,
+                    border_color=p["border"],
+                    color=p["text"],
+                    text_size=18,
+                ),
+                ft.TextField(
+                    ref=self.time_ref,
+                    label="時刻", 
+                    value=def_tim, 
+                    width=100,
+                    border_color=p["border"],
+                    color=p["text"],
+                    text_size=18,
+                ),
+                ft.Dropdown(
+                    ref=self.window_ref,
+                    label="検索範囲",
+                    value=def_win,
+                    width=160,
+                    border_color=p["border"],
+                    color=p["text"],
+                    text_size=18,
+                    options=[
+                        ft.dropdown.Option("1H", text="＋ 1時間"),
+                        ft.dropdown.Option("2H", text="＋ 2時間"),
+                        ft.dropdown.Option("4H", text="＋ 4時間"),
+                        ft.dropdown.Option("12H", text="＋ 12時間"),
+                    ],
+                ),
+                ft.Container(
+                    content=ft.ElevatedButton(
+                        content=ft.Row([
+                            ft.Icon(ft.Icons.SEARCH, color="white", size=20),
+                            ft.Text("検索", size=16, color="white"),
+                        ], spacing=8),
+                        bgcolor=COLOR_ACCENT,
+                        on_click=self.run_search,
+                        height=50,
+                    ),
+                    width=120,
+                ),
+            ], spacing=15, wrap=True, run_spacing=15, vertical_alignment=ft.CrossAxisAlignment.START),
+            bgcolor=ft.Colors.with_opacity(0.05, p["text"]) if self.is_dark else "#f9f9f9",
+            border=ft.border.all(1, p["border_opacity"]),
+            border_radius=16,
+            padding=20,
+        )
+        
+        # ローディングバー
+        loading_bar = ft.ProgressBar(
+            ref=self.loading_ref,
+            width=300,
+            color=COLOR_ACCENT,
+            visible=False,
+        )
+        
+        # 結果エリア
+        results_column = ft.Column(
+            ref=self.results_ref,
+            controls=[],
+            spacing=15,
+            scroll=ft.ScrollMode.AUTO,
+            expand=True,
+        )
+        
+        super().__init__(
+            controls=[
+                ft.Container(
+                    content=ft.Column([
+                        header,
+                        ft.Container(height=20),
+                        search_bar,
+                        ft.Container(height=20),
+                        loading_bar,
+                        results_column,
+                    ], spacing=0, expand=True),
+                    padding=40,
+                    expand=True,
+                )
+            ],
+            expand=True,
+        )
+        
+        if self.flights:
+            self._render_results()
 
     def _load_airports(self):
         try:
@@ -52,188 +180,229 @@ class SearchView(ft.Stack):
         except:
             return []
 
+    def update_palette(self, new_palette):
+        """テーマ変更時にパレットを更新（ビュー再作成なし）"""
+        self.palette = new_palette
+        self.is_dark = (self.app_state.theme_mode == "DARK")
+        
+        # ヘッダーテキストの色を更新
+        main_container = self.controls[0]
+        inner_column = main_container.content
+        header = inner_column.controls[0]  # ft.Column containing header texts
+        header.controls[0].color = new_palette["text"]  # Title
+        header.controls[1].color = new_palette["text_secondary"]  # Subtitle
+        
+        # 検索バーの背景と境界線を更新
+        search_bar = inner_column.controls[2]  # ft.Container
+        search_bar.bgcolor = ft.Colors.with_opacity(0.05, new_palette["text"]) if self.is_dark else "#f9f9f9"
+        search_bar.border = ft.border.all(1, new_palette["border_opacity"])
+        
+        # 入力フィールドの色を更新
+        search_row = search_bar.content
+        for control in search_row.controls:
+            if isinstance(control, ft.TextField):
+                control.border_color = new_palette["border"]
+                control.color = new_palette["text"]
+            elif isinstance(control, ft.Dropdown):
+                control.border_color = new_palette["border"]
+                control.color = new_palette["text"]
+        
+        # 結果を再描画
+        self._render_results()
+        
+        try:
+            self.update()
+        except:
+            pass
+
+    def _on_airport_focus(self, e, field_type):
+        self._active_field = field_type
+        if e.control.value:
+            self._show_suggestions(e.control.value, e.control)
+
+    def _on_airport_change(self, e, field_type):
+        self._active_field = field_type
+        self._show_suggestions(e.control.value, e.control)
+
+    def _show_suggestions(self, query, text_field):
+        # 既存のオーバーレイを削除
+        self._hide_suggestions()
+        
+        q = (query or "").upper()
+        if len(q) < 1:
+            return
+        
+        matches = [a for a in self.airports if 
+                   q in a["iata"] or 
+                   q in (a.get("city") or "").upper() or
+                   q in (a.get("city_ja") or "")][:5]
+        
+        if not matches:
+            return
+        
+        p = self.palette
+        
+        # サジェストリストを作成
+        suggestions = ft.Column([], spacing=0)
+        for m in matches:
+            code = m["iata"]
+            city = m.get('city_ja', m.get('city', ''))
+            name = m.get('name_ja', m.get('name', ''))
+            
+            tile = ft.ListTile(
+                title=ft.Text(f"{code} - {city}", size=13, weight="bold", color=p["text"]),
+                subtitle=ft.Text(name, size=11, color=p["text_secondary"]),
+                dense=True,
+                bgcolor=p["surface_container"],
+                on_click=lambda e, c=code: self._select_airport(c),
+            )
+            suggestions.controls.append(tile)
+        
+        # 位置計算:
+        # NavigationRail (100px) + VerticalDivider (1px) + padding (40px) + search_bar padding (20px)
+        base_left = 100 + 1 + 40 + 20  # 161px
+        field_width = 160
+        
+        if self._active_field == "origin":
+            left_pos = base_left
+        else:  # dest
+            left_pos = base_left + field_width + 15  # spacing 15px
+        
+        # 縦位置: 入力欄の底辺の真下
+        # 検索バー全体の位置を考慮
+        top_pos = 265  # 入力欄の底辺より下
+        
+        # サジェストボックス
+        suggestions_box = ft.Container(
+            content=suggestions,
+            bgcolor=p["surface_container"],
+            border=ft.border.all(1, p["border_opacity"]),
+            border_radius=8,
+            width=field_width,  # 入力フィールドと同じ幅
+            left=left_pos,
+            top=top_pos,
+        )
+        
+        self._suggestions_overlay = ft.Stack([
+            ft.GestureDetector(
+                content=ft.Container(bgcolor=ft.Colors.TRANSPARENT, expand=True),
+                on_tap=lambda e: self._hide_suggestions(),
+            ),
+            suggestions_box,
+        ], expand=True)
+        
+        self.page_ref.overlay.append(self._suggestions_overlay)
+        self.page_ref.update()
+
+    def _select_airport(self, code):
+        if self._active_field == "origin":
+            self.origin_ref.current.value = code
+            self.origin_ref.current.update()
+        elif self._active_field == "dest":
+            self.dest_ref.current.value = code
+            self.dest_ref.current.update()
+        self._hide_suggestions()
+
+    def _hide_suggestions(self):
+        if self._suggestions_overlay and self._suggestions_overlay in self.page_ref.overlay:
+            self.page_ref.overlay.remove(self._suggestions_overlay)
+            self.page_ref.update()
+        self._suggestions_overlay = None
+
     def _get_city_name(self, code):
         for a in self.airports:
             if a["iata"] == code:
                 return a.get("city_ja", a.get("city", code))
         return code
 
-    def _build_ui(self):
-        INPUT_WIDTH = 180
-        self.suggestions_overlay = ft.Container(
-            content=self.suggestions_col, visible=True, 
-            bgcolor=self.palette["surface_container"], 
-            border=ft.Border.all(1, self.palette["border_opacity"]), 
-            border_radius=8, padding=0, width=INPUT_WIDTH,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.BLACK_54),
-        )
-        
-        self.origin_field = self._create_autocomplete("出発地", "HND", 0, INPUT_WIDTH)
-        self.dest_field = self._create_autocomplete("目的地", "LHR", INPUT_WIDTH + 10, INPUT_WIDTH)
-        self.date_field = self._create_tf("日付", "2025-02-01", 130)
-        self.time_field = self._create_tf("時刻", "10:00", 100)
-        self.window_field = ft.Dropdown(
-            label="時間幅", value="4H", width=160, 
-            border_color=self.palette["border"], color=self.palette["text"],
-            text_size=16, label_style=ft.TextStyle(size=20, color=self.palette["text_secondary"]),
-            options=[
-                ft.dropdown.Option("1H", text="＋ 1時間"),
-                ft.dropdown.Option("2H", text="＋ 2時間"),
-                ft.dropdown.Option("4H", text="＋ 4時間"),
-                ft.dropdown.Option("12H", text="＋ 12時間"),
-            ]
-        )
+    def get_input_state(self):
+        return {
+            "origin": self.origin_ref.current.value if self.origin_ref.current else "",
+            "dest": self.dest_ref.current.value if self.dest_ref.current else "",
+            "date": self.date_ref.current.value if self.date_ref.current else "",
+            "time": self.time_ref.current.value if self.time_ref.current else "",
+            "window": self.window_ref.current.value if self.window_ref.current else "4H",
+        }
 
-        self.search_bar_container = ft.Container(
-            content=ft.Row(
-                [self.origin_field, self.dest_field, self.date_field, self.time_field, self.window_field, 
-                 ft.IconButton(ft.Icons.SEARCH, bgcolor=COLOR_ACCENT, icon_color="white", on_click=self.run_search, width=50, height=50, style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=12)))
-                ],
-                alignment=ft.MainAxisAlignment.START, vertical_alignment=ft.CrossAxisAlignment.CENTER, wrap=True, spacing=10
-            ),
-            bgcolor=ft.Colors.with_opacity(0.05, self.palette["text"]), blur=ft.Blur(10, 10),
-            border=ft.Border.all(1, self.palette["border_opacity"]), border_radius=16, padding=20
-        )
-
-        self.header_title = ft.Text("フライト検索", size=32, weight="bold", color=self.palette["text"], font_family="Yu Gothic UI")
-        self.header_sub = ft.Text("便を選択して座席表を解析します", size=14, color=self.palette["text_secondary"])
-
-        main_layer = ft.Container(
-            content=ft.Column([
-                self.header_title, self.header_sub,
-                ft.Divider(height=10, color="transparent"),
-                self.search_bar_container, self.loading_bar, self.results_col
-            ], spacing=15, expand=True),
-            expand=True, width=920,
-        )
-
-        self.overlay_layer = ft.Container(
-            expand=True, visible=False, width=920, alignment=ft.Alignment(0, -1),
-            content=ft.Stack([self.suggestions_overlay])
-        )
-        self.controls = [main_layer, self.overlay_layer]
-
-    def _create_tf(self, label, val, w):
-        return ft.TextField(
-            label=label, value=val, width=w, border_color=self.palette["border"], 
-            color=self.palette["text"], text_size=16, 
-            label_style=ft.TextStyle(size=20, color=self.palette["text_secondary"])
-        )
-
-    def _create_autocomplete(self, label, initial_val, left_pos, width):
-        def on_change(e):
-            q = tf.value.upper()
-            self.suggestions_col.controls.clear()
-            if len(q) >= 1:
-                matches = [a for a in self.airports if q in a["iata"] or q in (a.get("city") or "").upper()][:6]
-                if matches:
-                    for m in matches:
-                        self.suggestions_col.controls.append(
-                            ft.Container(
-                                content=ft.Column([
-                                    ft.Text(f"{m['iata']} - {m.get('city_ja', m.get('city'))}", color=self.palette["text"], weight="bold"),
-                                    ft.Text(f"{m.get('name_ja', m.get('name'))}", color=self.palette["text_secondary"], size=12, no_wrap=True),
-                                ], spacing=2, alignment=ft.MainAxisAlignment.START),
-                                padding=10, width=width, bgcolor=ft.Colors.with_opacity(0.01, self.palette["text"]), 
-                                on_click=lambda _, c=m["iata"]: select(c), ink=True, border_radius=4
-                            )
-                        )
-                    self.overlay_layer.visible = True
-                    self.suggestions_overlay.top = 200 
-                    self.suggestions_overlay.left = left_pos + 20
-                    self.page_ref.update()
-                else: self.overlay_layer.visible = False
-            else: self.overlay_layer.visible = False
-            self.page_ref.update()
-
-        def select(code):
-            tf.value = code
-            self.overlay_layer.visible = False
-            self.page_ref.update()
-        
-        def hide(e):
-            async def _h():
-                await asyncio.sleep(0.2)
-                self.overlay_layer.visible = False
-                self.page_ref.update()
-            asyncio.create_task(_h())
-
-        tf = ft.TextField(
-            label=label, value=initial_val, width=width, border_color=self.palette["border"], 
-            color=self.palette["text"], text_size=16, 
-            label_style=ft.TextStyle(size=20, color=self.palette["text_secondary"]),
-            on_change=on_change, on_blur=hide
-        )
-        return tf
-
-    def update_theme_mode(self, is_dark, should_update=True):
-        self.is_dark = is_dark
-        self.palette = get_color_palette(is_dark)
-        p = self.palette
-        
-        self.header_title.color = p["text"]
-        self.header_sub.color = p["text_secondary"]
-        
-        # Search Bar: White in Light Mode for clean look, Translucent in Dark
-        self.search_bar_container.bgcolor = ft.Colors.with_opacity(0.05, p["text"]) if is_dark else "#f9f9f9"
-        self.search_bar_container.border = ft.Border.all(1, p["border_opacity"])
-        
-        for f in [self.origin_field, self.dest_field, self.date_field, self.time_field, self.window_field]:
-            f.border_color = p["border"]
-            f.color = p["text"]
-            f.label_style.color = p["text_secondary"]
-            
-        self.suggestions_overlay.bgcolor = p["surface_container"]
-        self.suggestions_overlay.border = ft.Border.all(1, p["border_opacity"])
-        
-        # Results Update (In-Place to preserve scroll)
-        for c in self.results_col.controls:
-            if isinstance(c, FlightCard):
-                c.update_theme(p)
-            elif isinstance(c, ft.Text):
-                c.color = p["text"]
-        
-        if should_update:
-            self.update()
+    def _handle_toggle(self, flight_id):
+        if self.expanded_flight_id == flight_id:
+            self.expanded_flight_id = None
+        else:
+            self.expanded_flight_id = flight_id
+        self._render_results()
+        self.page_ref.update()
 
     async def run_search(self, e):
-        self.results_col.controls.clear()
-        self.loading_bar.visible = True
-        self.page_ref.update()
+        self._hide_suggestions()
+        self.loading_ref.current.visible = True
+        self.loading_ref.current.update()
+        self.results_ref.current.controls.clear()
+        
+        self.has_searched = True # 検索実行フラグを立てる
+        
+        origin = self.origin_ref.current.value
+        dest = self.dest_ref.current.value
         
         try:
-            t_val = self.time_field.value
-            w_val = self.window_field.value
-            input_time = datetime.strptime(t_val, "%H:%M")
+            t_val = self.time_ref.current.value
+            w_val = self.window_ref.current.value
             shift = int(w_val.replace("H", "")) / 2
-            t_fmt = (input_time + timedelta(hours=shift)).strftime("%H:%M") 
-            window_param = f"{int(shift)}H" 
+            input_time = datetime.strptime(t_val, "%H:%M")
+            t_fmt = (input_time + timedelta(hours=shift)).strftime("%H:%M")
+            window_param = f"{int(shift*2)}H"
             
             resp = await self.amadeus.search_flights(
-                self.origin_field.value, self.dest_field.value, self.date_field.value,
-                time=t_fmt, window=window_param
+                origin,
+                dest,
+                self.date_ref.current.value,
+                time=t_fmt,
+                window=window_param
             )
-        except ValueError:
+        except Exception as err:
+            print(f"Search error: {err}")
             resp = await self.amadeus.search_flights(
-                self.origin_field.value, self.dest_field.value, self.date_field.value,
-                time=self.time_field.value, window=self.window_field.value
+                origin,
+                dest,
+                self.date_ref.current.value
             )
         
-        self.flights = self.seat_service.group_offers_by_flight(resp)
-        self.loading_bar.visible = False
+        if resp and "data" in resp:
+            self.flights = self.seat_service.group_offers_by_flight(resp)
+            self.app_state.offers = self.flights
+        else:
+            self.flights = []
         
+        self.loading_ref.current.visible = False
         self._render_results()
         self.page_ref.update()
 
     def _render_results(self):
-        self.results_col.controls.clear()
+        col = self.results_ref.current
+        if not col:
+            return
+        col.controls.clear()
         p = self.palette
+        
         if self.flights:
-            self.results_col.controls.append(ft.Text(f"検索結果: {len(self.flights)} 便", size=16, color=p["text"], weight="bold"))
+            col.controls.append(
+                ft.Text(f"検索結果: {len(self.flights)} 便", size=20, color=p["text"], weight="bold")
+            )
             for f in self.flights:
+                is_expanded = (f["id"] == self.expanded_flight_id)
                 card = FlightCard(
-                    f, p, 
-                    on_select=lambda offers: asyncio.create_task(self.on_offer_select(offers)),
+                    flight_data=f,
+                    palette=p,
+                    is_expanded=is_expanded,
+                    on_toggle=lambda fd=f: self._handle_toggle(fd["id"]),
+                    on_select_seatmap=lambda offers, fd=f: self._handle_select(offers, fd),
                     get_city_name=self._get_city_name
                 )
-                self.results_col.controls.append(card)
+                col.controls.append(card)
+        elif self.has_searched:
+            col.controls.append(
+                ft.Text("条件に一致するフライトが見つかりませんでした。", size=18, color=p["text"])
+            )
+
+    def _handle_select(self, offers, flight_data):
+        self.app_state.selected_offer_group = flight_data
+        self.on_offer_select(offers)

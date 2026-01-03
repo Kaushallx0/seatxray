@@ -56,26 +56,7 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
             "chars": chars
         })
 
-    # --- 列順序を決定 ---
-    # 全ての列文字を収集してソート（A, B, C, D, E, F, G, H, J, K の順）
-    all_col_letters = sorted(column_characteristics.keys())
     
-    # 通路の位置を検出: 'A' (Aisle) 特性を持つ列の「後」に通路を配置
-    # 注: 左側通路席の後と、右側通路席の前にスペースを入れる
-    aisle_after_cols = set()
-    for i, col in enumerate(all_col_letters):
-        if 'A' in column_characteristics.get(col, set()):
-            # この列が通路側なら、次の列との間に通路がある可能性
-            # ただし、両側に通路がある場合は1つだけ入れる
-            if i < len(all_col_letters) - 1:
-                next_col = all_col_letters[i + 1]
-                if 'A' in column_characteristics.get(next_col, set()):
-                    # 両方通路側 = 実際の通路がある
-                    aisle_after_cols.add(col)
-    
-    print(f"[SeatCanvas] Detected column order: {all_col_letters}")
-    print(f"[SeatCanvas] Aisle after columns: {aisle_after_cols}")
-
     # --- UI 構築 ---
     ui_controls = []
     
@@ -106,16 +87,59 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
         rows_in_cabin = cabin_rows[cabin]
         sorted_rows = sorted(rows_in_cabin.keys())
         
-        # このキャビンで使用される列文字
-        cabin_cols = set()
+        # --- このキャビン固有の列情報を収集 ---
+        cabin_col_chars = {} # col -> set of characteristics
         for seats_list in rows_in_cabin.values():
             for s in seats_list:
-                cabin_cols.add(s["col_char"])
-        cabin_col_order = [c for c in all_col_letters if c in cabin_cols]
+                col = s["col_char"]
+                if col not in cabin_col_chars: cabin_col_chars[col] = set()
+                cabin_col_chars[col].update(s["chars"])
+        
+        cabin_col_order = sorted(cabin_col_chars.keys())
+        
+        # --- キャビンごとの通路検出 (Smart Logic) ---
+        cabin_aisles = set()
+        for i in range(len(cabin_col_order) - 1):
+            col_left = cabin_col_order[i]
+            col_right = cabin_col_order[i+1]
+            
+            # この2列が共存する行を探す
+            common_rows = []
+            for r in rows_in_cabin:
+                seats = rows_in_cabin[r]
+                row_cols = {s["col_char"]: s for s in seats}
+                if col_left in row_cols and col_right in row_cols:
+                    common_rows.append(row_cols)
+            
+            is_aisle = False
+            if common_rows:
+                # 共存する行がある場合：
+                # 「全ての共存行において、左がAisle かつ 右がAisle」ならば通路とみなす
+                all_separated = True
+                for row_map in common_rows:
+                    left_is_aisle = 'A' in row_map[col_left]["chars"]
+                    right_is_aisle = 'A' in row_map[col_right]["chars"]
+                    
+                    if not (left_is_aisle and right_is_aisle):
+                        all_separated = False
+                        break
+                
+                if all_separated:
+                    is_aisle = True
+            else:
+                # 共存する行がない場合（レアケース）
+                # デフォルトの挙動：両方が「どこかでAisle」なら通路とする
+                left_ever_aisle = 'A' in cabin_col_chars.get(col_left, set())
+                right_ever_aisle = 'A' in cabin_col_chars.get(col_right, set())
+                if left_ever_aisle and right_ever_aisle:
+                    is_aisle = True
+
+            if is_aisle:
+                cabin_aisles.add(col_left)
         
         # 座席サイズ計算（通路込み）
         num_cols = len(cabin_col_order)
-        num_aisles = len([c for c in aisle_after_cols if c in cabin_cols])
+        num_aisles = len(cabin_aisles)
         total_gaps = (num_cols - 1) * SEAT_GAP + num_aisles * (AISLE_GAP - SEAT_GAP)
         
         if num_cols > 0:
@@ -164,8 +188,8 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
                     # この行にこの列がない場合は空白プレースホルダー
                     seat_widgets.append(ft.Container(width=seat_size, height=seat_size))
                 
-                # 通路ギャップを追加
-                if col in aisle_after_cols and i < len(cabin_col_order) - 1:
+                # 通路ギャップを追加 (キャビン固有の定義を使用)
+                if col in cabin_aisles and i < len(cabin_col_order) - 1:
                     seat_widgets.append(ft.Container(width=AISLE_GAP - SEAT_GAP))
 
             ui_controls.append(ft.Row(

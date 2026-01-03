@@ -17,9 +17,9 @@ class AmadeusAuth(httpx.Auth):
     """
     Handles OAuth2 Token Management with Auto-Refresh (Singleton-like usage per Client)
     """
-    def __init__(self, client_id: str, client_secret: str):
-        self.client_id = client_id
-        self.client_secret = client_secret
+    def __init__(self, api_key: str, api_secret: str):
+        self.api_key = api_key
+        self.api_secret = api_secret
         self.access_token = None
         self.expires_at = 0
         self._lock = asyncio.Lock()
@@ -44,8 +44,8 @@ class AmadeusAuth(httpx.Auth):
                     TOKEN_URL,
                     data={
                         "grant_type": "client_credentials",
-                        "client_id": self.client_id,
-                        "client_secret": self.client_secret
+                        "client_id": self.api_key,
+                        "client_secret": self.api_secret
                     },
                     headers={"Content-Type": "application/x-www-form-urlencoded"}
                 )
@@ -64,11 +64,11 @@ class AmadeusClient:
     Main Service for interacting with Amadeus API.
     Supports Demo Mode if no keys are provided.
     """
-    def __init__(self, client_id=None, client_secret=None, page=None):
+    def __init__(self, api_key=None, api_secret=None, page=None):
         self.http_client = None
         self.auth = None
         self.page = page  # For stats tracking
-        self.update_credentials(client_id, client_secret)
+        self.update_credentials(api_key, api_secret)
 
     async def _increment_stat(self, key: str):
         """Increment API call counter in shared_preferences."""
@@ -80,14 +80,14 @@ class AmadeusClient:
         except Exception as e:
             print(f"[AmadeusClient] Stats Error ({key}): {e}")
 
-    def update_credentials(self, client_id=None, client_secret=None):
+    def update_credentials(self, api_key=None, api_secret=None):
         """
         Updates API credentials and re-initializes the HTTP client.
         If keys are missing, falls back to Demo Mode.
         """
-        self.client_id = client_id or os.getenv("AMADEUS_CLIENT_ID")
-        self.client_secret = client_secret or os.getenv("AMADEUS_CLIENT_SECRET")
-        self.is_demo = not (self.client_id and self.client_secret)
+        self.api_key = api_key or os.getenv("AMADEUS_API_KEY")
+        self.api_secret = api_secret or os.getenv("AMADEUS_API_SECRET")
+        self.is_demo = not (self.api_key and self.api_secret)
         
         # Cleanup existing client if any
         if self.http_client:
@@ -97,13 +97,13 @@ class AmadeusClient:
             pass
 
         if not self.is_demo:
-            self.auth = AmadeusAuth(self.client_id, self.client_secret)
+            self.auth = AmadeusAuth(self.api_key, self.api_secret)
             self.http_client = httpx.AsyncClient(
                 base_url=AMADEUS_BASE_URL,
                 auth=self.auth,
                 headers={"X-HTTP-Method-Override": "GET"}
             )
-            print(f"[AmadeusClient] Initialized in LIVE mode (ID: {self.client_id[:4]}...)")
+            print(f"[AmadeusClient] Initialized in LIVE mode (Key: {self.api_key[:4]}...)")
         else:
             self.auth = None
             self.http_client = None
@@ -130,7 +130,7 @@ class AmadeusClient:
                 return False
         return False
 
-    async def search_flights(self, origin: str, destination: str, date: str, time: str = None, window: str = None):
+    async def search_flights(self, origin: str, destination: str, date: str, time: str = None, window: str = None, carrier: str = None):
         """
         Executes Flight Offers Search (v2).
         In Demo Mode, returns dummy data.
@@ -139,10 +139,9 @@ class AmadeusClient:
         if self.is_demo:
             # Simulate network delay
             await asyncio.sleep(1) 
-            path = "src/assets/dummy_data/flight_offers.json"
-            if not os.path.exists(path):
-                # Fallback purely for dev environment if CWD differs
-                path = "seatxray/src/assets/dummy_data/flight_offers.json"
+            # Robust path resolution compatible with packaged environments
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            path = os.path.join(base_dir, "assets", "dummy_data", "flight_offers.json")
             
             try:
                 async with aiofiles.open(path, mode='r', encoding='utf-8') as f:
@@ -184,6 +183,12 @@ class AmadeusClient:
                     }
                 }
             }
+            
+            # Add Airline filtering if present
+            if carrier:
+                payload["searchCriteria"]["flightFilters"]["carrierRestrictions"] = {
+                    "includedCarrierCodes": [carrier.upper()]
+                }
             
             print(f"[AmadeusClient] Search Payload: {json.dumps(payload, indent=2)}")
             
@@ -254,7 +259,18 @@ class AmadeusClient:
             # Track API usage
             await self._increment_stat("stats_seatmap")
             
-            return response.json()
+            # Parse Cache-Control header for TTL
+            cache_ttl = 6 * 60 * 60  # フォールバック: 6時間
+            cache_control = response.headers.get("Cache-Control", "")
+            if "max-age=" in cache_control:
+                try:
+                    max_age_str = cache_control.split("max-age=")[1].split(",")[0].strip()
+                    cache_ttl = int(max_age_str)
+                    print(f"[AmadeusClient] Cache-Control max-age: {cache_ttl}s")
+                except:
+                    pass
+            
+            return {"data": response.json().get("data", []), "_cache_ttl": cache_ttl}
         except Exception as e:
             print(f"[AmadeusClient] Seatmap failed: {e}")
             # If it's an HTTP error, try to extract API error message

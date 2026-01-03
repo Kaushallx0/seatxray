@@ -69,6 +69,12 @@ class SeatService:
                 # OR we try to use what's in 'dictionaries' if it has names.
                 # Often 'locations' in search response ONLY has codes.
                 
+                # Calculate Days Difference for Arrival
+                dep_dt = datetime.fromisoformat(dep_time)
+                arr_dt = datetime.fromisoformat(last_seg["arrival"]["at"])
+                delta = arr_dt.date() - dep_dt.date()
+                days_diff = delta.days
+
                 # Terminal Info
                 dep_term = first_seg["departure"].get("terminal", "-")
                 arr_term = last_seg["arrival"].get("terminal", "-")
@@ -85,7 +91,8 @@ class SeatService:
                     "route": {
                         "departure": {"iata": dep_iata, "terminal": dep_term, "at": dep_time},
                         "arrival": {"iata": arr_iata, "terminal": arr_term, "at": last_seg["arrival"]["at"]},
-                        "duration": duration_fmt
+                        "duration": duration_fmt,
+                        "days_diff": days_diff # Added for UI
                     },
                     "offers": [], # All raw offers for this flight
                     "pricing": {} # aggregated pricing by cabin

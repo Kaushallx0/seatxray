@@ -18,6 +18,7 @@ def get_color_palette(is_dark: bool):
         "surface_container_low": "#252830" if is_dark else "#ffffff",
         "border": "white12" if is_dark else "black12",
         "border_opacity": ft.Colors.with_opacity(0.1, "white" if is_dark else "black"),
+        "divider": "white12" if is_dark else "black12",
         "accent": COLOR_ACCENT
     }
 

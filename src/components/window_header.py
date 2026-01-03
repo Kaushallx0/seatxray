@@ -1,82 +1,89 @@
 import flet as ft
-from theme import COLOR_BACKGROUND, COLOR_TEXT_PRIMARY
+import asyncio
 
-def WindowControls(page: ft.Page):
-    # State for maximize icon
-    max_icon_ref = ft.Ref[ft.IconButton]()
 
-    def minimize(e):
-        page.window.minimized = True
-        page.update()
-
-    def maximize(e):
-        page.window.maximized = not page.window.maximized
-        # Toggle icon based on state
-        if max_icon_ref.current:
-            if page.window.maximized:
-                max_icon_ref.current.icon = ft.Icons.FILTER_NONE  # Restore icon
-                max_icon_ref.current.icon_size = 12 # Visually smaller to balance complexity
-            else:
-                max_icon_ref.current.icon = ft.Icons.CROP_SQUARE  # Maximize icon
-                max_icon_ref.current.icon_size = 14 # Standard size
-        page.update()
-
-    async def close_app(e):
-        try:
-            # Flet 1.0 での推奨されるウィンドウ終了処理
-            await page.window.close()
-        except Exception:
-            # 万が一のフォールバック
-            import sys
-            sys.exit(0)
-
-    # Style for buttons (Windows 11 Native Look)
-    def button_style(icon, on_click, is_close=False, ref=None):
-        hover_col = "#c42b1c" if is_close else "#10ffffff"
+class WindowControls(ft.Row):
+    """
+    Windows 11 スタイルのウィンドウコントロール
+    全てのボタンを TextButton で統一
+    """
+    def __init__(self, page: ft.Page):
+        self.page_ref = page
+        self.max_icon_ref = ft.Ref[ft.Text]()
         
-        return ft.IconButton(
-            ref=ref,
-            icon=icon,
-            icon_size=14, # Revert to 14px as base size
-            icon_color=ft.Colors.ON_SURFACE,
-            style=ft.ButtonStyle(
-                shape=ft.RoundedRectangleBorder(radius=0),
-                bgcolor={ft.ControlState.HOVERED: hover_col},
-                padding=0,
-            ),
-            width=46,
-            height=32,
-            on_click=on_click,
-            tooltip=None
-        )
-
-    return ft.Row(
-        [
-            button_style(ft.Icons.REMOVE, minimize),
-            button_style(ft.Icons.CROP_SQUARE, maximize, ref=max_icon_ref),
-            button_style(ft.Icons.CLOSE, close_app, is_close=True),
-        ],
-        spacing=0
-    )
-
-# Minimal Header: Just a drag area + window controls on the right
-def CustomWindowHeader(page: ft.Page, title="SeatXray"):
-    """
-    main_single.py の MinimalWindowHeader と同等ですが、
-    既存コードとの互換性のためにコンポーネント名を維持。
-    """
-    return ft.Container(
-        content=ft.Row(
-            [
-                ft.WindowDragArea(
-                    ft.Container(expand=True, bgcolor=ft.Colors.TRANSPARENT),
-                    expand=True,
-                ),
-                WindowControls(page)
+        super().__init__(
+            controls=[
+                self._create_btn("\uE921", self._minimize, "最小化"),
+                self._create_btn("\uE922", self._maximize, "最大化", icon_ref=self.max_icon_ref),
+                self._create_btn("\uE8BB", self._close_app, "閉じる", is_close=True),
             ],
             spacing=0,
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-        ),
-        bgcolor=ft.Colors.TRANSPARENT, # Blend with main content background
-        height=32,
-    )
+        )
+
+    def _create_btn(self, glyph: str, on_click, tooltip: str = "", icon_ref=None, is_close=False):
+        """全てのボタンを TextButton で作成"""
+        # 閉じるボタンは赤いオーバーレイ、それ以外は標準
+        overlay = "#c42b1c" if is_close else ft.Colors.with_opacity(0.1, ft.Colors.ON_SURFACE)
+        
+        return ft.TextButton(
+            content=ft.Container(
+                content=ft.Text(
+                    ref=icon_ref,
+                    value=glyph,
+                    font_family="Segoe Fluent Icons",
+                    size=10,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                width=46,
+                height=32,
+                alignment=ft.Alignment(0, 0),
+            ),
+            style=ft.ButtonStyle(
+                shape=ft.RoundedRectangleBorder(radius=0),
+                padding=0,
+                overlay_color=overlay,
+            ),
+            on_click=on_click,
+            tooltip=tooltip,
+        )
+
+    def _minimize(self, e):
+        self.page_ref.window.minimized = True
+        self.page_ref.update()
+
+    def _maximize(self, e):
+        self.page_ref.window.maximized = not self.page_ref.window.maximized
+        if self.page_ref.window.maximized:
+            self.max_icon_ref.current.value = "\uE923"
+        else:
+            self.max_icon_ref.current.value = "\uE922"
+        self.max_icon_ref.current.update()
+
+    async def _close_app(self, e):
+        await self.page_ref.window.close()
+
+
+class CustomWindowHeader(ft.Stack):
+    """
+    カスタムウィンドウヘッダー
+    Stack レイアウトで WindowDragArea の上に WindowControls を配置
+    """
+    def __init__(self, page: ft.Page):
+        drag_area = ft.WindowDragArea(
+            content=ft.Container(
+                height=32,
+                bgcolor=ft.Colors.TRANSPARENT,
+            ),
+            expand=True,
+        )
+        
+        controls_container = ft.Container(
+            content=WindowControls(page),
+            right=0,
+            top=0,
+        )
+        
+        super().__init__(
+            controls=[drag_area, controls_container],
+            height=32,
+        )

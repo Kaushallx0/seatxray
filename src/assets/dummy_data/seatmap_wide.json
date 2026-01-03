@@ -532,7 +532,8 @@
                                 "y": 7
                             },
                             "characteristicsCodes": [
-                                "E"
+                                "E",
+                                "A"
                             ],
                             "travelerPricing": [
                                 {
@@ -674,7 +675,9 @@
                                 "x": 11,
                                 "y": 7
                             },
-                            "characteristicsCodes": [],
+                            "characteristicsCodes": [
+                                "A"
+                            ],
                             "travelerPricing": [
                                 {
                                     "seatAvailabilityStatus": "AVAILABLE"

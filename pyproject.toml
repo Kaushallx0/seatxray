@@ -10,3 +10,14 @@ dependencies = [
     "flet==0.80.0",
     "httpx>=0.28.1",
 ]
+
+[tool.flet]
+app.product = "SeatXray"
+app.org = "com.seatxray"
+app.path = "src"
+
+[tool.flet.windows]
+executable_name = "SeatXray"
+publisher_display_name = "SeatXray"
+identity_name = "SeatXray.SeatXray"
+publisher = "CN=33D8BA06-78D8-4319-B5F0-45A7789CD09B"

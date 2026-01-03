@@ -1,0 +1,53 @@
+site_name: SeatXray Official Docs
+site_description: Flight seat map analyzer for frequent flyers
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+    - navigation.footer: false
+
+extra:
+  generator: false
+
+nav:
+  - Welcome: index.md
+  - Japanese:
+      - 概要: ja/index.md
+      - セットアップガイド: ja/setup.md
+      - プライバシーポリシー: ja/privacy.md
+      - 免責事項: ja/disclaimer.md
+  - English:
+      - Home: en/index.md
+      - Setup Guide: en/setup.md
+      - Privacy Policy: en/privacy.md
+      - Disclaimer: en/disclaimer.md
+
+copyright: "Copyright &copy; 2025 SeatXray Project"
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
