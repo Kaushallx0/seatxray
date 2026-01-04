@@ -6,8 +6,8 @@ from utils.i18n import TranslationService
 
 class WindowControls(ft.Row):
     """
-    Windows 11 スタイルのウィンドウコントロール
-    全てのボタンを TextButton で統一
+    Windows 11 Style Window Controls
+    All buttons are unified using TextButton
     """
     def __init__(self, page: ft.Page):
         self.i18n = TranslationService.get_instance()
@@ -24,8 +24,8 @@ class WindowControls(ft.Row):
         )
 
     def _create_btn(self, glyph: str, on_click, tooltip: str = "", icon_ref=None, is_close=False):
-        """全てのボタンを TextButton で作成"""
-        # 閉じるボタンは赤いオーバーレイ、それ以外は標準
+        """Create all buttons using TextButton"""
+        # Close button uses a red overlay, others use standard
         overlay = "#c42b1c" if is_close else ft.Colors.with_opacity(0.1, ft.Colors.ON_SURFACE)
         
         return ft.TextButton(
@@ -68,8 +68,8 @@ class WindowControls(ft.Row):
 
 class CustomWindowHeader(ft.Stack):
     """
-    カスタムウィンドウヘッダー
-    Stack レイアウトで WindowDragArea の上に WindowControls を配置
+    Custom Window Header
+    Places WindowControls on top of WindowDragArea using Stack layout
     """
     def __init__(self, page: ft.Page):
         drag_area = ft.WindowDragArea(

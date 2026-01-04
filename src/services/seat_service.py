@@ -45,7 +45,7 @@ class SeatService:
                 dep_iata = first_seg["departure"]["iataCode"]
                 arr_iata = last_seg["arrival"]["iataCode"]
                 
-                # Format Duration (PT12H30M -> 12時間30分)
+                # Format Duration (PT12H30M -> 12h 30m)
                 duration_raw = itinerary["duration"] # e.g. PT14H15M
                 # New: i18n aware formatting
                 from utils.i18n import TranslationService

@@ -23,7 +23,7 @@ def get_color_palette(is_dark: bool):
     }
 
 def glass_style(opacity=0.1, blur=10, dark=False, surface_color=None):
-    """Glassmorphism スタイル。dark=True でダークモード用の暗い背景。"""
+    """Glassmorphism style. dark=True for dark background mode."""
     # Dynamic base color calculation
     if surface_color:
         base_color = surface_color

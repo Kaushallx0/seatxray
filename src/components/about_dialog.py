@@ -5,7 +5,7 @@ from utils.i18n import TranslationService
 
 class AboutDialog(ft.Container):
     """
-    SeatXray専用のカスタム「このアプリについて」ダイアログ
+    Custom "About" dialog for SeatXray
     """
     def __init__(self, page: ft.Page, on_close: callable, palette: dict):
         super().__init__()
@@ -14,7 +14,7 @@ class AboutDialog(ft.Container):
         self.on_close_callback = on_close
         self.palette = palette
         
-        # デザイン設定
+        # Design settings
         is_dark = (palette["bg"] != "#f0f2f5")
         style = glass_style(opacity=0.95, blur=20, dark=is_dark, surface_color=palette["surface"])
         
@@ -36,8 +36,8 @@ class AboutDialog(ft.Container):
         p = self.palette
         tr = self.i18n.tr
         
-        # アプリロゴ（テキストベース）
-        # ヘッダー情報（スクロール領域内に配置）
+        # App Logo (Text based)
+        # Header info (Placed inside scroll area)
         header_items = [
             ft.Image(src="/icon.png", width=64, height=64),
             ft.Text(tr("app_title"), size=32, weight="bold", color=p["text"]),
@@ -53,10 +53,10 @@ class AboutDialog(ft.Container):
                     style=ft.ButtonStyle(padding=0)
                 )
             ], alignment=ft.MainAxisAlignment.CENTER, spacing=5, vertical_alignment=ft.CrossAxisAlignment.CENTER),
-            ft.Container(height=10), # スペーサー
+            ft.Container(height=10), # Spacer
         ]
         
-        # ライセンス・クレジット情報
+        # License and Credit info
         credits = [
             self._build_section(tr("about.section_tech"), [
                 "Amadeus for Developers",
@@ -76,7 +76,7 @@ class AboutDialog(ft.Container):
             ])
         ]
         
-        # 全体を一つのカラムに統合
+        # Integrate into one column
         all_content = ft.Column(
             header_items + credits,
             scroll=ft.ScrollMode.AUTO,
@@ -85,7 +85,7 @@ class AboutDialog(ft.Container):
             spacing=20
         )
         
-        # フッター（Copyright & Close）
+        # Footer (Copyright & Close)
         footer = ft.Column([
             ft.Divider(color=p["divider"]),
             ft.Container(height=5),
@@ -105,7 +105,7 @@ class AboutDialog(ft.Container):
                 content=ft.IconButton(ft.Icons.CLOSE, on_click=self._close, icon_color=p["text_secondary"]),
                 alignment=ft.Alignment(1.0, -1.0)
             ),
-            all_content, # 統合されたスクロール領域
+            all_content, # Integrated scroll area
             ft.Container(height=10),
             footer
         ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=0)
@@ -146,7 +146,7 @@ class AboutDialog(ft.Container):
             self.on_close_callback()
 
 class LicenseViewer(ft.Container):
-    """ライセンス全文を表示するダイアログ"""
+    """Dialog displaying full license text"""
     def __init__(self, page: ft.Page, on_close: callable, palette: dict):
         super().__init__()
         self.i18n = TranslationService.get_instance()
@@ -154,7 +154,7 @@ class LicenseViewer(ft.Container):
         self.on_close = on_close
         self.palette = palette
         
-        # デザイン設定
+        # Design settings
         is_dark = (palette["bg"] != "#f0f2f5")
         style = glass_style(opacity=0.98, blur=20, dark=is_dark, surface_color=palette["surface"])
         

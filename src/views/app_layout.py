@@ -21,9 +21,9 @@ class AppLayout(ft.View):
         self.current_idx = 0
         self.search_input_state = {}
         
-        # ビューのキャッシュ（タブ切り替え時に再作成しない）
+        # View cache (prevent recreating views on tab switch)
         self._view_cache = {}
-        self._in_seatmap = False  # 座席表を表示中かどうか
+        self._in_seatmap = False  # Whether seatmap is currently displayed
         
         # 2. Controls Init
         self.content_area = ft.Container(expand=True, bgcolor=self.palette["bg"])
@@ -124,9 +124,9 @@ class AppLayout(ft.View):
             self.search_input_state = self.content_area.content.get_input_state()
 
     def _navigate_to_seatmap(self, offers):
-        """検索画面から座席マップへ遷移（ナビゲーションバーは変更しない）"""
+        """Navigate from Search to SeatMap (Navigation bar remains unchanged)"""
         self._in_seatmap = True
-        # 座席表ビューをキャッシュ
+        # Cache the seatmap view
         self._view_cache["seatmap"] = SeatMapContent(
             self.page_ref, 
             self.app_state, 
@@ -137,7 +137,7 @@ class AppLayout(ft.View):
         self.content_area.update()
 
     def _back_from_seatmap(self):
-        """座席表から戻る"""
+        """Return from SeatMap"""
         self._in_seatmap = False
         self._set_view(0)
 
@@ -146,7 +146,7 @@ class AppLayout(ft.View):
         self._save_search_state()
         
         if idx == 0:  # Search or Seatmap
-            # 座席表を表示中ならキャッシュから復元
+            # specific logic to restore state if needed
             if self._in_seatmap and "seatmap" in self._view_cache:
                 self.content_area.content = self._view_cache["seatmap"]
             else:
@@ -174,41 +174,41 @@ class AppLayout(ft.View):
             pass
 
     async def _rebuild_app(self):
-        # パレット更新
+        # Update Palette
         self.is_dark = (self.app_state.theme_mode == "DARK")
         self.palette = get_color_palette(self.is_dark)
         
-        # ページテーマを更新
+        # Update page theme
         self.page_ref.theme_mode = ft.ThemeMode.DARK if self.is_dark else ft.ThemeMode.LIGHT
         self.page_ref.bgcolor = self.palette["bg"]
         self.page_ref.window.bgcolor = self.palette["bg"]
         
-        # ナビゲーションを再作成
+        # Recreate navigation
         if self.is_mobile:
              self.navigation_bar = self._build_bottom_bar()
         else:
             self.controls[0].controls[0] = self._build_sidebar()
             self.controls[0].controls[0].selected_index = self.current_idx
-            # ディバイダーの色を更新
+            # Update divider color
             self.controls[0].controls[1].color = self.palette["border"]
         
-        # content_area の背景色を更新
+        # Update content_area background color
         self.content_area.bgcolor = self.palette["bg"]
         
-        # ビューキャッシュのパレットを更新（クリアせずに保持）
+        # Update palette in view cache (keep without clearing)
         for view in self._view_cache.values():
             if hasattr(view, 'update_palette'):
                 view.update_palette(self.palette)
         
-        # 現在のビュー（キャッシュ外の場合、例：Settings）のパレットを更新
+        # Update palette for current view (if outside cache, e.g. Settings)
         curr = self.content_area.content
         if curr and (curr not in self._view_cache.values()):
              if hasattr(curr, 'update_palette'):
                  curr.update_palette(self.palette)
         
-        # 現在のビューのパレットを更新
+        # Update palette for current view
         # if hasattr(self.content_area.content, 'update_palette'):
         #     self.content_area.content.update_palette(self.palette)
         
-        # 全体を更新
+        # Update everything
         self.page_ref.update()

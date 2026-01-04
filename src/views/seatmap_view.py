@@ -23,10 +23,12 @@ class SeatMapView(ft.View):
         self.details_panel = self._build_details_panel()
         
         # Trigger data load
+        # Get FlightOffer from navigation
         target_flight = self.app_state.selected_offer_group
         if target_flight:
             # We can start loading immediately
-             asyncio.create_task(self._load_data(target_flight["offers"]))
+            # If flight info is missing (e.g. reload), show error
+            asyncio.create_task(self._load_data(target_flight["offers"]))
         
         super().__init__(
             route="/seatmap",

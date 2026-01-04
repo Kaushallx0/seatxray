@@ -1,48 +1,49 @@
+
 import flet as ft
 import time
 
 class AppState:
     """
-    アプリケーション全体の共有状態を管理するクラス。
-    画面遷移(Viewの再生成)またいで保持すべきデータは全てここに置く。
+    Class managing the shared state of the entire application.
+    All data that should be persisted across screen transitions (View recreation) should be placed here.
     """
     def __init__(self):
-        # 検索結果のキャッシュ (戻ったときに再検索させないため)
+        # Search results cache (to prevent re-search when going back)
         self.offers: list = []
         
-        # 選択されたフライト(詳細画面用)
-        # { "offers": [...], "identity": ..., "route": ... } のような構造
+        # Selected flight (for detail screen)
+        # Structure like { "offers": [...], "identity": ..., "route": ... }
         self.selected_offer_group: dict = None
         
-        # テーマ設定 (DARK/LIGHT)
+        # Theme setting (DARK/LIGHT)
         self.theme_mode: str = "DARK"
         
-        # 座席マップキャッシュ {key: (data, timestamp, ttl)}
-        # キャッシュヘッダーまたは最大6時間で揮発
+        # Seat map cache {key: (data, timestamp, ttl)}
+        # Volatile: expires based on Cache-Control header or max 6 hours
         self._seatmap_cache: dict = {}
-        self._cache_ttl_default = 6 * 60 * 60  # 6時間（フォールバック）
+        self._cache_ttl_default = 6 * 60 * 60  # 6 hours (fallback)
     
     def get_seatmap_cache(self, key: str):
-        """キャッシュから座席データを取得。期限切れなら None"""
+        """Get seat data from cache. Returns None if expired."""
         if not key or key not in self._seatmap_cache:
             return None
         
         data, timestamp, ttl = self._seatmap_cache[key]
         if time.time() - timestamp > ttl:
-            # 期限切れ - 削除して None を返す
+            # Expired - delete and return None
             del self._seatmap_cache[key]
             return None
         
         return data
     
     def set_seatmap_cache(self, key: str, data, ttl: int = None):
-        """座席データをキャッシュに保存"""
+        """Save seat data to cache"""
         if key:
             cache_ttl = ttl if ttl else self._cache_ttl_default
             self._seatmap_cache[key] = (data, time.time(), cache_ttl)
     
     def clear_expired_cache(self):
-        """期限切れキャッシュをクリア"""
+        """Clear expired cache"""
         now = time.time()
         expired_keys = [
             k for k, (_, ts, ttl) in self._seatmap_cache.items()
@@ -50,5 +51,3 @@ class AppState:
         ]
         for k in expired_keys:
             del self._seatmap_cache[k]
-
-

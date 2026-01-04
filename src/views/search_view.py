@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from utils.i18n import TranslationService
 
 class SearchContent(ft.Column):
-    """検索画面のコンテンツ"""
+    """Content for the Search View"""
     
     def __init__(self, page: ft.Page, app_state, amadeus, on_navigate_seatmap, **kwargs):
         self.i18n = TranslationService.get_instance()
@@ -28,7 +28,7 @@ class SearchContent(ft.Column):
         self.expanded_flight_id = None
         self.saved_input_state = kwargs.get("input_state", {})
         
-        # オートコンプリート用
+        # For autocomplete
         self._active_field = None
         self._suggestions_overlay = None
         
@@ -44,7 +44,7 @@ class SearchContent(ft.Column):
         p = self.palette
         tr = self.i18n.tr
         
-        # デフォルト値
+        # Default values
         def_ori = self.saved_input_state.get("origin", "HND")
         def_dst = self.saved_input_state.get("dest", "LHR")
         default_date_obj = datetime.now() + timedelta(days=30)
@@ -52,13 +52,13 @@ class SearchContent(ft.Column):
         def_tim = self.saved_input_state.get("time", "10:00")
         def_win = self.saved_input_state.get("window", "4H")
         
-        # ヘッダー
+        # Header
         header = ft.Column([
             ft.Text(tr("search.header_title"), size=48, weight="bold", color=p["text"]),
             ft.Text(tr("search.header_subtitle"), size=18, color=p["text_secondary"]),
         ], spacing=5)
         
-        # 検索バー
+        # Search Bar
         search_bar = ft.Container(
             content=ft.Row([
                 ft.TextField(
@@ -135,7 +135,7 @@ class SearchContent(ft.Column):
             padding=20,
         )
         
-        # ローディングバー
+        # Loading Bar
         loading_bar = ft.ProgressBar(
             ref=self.loading_ref,
             width=300,
@@ -143,7 +143,7 @@ class SearchContent(ft.Column):
             visible=False,
         )
         
-        # 結果エリア
+        # Results Area
         results_column = ft.Column(
             ref=self.results_ref,
             controls=[],
@@ -174,23 +174,23 @@ class SearchContent(ft.Column):
             self._render_results()
 
     def update_palette(self, new_palette):
-        """テーマ変更時にパレットを更新（ビュー再作成なし）"""
+        """Update palette when theme changes (without view recreation)"""
         self.palette = new_palette
         self.is_dark = (self.app_state.theme_mode == "DARK")
         
-        # ヘッダーテキストの色を更新
+        # Update header text color
         main_container = self.controls[0]
         inner_column = main_container.content
         header = inner_column.controls[0]  # ft.Column containing header texts
         header.controls[0].color = new_palette["text"]  # Title
         header.controls[1].color = new_palette["text_secondary"]  # Subtitle
         
-        # 検索バーの背景と境界線を更新
+        # Update search bar background and border
         search_bar = inner_column.controls[2]  # ft.Container
         search_bar.bgcolor = ft.Colors.with_opacity(0.05, new_palette["text"]) if self.is_dark else "#f9f9f9"
         search_bar.border = ft.border.all(1, new_palette["border_opacity"])
         
-        # 入力フィールドの色を更新
+        # Update input field color
         search_row = search_bar.content
         for control in search_row.controls:
             if isinstance(control, ft.TextField):
@@ -200,7 +200,7 @@ class SearchContent(ft.Column):
                 control.border_color = new_palette["border"]
                 control.color = new_palette["text"]
         
-        # 結果を再描画
+        # Redraw results
         self._render_results()
         
         try:
@@ -218,7 +218,7 @@ class SearchContent(ft.Column):
         self._show_suggestions(e.control.value, e.control)
 
     def _show_suggestions(self, query, text_field):
-        # 既存のオーバーレイを削除
+        # Remove existing overlay
         self._hide_suggestions()
         
         q = (query or "").upper()
@@ -234,7 +234,7 @@ class SearchContent(ft.Column):
         
         p = self.palette
         
-        # サジェストリストを作成
+        # Create suggestion list
         suggestions = ft.Column([], spacing=0)
         for m in matches:
             code = m["iata"]
@@ -250,7 +250,7 @@ class SearchContent(ft.Column):
             )
             suggestions.controls.append(tile)
         
-        # 位置計算:
+        # Position calculation:
         # NavigationRail (100px) + VerticalDivider (1px) + padding (40px) + search_bar padding (20px)
         base_left = 100 + 1 + 40 + 20  # 161px
         field_width = 160
@@ -260,17 +260,17 @@ class SearchContent(ft.Column):
         else:  # dest
             left_pos = base_left + field_width + 15  # spacing 15px
         
-        # 縦位置: 入力欄の底辺の真下
-        # 検索バー全体の位置を考慮
-        top_pos = 265  # 入力欄の底辺より下
+        # Vertical: Directly below the input field
+        # Consider the entire search bar position
+        top_pos = 265  # Below the input field
         
-        # サジェストボックス
+        # Suggestion box
         suggestions_box = ft.Container(
             content=suggestions,
             bgcolor=p["surface_container"],
             border=ft.border.all(1, p["border_opacity"]),
             border_radius=8,
-            width=field_width,  # 入力フィールドと同じ幅
+            width=field_width,  # Same width as input field
             left=left_pos,
             top=top_pos,
         )
@@ -330,7 +330,7 @@ class SearchContent(ft.Column):
         self.loading_ref.current.update()
         self.results_ref.current.controls.clear()
         
-        self.has_searched = True # 検索実行フラグを立てる
+        self.has_searched = True # Set search executed flag
         
         origin = self.origin_ref.current.value
         dest = self.dest_ref.current.value

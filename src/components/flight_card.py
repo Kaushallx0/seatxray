@@ -119,7 +119,7 @@ class FlightCard(ft.Container):
         
         ac_name = identity['aircraftName']
         duration = route['duration']
-        # Note: SeatService already pre-formatted duration to 日本語 "X時間Y分". 
+        # Note: SeatService already pre-formatted duration to localized "Xh Ym". 
         # i18n for duration needs SeatService refactor, skipping for now as per plan focus on View.
         
         detail_text = self.i18n.tr("flight_card.details_template", ac_name=ac_name, duration=duration)

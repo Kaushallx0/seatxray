@@ -4,41 +4,41 @@ from utils.i18n import TranslationService
 
 def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: dict):
     """
-    座席表を描画する関数。
-    characteristicsCodes (W=窓側, A=通路側) を使用して通路位置を正確に検出。
+    Function to render the seat map.
+    Uses characteristicsCodes (W=Window, A=Aisle) to accurately detect aisle positions.
     """
     i18n = TranslationService.get_instance()
     
-    # --- 定数 ---
+    # --- Constants ---
     FUSELAGE_WIDTH = 650
     SEAT_GAP = 4
-    AISLE_GAP = 20  # 通路は広めに
+    AISLE_GAP = 20  # Wider gap for aisles
     MIN_SEAT_SIZE = 40
     MAX_SEAT_SIZE = 56
     
-    # --- データ整理ロジック ---
+    # --- Data Organization Logic ---
     cabin_rows = {}  # cabin -> { row_num: [seats...] }
     CABIN_ORDER = ["FIRST", "BUSINESS", "PREMIUM_ECONOMY", "ECONOMY"]
     
-    # 列文字ごとの特性を収集（通路検出用）
+    # Collect characteristics for each column character (for aisle detection)
     column_characteristics = {}  # col_letter -> set of characteristics
     
     for seat_num, seat in seats.items():
         cabin = seat.get("cabin", "ECONOMY")
         
-        # 座席番号から行番号を抽出 (例: "25A" -> 25)
+        # Extract row number from seat number (e.g. "25A" -> 25)
         match = re.match(r'(\d+)', seat_num)
         if match:
             row = int(match.group(1))
         else:
             row = 0
         
-        # 座席番号からカラム文字を抽出 (例: "25A" -> "A")
+        # Extract column character from seat number (e.g. "25A" -> "A")
         col_char = re.sub(r'\d+', '', seat_num).upper()
         if not col_char:
             col_char = "?"
         
-        # 特性コードを収集
+        # Collect characteristic codes
         chars = seat.get("characteristicsCodes", [])
         if col_char not in column_characteristics:
             column_characteristics[col_char] = set()
@@ -52,14 +52,14 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
         cabin_rows[cabin][row].append({
             "num": seat_num, 
             "row": row, 
-            "col_char": col_char,  # 文字で保持
+            "col_char": col_char,  # Keep as char
             "cabin": cabin, 
             "data": seat,
             "chars": chars
         })
 
     
-    # --- UI 構築 ---
+    # --- UI Construction ---
     ui_controls = []
     
     for cabin in CABIN_ORDER:
@@ -85,7 +85,7 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
         rows_in_cabin = cabin_rows[cabin]
         sorted_rows = sorted(rows_in_cabin.keys())
         
-        # --- このキャビン固有の列情報を収集 ---
+        # --- Collect column info specific to this cabin ---
         cabin_col_chars = {} # col -> set of characteristics
         for seats_list in rows_in_cabin.values():
             for s in seats_list:
@@ -95,13 +95,13 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
         
         cabin_col_order = sorted(cabin_col_chars.keys())
         
-        # --- キャビンごとの通路検出 (Smart Logic) ---
+        # --- Per-cabin aisle detection (Smart Logic) ---
         cabin_aisles = set()
         for i in range(len(cabin_col_order) - 1):
             col_left = cabin_col_order[i]
             col_right = cabin_col_order[i+1]
             
-            # この2列が共存する行を探す
+            # Find a row where these two columns coexist
             common_rows = []
             for r in rows_in_cabin:
                 seats = rows_in_cabin[r]
@@ -111,8 +111,8 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
             
             is_aisle = False
             if common_rows:
-                # 共存する行がある場合：
-                # 「全ての共存行において、左がAisle かつ 右がAisle」ならば通路とみなす
+                # If a coexisting row exists:
+                # If "Left is Aisle AND Right is Aisle" in all coexisting rows, assume an aisle
                 all_separated = True
                 for row_map in common_rows:
                     left_is_aisle = 'A' in row_map[col_left]["chars"]
@@ -125,8 +125,8 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
                 if all_separated:
                     is_aisle = True
             else:
-                # 共存する行がない場合（レアケース）
-                # デフォルトの挙動：両方が「どこかでAisle」なら通路とする
+                # If no coexisting row (rare case)
+                # Default behavior: If both are "Aisle somewhere", treat as aisle
                 left_ever_aisle = 'A' in cabin_col_chars.get(col_left, set())
                 right_ever_aisle = 'A' in cabin_col_chars.get(col_right, set())
                 if left_ever_aisle and right_ever_aisle:
@@ -135,7 +135,7 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
             if is_aisle:
                 cabin_aisles.add(col_left)
         
-        # 座席サイズ計算（通路込み）
+        # Calculate seat size (including aisles)
         num_cols = len(cabin_col_order)
         num_aisles = len(cabin_aisles)
         total_gaps = (num_cols - 1) * SEAT_GAP + num_aisles * (AISLE_GAP - SEAT_GAP)
@@ -148,7 +148,7 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
         
         for row_num in sorted_rows:
             row_seats = rows_in_cabin[row_num]
-            # 列文字でマップ化
+            # Map by column char
             row_map = {s["col_char"]: s for s in row_seats}
             
             seat_widgets = []
@@ -183,10 +183,10 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
                         ink=True,
                     ))
                 else:
-                    # この行にこの列がない場合は空白プレースホルダー
+                    # Empty placeholder if this column doesn't exist in this row
                     seat_widgets.append(ft.Container(width=seat_size, height=seat_size))
                 
-                # 通路ギャップを追加 (キャビン固有の定義を使用)
+                # Add aisle gap (using cabin-specific definition)
                 if col in cabin_aisles and i < len(cabin_col_order) - 1:
                     seat_widgets.append(ft.Container(width=AISLE_GAP - SEAT_GAP))
 

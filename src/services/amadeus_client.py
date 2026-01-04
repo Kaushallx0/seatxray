@@ -178,7 +178,7 @@ class AmadeusClient:
                     "maxFlightOffers": 250,
                     "flightFilters": {
                         "connectionRestriction": {
-                            "maxNumberOfConnections": 0  # 直行便のみ
+                            "maxNumberOfConnections": 0  # Direct flights only
                         }
                     }
                 }
@@ -260,7 +260,7 @@ class AmadeusClient:
             await self._increment_stat("stats_seatmap")
             
             # Parse Cache-Control header for TTL
-            cache_ttl = 6 * 60 * 60  # フォールバック: 6時間
+            cache_ttl = 6 * 60 * 60  # Fallback: 6 hours
             cache_control = response.headers.get("Cache-Control", "")
             if "max-age=" in cache_control:
                 try:

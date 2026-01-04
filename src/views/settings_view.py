@@ -8,14 +8,14 @@ from utils.i18n import TranslationService
 from components.about_dialog import AboutDialog
 
 def create_card(title, subtitle, content_list, palette):
-    """カードUIを生成するヘルパー関数"""
+    """Helper function to create UI cards"""
     p = palette
     return ft.Container(
         bgcolor=p["surface"],
         border_radius=12,
         padding=24,
         margin=ft.margin.only(bottom=15),
-        width=700,  # 固定幅でカードを適切なサイズに
+        width=700,  # Fixed width to keep card size appropriate
         content=ft.Column([
             ft.Row([
                 ft.Icon(ft.Icons.CIRCLE, size=12, color=COLOR_ACCENT),
@@ -50,7 +50,7 @@ class SettingsContent(ft.Column):
         # Overlay State
         self._about_overlay = None
 
-        # UI構築
+        # UI Construction
         controls_list = self._build_controls()
 
         super().__init__(
@@ -210,21 +210,21 @@ class SettingsContent(ft.Column):
     def _show_about_dialog(self, e):
         if self._about_overlay: return
         
-        # ダイアログ コンポーネントを作成
+        # Create dialog component
         dialog = AboutDialog(
             page=self.page_ref, 
             on_close=self._hide_about_dialog, 
             palette=self.palette
         )
         
-        # 中央配置のオーバーレイとして作成
+        # Create as centered overlay
         self._about_overlay = ft.Stack([
-            # 背景クリックで閉じるための透明レイヤー
+            # Background transparent layer for click-to-close
             ft.GestureDetector(
                 content=ft.Container(expand=True, bgcolor=ft.Colors.with_opacity(0.4, "black")),
                 on_tap=lambda _: self._hide_about_dialog()
             ),
-            # ダイアログ本体（中央）
+            # Dialog body (Center)
             ft.Container(
                 content=dialog,
                 alignment=ft.Alignment(0, 0)
@@ -241,16 +241,16 @@ class SettingsContent(ft.Column):
             self.page_ref.update()
 
     def update_palette(self, new_palette):
-        """テーマ変更時にパレットを更新（ビュー再作成なし）"""
+        """Update palette when theme changes (without view recreation)"""
         self.palette = new_palette
         self.is_dark = (self.app_state.theme_mode == "DARK")
         
-        # コントロールを再構築
+        # Reconstruct controls
         new_controls = self._build_controls()
         self.controls.clear()
         self.controls.extend(new_controls)
         
-        # データを再ロード（UI再構築で値が消えるため）
+        # Reload data (because values are lost on UI reconstruction)
         asyncio.create_task(self._load_settings())
         asyncio.create_task(self._refresh_stats())
         
@@ -260,7 +260,7 @@ class SettingsContent(ft.Column):
             pass
 
     async def _refresh_stats(self):
-        # 遅延なしで即座に読み込み
+        # Load immediately without delay
         s = await self.page_ref.shared_preferences.get("stats_search") or 0
         m = await self.page_ref.shared_preferences.get("stats_seatmap") or 0
         if self.stats_search_ref.current:
@@ -271,7 +271,7 @@ class SettingsContent(ft.Column):
             self.stats_seatmap_ref.current.update()
 
     async def _load_settings(self):
-        # 遅延なしで即座に読み込み
+        # Load immediately without delay
         key = await self.page_ref.shared_preferences.get("amadeus_api_key")
         sec = await self.page_ref.shared_preferences.get("amadeus_api_secret")
         if self.api_key_ref.current:
