@@ -101,7 +101,11 @@ class AmadeusClient:
             self.http_client = httpx.AsyncClient(
                 base_url=AMADEUS_BASE_URL,
                 auth=self.auth,
-                headers={"X-HTTP-Method-Override": "GET"}
+                headers={
+                    "X-HTTP-Method-Override": "GET",
+                    "Content-Type": "application/vnd.amadeus+json",
+                    "Accept": "application/vnd.amadeus+json"
+                }
             )
             print(f"[AmadeusClient] Initialized in LIVE mode (Key: {self.api_key[:4]}...)")
         else:
@@ -203,9 +207,15 @@ class AmadeusClient:
             print(f"[AmadeusClient] HTTP Error: {e}")
             if e.response is not None:
                 print(f"[AmadeusClient] Response: {e.response.text}")
+                try:
+                    return {"data": [], "errors": e.response.json().get("errors", [])}
+                except:
+                    pass
             return {"data": [], "errors": [str(e)]}
         except Exception as e:
             print(f"[AmadeusClient] Search failed: {e}")
+            import traceback
+            traceback.print_exc()
             return {"data": [], "errors": [str(e)]}
 
     async def get_seatmap(self, flight_offer_or_list):
