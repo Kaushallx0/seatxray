@@ -42,6 +42,21 @@ async def main(page: ft.Page):
         app_state.theme_mode = saved_theme
         page.theme_mode = ft.ThemeMode.DARK if saved_theme == "DARK" else ft.ThemeMode.LIGHT
     
+    # Load Locale and Currency preferences
+    from utils.i18n import get_default_currency
+    saved_locale = await page.shared_preferences.get("seatxray_locale")
+    saved_currency = await page.shared_preferences.get("seatxray_currency")
+    
+    if saved_locale:
+        app_state.locale = saved_locale
+    else:
+        app_state.locale = i18n.current_locale  # Use detected locale
+    
+    if saved_currency:
+        app_state.currency = saved_currency
+    else:
+        app_state.currency = get_default_currency(app_state.locale)
+    
     # Load Credentials for Global Service
     key = await page.shared_preferences.get("amadeus_api_key")
     secret = await page.shared_preferences.get("amadeus_api_secret")
@@ -91,6 +106,9 @@ async def main(page: ft.Page):
     # Show window after all initialization is complete
     page.window.visible = True
     page.update()
+
+# Export for app reload functionality
+main_app = main
 
 if __name__ == "__main__":
     ft.run(main, assets_dir="assets")

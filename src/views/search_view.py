@@ -348,14 +348,16 @@ class SearchContent(ft.Column):
                 dest,
                 self.date_ref.current.value,
                 time=t_fmt,
-                window=window_param
+                window=window_param,
+                currency_code=self.app_state.currency
             )
         except Exception as err:
             print(f"Search error: {err}")
             resp = await self.amadeus.search_flights(
                 origin,
                 dest,
-                self.date_ref.current.value
+                self.date_ref.current.value,
+                currency_code=self.app_state.currency
             )
         
         if resp and "data" in resp:

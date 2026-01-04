@@ -32,8 +32,8 @@ class TranslationService:
         
         # 1. Try Preference
         try:
-            # Use client_storage for persistence across sessions
-            pref = await page.client_storage.get_async("seatxray_locale")
+            # Use shared_preferences for persistence across sessions (Flet 1.0)
+            pref = await page.shared_preferences.get("seatxray_locale")
             if pref and pref in ["ja", "en"]: 
                 target_locale = pref
                 print(f"[I18n] Used user preference: {target_locale}")
@@ -116,3 +116,44 @@ class TranslationService:
 
     def get_airports(self):
         return self.airports
+
+def get_default_currency(locale: str) -> str:
+    """
+    Maps locale to default currency.
+    """
+    currency_map = {
+        "ja": "JPY",
+        "en": "USD",
+        "ko": "KRW",
+        "zh": "CNY",
+        "th": "THB",
+        "sg": "SGD",
+    }
+    return currency_map.get(locale, "USD")
+
+def format_currency(amount: float, currency: str) -> str:
+    """
+    Formats currency with symbol and appropriate decimal places.
+    """
+    currency_symbols = {
+        "JPY": "¥",
+        "USD": "$",
+        "EUR": "€",
+        "GBP": "£",
+        "AUD": "A$",
+        "CAD": "C$",
+        "KRW": "₩",
+        "CNY": "¥",
+        "SGD": "S$",
+        "THB": "฿",
+    }
+    
+    # Currencies without decimal places
+    no_decimal = ["JPY", "KRW"]
+    
+    symbol = currency_symbols.get(currency, currency)
+    
+    if currency in no_decimal:
+        return f"{symbol}{int(amount):,}"
+    else:
+        return f"{symbol}{amount:,.2f}"

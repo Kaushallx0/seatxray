@@ -18,6 +18,10 @@ class AppState:
         # Theme setting (DARK/LIGHT)
         self.theme_mode: str = "DARK"
         
+        # Locale and Currency settings
+        self.locale: str = "ja"  # Default: Japanese
+        self.currency: str = "JPY"  # Default: Japanese Yen
+        
         # Seat map cache {key: (data, timestamp, ttl)}
         # Volatile: expires based on Cache-Control header or max 6 hours
         self._seatmap_cache: dict = {}

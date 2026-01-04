@@ -55,8 +55,12 @@
         "subtitle": "API接続設定とモード管理",
         "section_api": "Amadeus API 接続設定",
         "section_display": "表示設定",
+        "section_preferences": "言語と通貨",
         "section_stats": "API利用統計",
         "section_about": "このアプリについて / ライセンス",
+        "label_language": "言語",
+        "label_currency": "通貨",
+        "btn_save_reload": "保存して再読み込み",
         "desc_api": "Amadeus APIキーを取得し、以下に入力してください。",
         "desc_stats": "※ この数値は目安です。正確な利用回数はAmadeus開発者ポータルで確認してください。",
         "label_api_key": "API Key",
@@ -81,6 +85,18 @@
         "section_legal": "法的情報",
         "legal_text": "本アプリは Amadeus Flight Offers Search および SeatMap Display API を使用しています。...",
         "warranty_disclaimer": "データは現状有姿で提供され、いかなる保証もありません。"
+    },
+    "currency": {
+        "JPY": "日本円",
+        "USD": "米ドル",
+        "EUR": "ユーロ",
+        "GBP": "英ポンド",
+        "AUD": "豪ドル",
+        "CAD": "カナダドル",
+        "KRW": "韓国ウォン",
+        "CNY": "中国元",
+        "SGD": "シンガポールドル",
+        "THB": "タイバーツ"
     },
     "window": {
         "minimize": "最小化",

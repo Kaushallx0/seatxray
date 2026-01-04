@@ -46,6 +46,8 @@ class SettingsContent(ft.Column):
         self.status_container_ref = ft.Ref[ft.Container]()
         self.stats_search_ref = ft.Ref[ft.Text]()
         self.stats_seatmap_ref = ft.Ref[ft.Text]()
+        self.language_dropdown_ref = ft.Ref[ft.Dropdown]()
+        self.currency_dropdown_ref = ft.Ref[ft.Dropdown]()
         
         # Overlay State
         self._about_overlay = None
@@ -137,6 +139,50 @@ class SettingsContent(ft.Column):
             palette=p
         )
 
+        # Language & Currency Card
+        tr = self.i18n.tr
+        lang_currency_card = create_card(
+            tr("settings.section_preferences"),
+            None,
+            [
+                ft.Row([
+                    ft.Column([
+                        ft.Text(tr("settings.label_language"), size=18, color=p["text"], weight="w600"),
+                        ft.Dropdown(
+                            ref=self.language_dropdown_ref,
+                            value=self.app_state.locale,
+                            options=[
+                                ft.dropdown.Option("ja", "日本語 (Japanese)"),
+                                ft.dropdown.Option("en", "English"),
+                            ],
+                            width=280,
+                            text_size=16,
+                        ),
+                    ], spacing=8),
+                    ft.Column([
+                        ft.Text(tr("settings.label_currency"), size=18, color=p["text"], weight="w600"),
+                        ft.Dropdown(
+                            ref=self.currency_dropdown_ref,
+                            value=self.app_state.currency,
+                            options=self._build_currency_options(),
+                            width=280,
+                            text_size=16,
+                        ),
+                    ], spacing=8),
+                ], spacing=30),
+                ft.Container(height=20),
+                ft.ElevatedButton(
+                    content=ft.Text(tr("settings.btn_save_reload"), size=16),
+                    on_click=self._on_save_reload,
+                    bgcolor=COLOR_ACCENT,
+                    color="white",
+                    height=45,
+                    width=200,
+                ),
+            ],
+            palette=p
+        )
+
         # Stats Card
         stats_card = create_card(
             tr("settings.section_stats"),
@@ -182,6 +228,7 @@ class SettingsContent(ft.Column):
                     ft.Divider(height=30, color="transparent"),
                     api_card,
                     appearance_card,
+                    lang_currency_card,
                     stats_card,
                     self._build_about_section(p),
                 ], spacing=0, horizontal_alignment=ft.CrossAxisAlignment.START),
@@ -331,3 +378,32 @@ class SettingsContent(ft.Column):
     def _on_link_hover(self, e):
         e.control.bgcolor = ft.Colors.with_opacity(0.1, COLOR_ACCENT) if e.data == "true" else None
         e.control.update()
+    
+    def _build_currency_options(self):
+        """Build currency dropdown options with i18n names"""
+        tr = self.i18n.tr
+        currencies = ["JPY", "USD", "EUR", "GBP", "AUD", "CAD", "KRW", "CNY", "SGD", "THB"]
+        return [
+            ft.dropdown.Option(code, f"{code} - {tr(f'currency.{code}')}")
+            for code in currencies
+        ]
+    
+    async def _on_save_reload(self, e):
+        """Save preferences and reload the app"""
+        # Get values from dropdowns
+        new_locale = self.language_dropdown_ref.current.value
+        new_currency = self.currency_dropdown_ref.current.value
+        
+        # Save to client_storage
+        await self.page_ref.shared_preferences.set("seatxray_locale", new_locale)
+        await self.page_ref.shared_preferences.set("seatxray_currency", new_currency)
+        
+        # Update app state
+        self.app_state.locale = new_locale
+        self.app_state.currency = new_currency
+        
+        # Reload the app by clearing and reinitializing
+        from main import main_app
+        self.page_ref.controls.clear()
+        await main_app(self.page_ref)
+        self.page_ref.update()

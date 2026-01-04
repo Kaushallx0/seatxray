@@ -130,7 +130,7 @@ class AmadeusClient:
                 return False
         return False
 
-    async def search_flights(self, origin: str, destination: str, date: str, time: str = None, window: str = None, carrier: str = None):
+    async def search_flights(self, origin: str, destination: str, date: str, time: str = None, window: str = None, carrier: str = None, currency_code: str = None):
         """
         Executes Flight Offers Search (v2).
         In Demo Mode, returns dummy data.
@@ -163,7 +163,7 @@ class AmadeusClient:
                 departure_range["timeWindow"] = window
 
             payload = {
-                "currencyCode": "JPY",
+                "currencyCode": currency_code if currency_code else "JPY",
                 "originDestinations": [
                     {
                         "id": "1",

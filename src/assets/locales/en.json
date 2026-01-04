@@ -55,8 +55,12 @@
         "subtitle": "API Connection & Mode Management",
         "section_api": "Amadeus API Settings",
         "section_display": "Display Settings",
+        "section_preferences": "Language & Currency",
         "section_stats": "API Usage Stats",
         "section_about": "About / License",
+        "label_language": "Language",
+        "label_currency": "Currency",
+        "btn_save_reload": "Save & Reload",
         "desc_api": "Enter your Amadeus API credentials below.",
         "desc_stats": "* Stats are approximate. Check Amadeus Developer Portal for official usage.",
         "label_api_key": "API Key",
@@ -81,6 +85,18 @@
         "section_legal": "Legal Information",
         "legal_text": "This app uses Amadeus Flight Offers Search and SeatMap Display APIs...",
         "warranty_disclaimer": "Data provided as is without warranty."
+    },
+    "currency": {
+        "JPY": "Japanese Yen",
+        "USD": "US Dollar",
+        "EUR": "Euro",
+        "GBP": "British Pound",
+        "AUD": "Australian Dollar",
+        "CAD": "Canadian Dollar",
+        "KRW": "Korean Won",
+        "CNY": "Chinese Yuan",
+        "SGD": "Singapore Dollar",
+        "THB": "Thai Baht"
     },
     "window": {
         "minimize": "Minimize",

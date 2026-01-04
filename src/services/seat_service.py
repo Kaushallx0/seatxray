@@ -113,19 +113,16 @@ class SeatService:
             # We look at the first segment's cabin for simplicity in labeling
             cabin_breakdown = offer["travelerPricings"][0]["fareDetailsBySegment"][0]["cabin"]
             price_amount = offer["price"]["total"]
+            price_currency = offer["price"].get("currency", "JPY")
             
-            # Formatting Price (JPY assumed or convert symbol)
-            # Use i18n for formatting
-            from utils.i18n import TranslationService
-            i18n = TranslationService.get_instance()
+            # Formatting Price using actual currency from API response
+            from utils.i18n import format_currency
             
             try:
                 price_float = float(price_amount)
-                # Currently simple ¥ format logic
-                # Ideally "currency_format" in i18n handles symbol placement
-                price_fmt = i18n.tr("common.currency_format", amount=f"{price_float:,.0f}")
+                price_fmt = format_currency(price_float, price_currency)
             except:
-                price_fmt = f"¥{price_amount}"
+                price_fmt = f"{price_currency} {price_amount}"
 
             # Store absolute simplest lowest price per cabin
             if cabin_breakdown not in grouped[key]["pricing"]:
