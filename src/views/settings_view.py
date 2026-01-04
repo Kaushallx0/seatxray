@@ -264,10 +264,10 @@ class SettingsContent(ft.Column):
         s = await self.page_ref.shared_preferences.get("stats_search") or 0
         m = await self.page_ref.shared_preferences.get("stats_seatmap") or 0
         if self.stats_search_ref.current:
-            self.stats_search_ref.current.value = f"{s} 回"
+            self.stats_search_ref.current.value = self.i18n.tr("settings.stat_unit", count=s)
             self.stats_search_ref.current.update()
         if self.stats_seatmap_ref.current:
-            self.stats_seatmap_ref.current.value = f"{m} 回"
+            self.stats_seatmap_ref.current.value = self.i18n.tr("settings.stat_unit", count=m)
             self.stats_seatmap_ref.current.update()
 
     async def _load_settings(self):
@@ -286,7 +286,7 @@ class SettingsContent(ft.Column):
         sec = self.api_secret_ref.current.value
         
         self.status_container_ref.current.visible = True
-        self.status_text_ref.current.value = "接続テスト中..."
+        self.status_text_ref.current.value = self.i18n.tr("settings.msg_testing")
         self.status_text_ref.current.color = self.palette["text"]
         self.status_container_ref.current.update()
         
@@ -297,10 +297,10 @@ class SettingsContent(ft.Column):
         success = await self.amadeus.authenticate()
         
         if success:
-            self.status_text_ref.current.value = "接続成功！設定を保存しました。"
+            self.status_text_ref.current.value = self.i18n.tr("settings.msg_success")
             self.status_text_ref.current.color = ft.Colors.GREEN
         else:
-            self.status_text_ref.current.value = "認証エラー: キーを確認してください。"
+            self.status_text_ref.current.value = self.i18n.tr("settings.msg_auth_error")
             self.status_text_ref.current.color = ft.Colors.RED
         self.status_text_ref.current.update()
         self.status_container_ref.current.update()
@@ -315,7 +315,7 @@ class SettingsContent(ft.Column):
         
         self.amadeus.update_credentials(None, None)
         self.status_container_ref.current.visible = True
-        self.status_text_ref.current.value = "デモモードにリセットしました。"
+        self.status_text_ref.current.value = self.i18n.tr("settings.msg_demo_reset")
         self.status_text_ref.current.color = self.palette["text"]
         self.status_container_ref.current.update()
 

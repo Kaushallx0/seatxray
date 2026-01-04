@@ -1,7 +1,7 @@
 # SeatXray Windows Build Script (Auto-Fix)
 # Based on build-guide.md
 
-Set-Location "c:\Users\famil\Desktop\SeatXray\seatxray"
+Set-Location $PSScriptRoot
 
 Write-Host "=== SeatXray Windows Build System ===" -ForegroundColor Cyan
 Write-Host "Target: Windows (MSIX/EXE)"
@@ -27,10 +27,12 @@ if (Test-Path $pluginFile) {
     if ($content.Count -ne $newContent.Count) {
         $newContent | Set-Content $pluginFile
         Write-Host "  [OK] Removed broken System32 DLL references." -ForegroundColor Green
-    } else {
+    }
+    else {
         Write-Host "  [SKIP] CMakeLists.txt already clean or pattern not found." -ForegroundColor Gray
     }
-} else {
+}
+else {
     Write-Host "  [WARN] Plugin directory not found. Is this the first run?" -ForegroundColor Red
 }
 
@@ -41,7 +43,8 @@ if (Test-Path $windowCpp) {
     if ($cppContent -match 'WS_OVERLAPPEDWINDOW') {
         ($cppContent -replace 'WS_OVERLAPPEDWINDOW', 'WS_POPUP') | Set-Content $windowCpp
         Write-Host "  [OK] Changed window style to WS_POPUP (No TitleBar)." -ForegroundColor Green
-    } else {
+    }
+    else {
         Write-Host "  [SKIP] Window style already set or custom." -ForegroundColor Gray
     }
 }
@@ -52,6 +55,7 @@ flet build windows --verbose
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "`nBuild Complete! Output in build\windows\runner\Release" -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "`nBuild Failed. Check output above." -ForegroundColor Red
 }

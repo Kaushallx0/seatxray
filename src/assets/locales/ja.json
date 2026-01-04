@@ -7,7 +7,9 @@
         "loading": "読み込み中...",
         "error": "エラー",
         "date": "日付",
-        "time": "時刻"
+        "time": "時刻",
+        "time_format": "{h}時間{m}分",
+        "currency_format": "¥{amount}"
     },
     "nav": {
         "search": "検索",
@@ -67,7 +69,8 @@
         "msg_testing": "接続テスト中...",
         "msg_success": "接続成功！設定を保存しました。",
         "msg_auth_error": "認証エラー: キーを確認してください。",
-        "msg_demo_reset": "デモモードにリセットしました。"
+        "msg_demo_reset": "デモモードにリセットしました。",
+        "stat_unit": "{count} 回"
     },
     "about": {
         "version": "v0.1.1",

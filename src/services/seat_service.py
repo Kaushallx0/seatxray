@@ -47,7 +47,17 @@ class SeatService:
                 
                 # Format Duration (PT12H30M -> 12時間30分)
                 duration_raw = itinerary["duration"] # e.g. PT14H15M
-                duration_fmt = duration_raw.replace("PT", "").replace("H", "時間").replace("M", "分").lower()
+                # New: i18n aware formatting
+                from utils.i18n import TranslationService
+                i18n = TranslationService.get_instance()
+                
+                # Simple parser for PTxxHxxM
+                import re
+                match = re.search(r'PT(?:(\d+)H)?(?:(\d+)M)?', duration_raw)
+                h = match.group(1) if match and match.group(1) else "0"
+                m = match.group(2) if match and match.group(2) else "0"
+                
+                duration_fmt = i18n.tr("common.time_format", h=h, m=m)
                 
                 # Resolve Names
                 carrier_name = carrier_map.get(carrier_code, carrier_code)
@@ -105,13 +115,17 @@ class SeatService:
             price_amount = offer["price"]["total"]
             
             # Formatting Price (JPY assumed or convert symbol)
-            currency = offer["price"].get("currency", "JPY")
-            symbol = "¥" if currency == "JPY" else "€" if currency == "EUR" else "$"
+            # Use i18n for formatting
+            from utils.i18n import TranslationService
+            i18n = TranslationService.get_instance()
+            
             try:
                 price_float = float(price_amount)
-                price_fmt = f"{symbol}{price_float:,.0f}"
+                # Currently simple ¥ format logic
+                # Ideally "currency_format" in i18n handles symbol placement
+                price_fmt = i18n.tr("common.currency_format", amount=f"{price_float:,.0f}")
             except:
-                price_fmt = f"{symbol}{price_amount}"
+                price_fmt = f"¥{price_amount}"
 
             # Store absolute simplest lowest price per cabin
             if cabin_breakdown not in grouped[key]["pricing"]:

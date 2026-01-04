@@ -4,12 +4,14 @@ import traceback
 from services.seat_service import SeatService
 from components.seat_canvas import SeatCanvas
 from theme import get_color_palette, COLOR_ACCENT
+from utils.i18n import TranslationService
 
 
 class SeatMapContent(ft.Column):
     """座席マップコンテンツ（AppLayout 内に埋め込み可能）"""
     
     def __init__(self, page: ft.Page, app_state, amadeus, on_back=None):
+        self.i18n = TranslationService.get_instance()
         self.page_ref = page
         self.app_state = app_state
         self.amadeus = amadeus
@@ -117,10 +119,11 @@ class SeatMapContent(ft.Column):
             return
         
         # ローディング表示
+        tr = self.i18n.tr
         self.canvas_container.content = ft.Container(
             content=ft.Column([
                 ft.ProgressRing(color=COLOR_ACCENT),
-                ft.Text("座席データを解析中...", color=p["text"])
+                ft.Text(tr("seatmap.loading"), color=p["text"])
             ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
             alignment=ft.Alignment(0, 0)
         )
@@ -135,7 +138,7 @@ class SeatMapContent(ft.Column):
             
             if not master_map:
                 self.canvas_container.content = ft.Container(
-                    ft.Text("座席データの取得に失敗しました。", color="red"),
+                    ft.Text(tr("seatmap.fetch_error"), color="red"),
                     alignment=ft.Alignment(0, 0)
                 )
             else:
@@ -164,12 +167,17 @@ class SeatMapContent(ft.Column):
         if status == "UNKNOWN": 
             status = pricing.get("seatAvailabilityStatus", "UNKNOWN")
         
-        STATUS_MAP = {"AVAILABLE": "空席", "OCCUPIED": "指定済み", "BLOCKED": "ブロック中"}
+        tr = self.i18n.tr
+        STATUS_MAP = {
+            "AVAILABLE": tr("seatmap.status_available"), 
+            "OCCUPIED": tr("seatmap.status_occupied"), 
+            "BLOCKED": tr("seatmap.status_blocked")
+        }
         
         codes = seat_data.get("characteristicsCodes", [])
         features = []
-        if "E" in codes: features.append(("非常口", ft.Icons.EMERGENCY))
-        if "L" in codes: features.append(("足元広め", ft.Icons.EXPAND))
+        if "E" in codes: features.append((tr("seatmap.feature_exit"), ft.Icons.EMERGENCY))
+        if "L" in codes: features.append((tr("seatmap.feature_legroom"), ft.Icons.EXPAND))
         
         feature_layout = []
         for label, icon in features:
@@ -177,7 +185,7 @@ class SeatMapContent(ft.Column):
 
         # 詳細パネルの内容（1行表示）
         info_items = [
-            ft.Text(f"座席 {number}", size=28, weight="bold", color=p["text"]),
+            ft.Text(tr("seatmap.seat_number", number=number), size=28, weight="bold", color=p["text"]),
             ft.Container(width=10),
             ft.Text(STATUS_MAP.get(status, status), size=18, color=COLOR_ACCENT if status=="AVAILABLE" else p["text_secondary"]),
             ft.Container(width=10),

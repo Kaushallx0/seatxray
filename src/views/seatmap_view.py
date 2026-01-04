@@ -121,12 +121,12 @@ class SeatMapView(ft.View):
             "OCCUPIED": tr("seatmap.status_occupied"), 
             "BLOCKED": tr("seatmap.status_blocked")
         }
-        
         codes = seat_data.get("characteristicsCodes", [])
         features = []
         if "E" in codes: features.append((tr("seatmap.feature_exit"), ft.Icons.EMERGENCY))
         if "L" in codes: features.append((tr("seatmap.feature_legroom"), ft.Icons.EXPAND))
-        
+
+        # Old simple layout restored
         feature_layout = []
         for label, icon in features:
              feature_layout.append(ft.Row([ft.Icon(icon), ft.Text(label)]))
@@ -135,6 +135,7 @@ class SeatMapView(ft.View):
             ft.Column([
                 ft.Text(tr("seatmap.seat_number", number=number), size=28, weight="bold", color=p["text"]),
                 ft.Text(STATUS_MAP.get(status, status), size=18, color=COLOR_ACCENT if status=="AVAILABLE" else p["text_secondary"]),
+                ft.Column(feature_layout, spacing=2)
             ]),
             ft.IconButton(ft.Icons.CLOSE, on_click=lambda e: self._close_panel(), icon_color=p["text"])
         ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)

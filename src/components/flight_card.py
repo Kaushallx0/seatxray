@@ -110,7 +110,7 @@ class FlightCard(ft.Container):
                     ft.Icon(ft.Icons.EVENT_SEAT, color="#6d4aff", size=18),
                     ft.Text(f"{label}", color=p["text"], weight="bold", size=16),
                     ft.Container(expand=True),
-                    ft.Text(f"¥{float(amt):,.0f}" if amt.replace('.','',1).isdigit() else amt, color=p["text"], size=16, weight="bold"),
+                    ft.Text(amt, color=p["text"], size=16, weight="bold"),
                     ft.Icon(ft.Icons.CHEVRON_RIGHT, color=p["text_secondary"])
                 ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                 ink=True

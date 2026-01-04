@@ -120,3 +120,21 @@ local.db
 # API Keys (Just in case)
 secrets.json
 config.json
+
+# Development Tools
+# Force English Locale execution script
+run_en.py
+
+# Documentation & Personal
+# Private TODO list for development tracking
+docs/TODO.md
+
+# MS Store Assets & Tools
+# Script to process app icon for Microsoft Store
+tools/process_icon.py
+# High-resolution icon generated for MS Store submission
+src/assets/store_icon_1080.png
+
+# Internal Dev Tools (Not for OSS Repo)
+tools/generate_airports.py
+scripts/generate_assets.py

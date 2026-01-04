@@ -7,7 +7,9 @@
         "loading": "Loading...",
         "error": "Error",
         "date": "Date",
-        "time": "Time"
+        "time": "Time",
+        "time_format": "{h}h {m}m",
+        "currency_format": "¥{amount}"
     },
     "nav": {
         "search": "Search",
@@ -67,7 +69,8 @@
         "msg_testing": "Testing Connection...",
         "msg_success": "Connected! Settings saved.",
         "msg_auth_error": "Auth Error: Please check your keys.",
-        "msg_demo_reset": "Reset to Demo Mode."
+        "msg_demo_reset": "Reset to Demo Mode.",
+        "stat_unit": "{count} times"
     },
     "about": {
         "version": "v0.1.1",
