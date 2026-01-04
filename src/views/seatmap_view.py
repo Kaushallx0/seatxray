@@ -5,9 +5,11 @@ from services.seat_service import SeatService
 from components.seat_canvas import SeatCanvas
 from components.window_header import CustomWindowHeader
 from theme import get_color_palette, COLOR_ACCENT, glass_style
+from utils.i18n import TranslationService
 
 class SeatMapView(ft.View):
     def __init__(self, page: ft.Page, app_state, amadeus):
+        self.i18n = TranslationService.get_instance()
         self.page_ref = page
         self.app_state = app_state
         self.amadeus = amadeus
@@ -73,10 +75,12 @@ class SeatMapView(ft.View):
 
     async def _load_data(self, offers):
         p = self.palette
+        tr = self.i18n.tr
+        
         self.canvas_container.content = ft.Container(
             content=ft.Column([
                 ft.ProgressRing(color=COLOR_ACCENT),
-                ft.Text("座席データを解析中...", color=p["text"])
+                ft.Text(tr("seatmap.loading"), color=p["text"])
             ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
             alignment=ft.Alignment(0, 0) # Corrected alignment
         )
@@ -88,7 +92,7 @@ class SeatMapView(ft.View):
             
             if not master_map:
                 self.canvas_container.content = ft.Container(
-                    ft.Text("座席データの取得に失敗しました。", color="red"),
+                    ft.Text(tr("seatmap.fetch_error"), color="red"),
                     alignment=ft.Alignment(0, 0)
                 )
             else:
@@ -100,24 +104,28 @@ class SeatMapView(ft.View):
                 )
         except Exception as e:
             traceback.print_exc()
-            self.canvas_container.content = ft.Text(f"エラー: {e}", color="red")
+            self.canvas_container.content = ft.Text(f"{tr('common.error')}: {e}", color="red")
             
         self.page_ref.update()
 
     def _on_seat_click(self, seat_data):
         p = self.palette
+        tr = self.i18n.tr
         number = seat_data.get("number", "??")
         status = seat_data.get("_final_status", "UNKNOWN")
         pricing = seat_data.get("travelerPricing", [{}])[0]
         if status == "UNKNOWN": status = pricing.get("seatAvailabilityStatus", "UNKNOWN")
         
-        STATUS_MAP = {"AVAILABLE": "空席", "OCCUPIED": "指定済み", "BLOCKED": "ブロック中"}
+        STATUS_MAP = {
+            "AVAILABLE": tr("seatmap.status_available"), 
+            "OCCUPIED": tr("seatmap.status_occupied"), 
+            "BLOCKED": tr("seatmap.status_blocked")
+        }
         
-        # ... logic for codes ...
         codes = seat_data.get("characteristicsCodes", [])
         features = []
-        if "E" in codes: features.append(("非常口", ft.Icons.EMERGENCY))
-        if "L" in codes: features.append(("足元広め", ft.Icons.EXPAND))
+        if "E" in codes: features.append((tr("seatmap.feature_exit"), ft.Icons.EMERGENCY))
+        if "L" in codes: features.append((tr("seatmap.feature_legroom"), ft.Icons.EXPAND))
         
         feature_layout = []
         for label, icon in features:
@@ -125,7 +133,7 @@ class SeatMapView(ft.View):
 
         self.details_panel.content = ft.Row([
             ft.Column([
-                ft.Text(f"座席 {number}", size=28, weight="bold", color=p["text"]),
+                ft.Text(tr("seatmap.seat_number", number=number), size=28, weight="bold", color=p["text"]),
                 ft.Text(STATUS_MAP.get(status, status), size=18, color=COLOR_ACCENT if status=="AVAILABLE" else p["text_secondary"]),
             ]),
             ft.IconButton(ft.Icons.CLOSE, on_click=lambda e: self._close_panel(), icon_color=p["text"])

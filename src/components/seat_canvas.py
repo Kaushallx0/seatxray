@@ -1,11 +1,13 @@
 import flet as ft
 import re
+from utils.i18n import TranslationService
 
 def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: dict):
     """
     座席表を描画する関数。
     characteristicsCodes (W=窓側, A=通路側) を使用して通路位置を正確に検出。
     """
+    i18n = TranslationService.get_instance()
     
     # --- 定数 ---
     FUSELAGE_WIDTH = 650
@@ -64,18 +66,14 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
         if cabin not in cabin_rows:
             continue
             
-        cabin_names = {
-            "FIRST": "ファーストクラス",
-            "BUSINESS": "ビジネスクラス", 
-            "PREMIUM_ECONOMY": "プレミアムエコノミー",
-            "ECONOMY": "エコノミークラス",
-        }
+        cabin_header_key = f"seatmap.cabin_{cabin.lower()}"
+        cabin_name = i18n.tr(cabin_header_key)
         
         header = ft.Container(
             content=ft.Row([
                 ft.Container(width=4, height=18, bgcolor="#00b96b", border_radius=2),
                 ft.Text(
-                    cabin_names.get(cabin, cabin), 
+                    cabin_name, 
                     size=16, weight="bold", color=palette["text"],
                 ),
             ], alignment=ft.MainAxisAlignment.START, vertical_alignment=ft.CrossAxisAlignment.CENTER),
@@ -204,16 +202,16 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
     legend = ft.Row(
         controls=[
             ft.Container(width=24, height=24, bgcolor="#00b96b", border_radius=6),
-            ft.Text("空席", size=16, color=palette["text"]),
+            ft.Text(i18n.tr("seatmap.status_available"), size=16, color=palette["text"]),
             ft.Container(width=24),
             ft.Container(width=24, height=24, bgcolor="#555555", border_radius=6),
-            ft.Text("指定済み", size=16, color=palette["text_secondary"]),
+            ft.Text(i18n.tr("seatmap.status_occupied"), size=16, color=palette["text_secondary"]),
             ft.Container(width=24),
             ft.Container(width=24, height=24, bgcolor="#ffb020", border_radius=6),
-            ft.Text("ブロック", size=16, color=palette["text_secondary"]),
+            ft.Text(i18n.tr("seatmap.status_blocked"), size=16, color=palette["text_secondary"]),
             ft.Container(width=24),
             ft.Container(width=24, height=24, border=ft.Border.all(3, "#00ff88"), border_radius=6),
-            ft.Text("非常口", size=16, color="#00ff88" if palette["text"] == "white" else "#009944"),
+            ft.Text(i18n.tr("seatmap.feature_exit"), size=16, color="#00ff88" if palette["text"] == "white" else "#009944"),
         ],
         alignment=ft.MainAxisAlignment.CENTER,
     )

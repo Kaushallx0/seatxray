@@ -2,7 +2,10 @@ import flet as ft
 from services.amadeus_client import AmadeusClient
 from theme import get_color_palette, COLOR_ACCENT
 import asyncio
+from utils.i18n import TranslationService
 
+
+from components.about_dialog import AboutDialog
 
 def create_card(title, subtitle, content_list, palette):
     """カードUIを生成するヘルパー関数"""
@@ -27,6 +30,7 @@ def create_card(title, subtitle, content_list, palette):
 
 class SettingsContent(ft.Column):
     def __init__(self, page: ft.Page, app_state, amadeus: AmadeusClient, on_theme_toggle=None):
+        self.i18n = TranslationService.get_instance()
         self.page_ref = page
         self.app_state = app_state
         self.amadeus = amadeus
@@ -42,6 +46,9 @@ class SettingsContent(ft.Column):
         self.status_container_ref = ft.Ref[ft.Container]()
         self.stats_search_ref = ft.Ref[ft.Text]()
         self.stats_seatmap_ref = ft.Ref[ft.Text]()
+        
+        # Overlay State
+        self._about_overlay = None
 
         # UI構築
         controls_list = self._build_controls()
@@ -59,15 +66,16 @@ class SettingsContent(ft.Column):
 
     def _build_controls(self):
         p = self.palette
+        tr = self.i18n.tr
         
         # API Card
         api_card = create_card(
-            "Amadeus API 接続設定",
-            ft.Text("Amadeus APIキーを取得し、以下に入力してください。", color=p["text_secondary"]),
+            tr("settings.section_api"),
+            ft.Text(tr("settings.desc_api"), color=p["text_secondary"]),
             [
                 ft.TextField(
                     ref=self.api_key_ref,
-                    label="API Key",
+                    label=tr("settings.label_api_key"),
                     password=True,
                     can_reveal_password=True,
                     border_color=p["border"],
@@ -77,7 +85,7 @@ class SettingsContent(ft.Column):
                 ),
                 ft.TextField(
                     ref=self.api_secret_ref,
-                    label="API Secret",
+                    label=tr("settings.label_api_secret"),
                     password=True,
                     can_reveal_password=True,
                     border_color=p["border"],
@@ -87,14 +95,14 @@ class SettingsContent(ft.Column):
                 ),
                 ft.Row([
                     ft.ElevatedButton(
-                        content=ft.Text("保存して接続テスト", size=16),
+                        content=ft.Text(tr("settings.btn_save_test"), size=16),
                         on_click=self._on_save,
                         bgcolor=COLOR_ACCENT,
                         color="white",
                         height=45
                     ),
                     ft.OutlinedButton(
-                        content=ft.Text("設定を削除", size=16),
+                        content=ft.Text(tr("settings.btn_delete"), size=16),
                         on_click=self._on_reset,
                         style=ft.ButtonStyle(color=p["text"]),
                         height=45
@@ -112,12 +120,12 @@ class SettingsContent(ft.Column):
 
         # Appearance Card
         appearance_card = create_card(
-            "表示設定",
+            tr("settings.section_display"),
             None,
             [
                 ft.Row([
                     ft.Icon(ft.Icons.DARK_MODE, color=p["text"], size=24),
-                    ft.Text("ダークモード", size=20, color=p["text"]),
+                    ft.Text(tr("settings.label_dark_mode"), size=20, color=p["text"]),
                     ft.Container(expand=True),
                     ft.Switch(
                         value=self.is_dark,
@@ -131,23 +139,23 @@ class SettingsContent(ft.Column):
 
         # Stats Card
         stats_card = create_card(
-            "API利用統計",
+            tr("settings.section_stats"),
             None,
             [
                 ft.Row([
                     ft.Column([
-                        ft.Text("検索実行", size=16, color=p["text_secondary"]),
+                        ft.Text(tr("settings.label_stat_search"), size=16, color=p["text_secondary"]),
                         ft.Text("-", ref=self.stats_search_ref, size=24, weight="bold", color=p["text"])
                     ]),
                     ft.Container(width=50),
                     ft.Column([
-                        ft.Text("座席表取得", size=16, color=p["text_secondary"]),
+                        ft.Text(tr("settings.label_stat_seatmap"), size=16, color=p["text_secondary"]),
                         ft.Text("-", ref=self.stats_seatmap_ref, size=24, weight="bold", color=p["text"])
                     ]),
                 ]),
                 ft.Container(height=10),
                 ft.Text(
-                    "※ この数値は目安です。正確な利用回数はAmadeus開発者ポータルで確認してください。",
+                    tr("settings.desc_stats"),
                     size=14,
                     color=p["text_secondary"]
                 ),
@@ -169,16 +177,68 @@ class SettingsContent(ft.Column):
         return [
             ft.Container(
                 content=ft.Column([
-                    ft.Text("設定", size=48, weight="bold", color=p["text"]),
-                    ft.Text("API接続設定とモード管理", size=20, color=p["text_secondary"]),
+                    ft.Text(tr("settings.title"), size=48, weight="bold", color=p["text"]),
+                    ft.Text(tr("settings.subtitle"), size=20, color=p["text_secondary"]),
                     ft.Divider(height=30, color="transparent"),
                     api_card,
                     appearance_card,
                     stats_card,
+                    self._build_about_section(p),
                 ], spacing=0, horizontal_alignment=ft.CrossAxisAlignment.START),
                 padding=40,
             )
         ]
+
+
+
+    def _build_about_section(self, p):
+        tr = self.i18n.tr
+        return ft.Container(
+            content=ft.Row([
+                ft.TextButton(
+                    content=ft.Row([
+                        ft.Icon(ft.Icons.INFO_OUTLINE, color=p["text_secondary"], size=20),
+                        ft.Text(tr("settings.section_about"), color=p["text_secondary"])
+                    ]),
+                    on_click=self._show_about_dialog
+                )
+            ], alignment=ft.MainAxisAlignment.CENTER),
+            width=700,
+            padding=ft.Padding(0, 20, 0, 40)
+        )
+
+    def _show_about_dialog(self, e):
+        if self._about_overlay: return
+        
+        # ダイアログ コンポーネントを作成
+        dialog = AboutDialog(
+            page=self.page_ref, 
+            on_close=self._hide_about_dialog, 
+            palette=self.palette
+        )
+        
+        # 中央配置のオーバーレイとして作成
+        self._about_overlay = ft.Stack([
+            # 背景クリックで閉じるための透明レイヤー
+            ft.GestureDetector(
+                content=ft.Container(expand=True, bgcolor=ft.Colors.with_opacity(0.4, "black")),
+                on_tap=lambda _: self._hide_about_dialog()
+            ),
+            # ダイアログ本体（中央）
+            ft.Container(
+                content=dialog,
+                alignment=ft.Alignment(0, 0)
+            )
+        ], expand=True)
+        
+        self.page_ref.overlay.append(self._about_overlay)
+        self.page_ref.update()
+
+    def _hide_about_dialog(self, e=None):
+        if self._about_overlay and self._about_overlay in self.page_ref.overlay:
+            self.page_ref.overlay.remove(self._about_overlay)
+            self._about_overlay = None
+            self.page_ref.update()
 
     def update_palette(self, new_palette):
         """テーマ変更時にパレットを更新（ビュー再作成なし）"""

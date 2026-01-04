@@ -1,0 +1,87 @@
+{
+    "app_title": "SeatXray",
+    "common": {
+        "search": "Search",
+        "settings": "Settings",
+        "close": "Close",
+        "loading": "Loading...",
+        "error": "Error",
+        "date": "Date",
+        "time": "Time"
+    },
+    "nav": {
+        "search": "Search",
+        "settings": "Settings"
+    },
+    "search": {
+        "header_title": "Flight Search",
+        "header_subtitle": "Select a flight to verify seat availability",
+        "label_origin": "Origin",
+        "label_dest": "Destination",
+        "label_search_range": "Search Window",
+        "range_1h": "+ 1 Hour",
+        "range_2h": "+ 2 Hours",
+        "range_4h": "+ 4 Hours",
+        "range_12h": "+ 12 Hours",
+        "hint_airport": "Search by Airport, City, or IATA...",
+        "results_count": "Results: {count} Flights",
+        "no_results": "No flights found matching your criteria."
+    },
+    "flight_card": {
+        "cabin_economy": "Economy",
+        "cabin_premium_economy": "Prem Eco",
+        "cabin_business": "Business",
+        "cabin_first": "First",
+        "details_template": "Aircraft: {ac_name}  |  Duration: {duration}"
+    },
+    "seatmap": {
+        "loading": "Analyzing Seatmap...",
+        "fetch_error": "Failed to fetch seat data.",
+        "status_available": "Available",
+        "status_occupied": "Occupied",
+        "status_blocked": "Blocked",
+        "feature_exit": "Exit Row",
+        "feature_legroom": "Extra Legroom",
+        "seat_number": "Seat {number}",
+        "cabin_first": "First Class",
+        "cabin_business": "Business Class",
+        "cabin_premium_economy": "Premium Economy",
+        "cabin_economy": "Economy Class"
+    },
+    "settings": {
+        "title": "Settings",
+        "subtitle": "API Connection & Mode Management",
+        "section_api": "Amadeus API Settings",
+        "section_display": "Display Settings",
+        "section_stats": "API Usage Stats",
+        "section_about": "About / License",
+        "desc_api": "Enter your Amadeus API credentials below.",
+        "desc_stats": "* Stats are approximate. Check Amadeus Developer Portal for official usage.",
+        "label_api_key": "API Key",
+        "label_api_secret": "API Secret",
+        "btn_save_test": "Save & Test Connection",
+        "btn_delete": "Delete Settings",
+        "label_dark_mode": "Dark Mode",
+        "label_stat_search": "Search Calls",
+        "label_stat_seatmap": "Seatmap Calls",
+        "msg_testing": "Testing Connection...",
+        "msg_success": "Connected! Settings saved.",
+        "msg_auth_error": "Auth Error: Please check your keys.",
+        "msg_demo_reset": "Reset to Demo Mode."
+    },
+    "about": {
+        "version": "v0.1.1",
+        "license_label": "License: AGPL-3.0",
+        "tooltip_license": "View Full License",
+        "section_tech": "Technologies",
+        "section_libs": "Open Source Libraries",
+        "section_legal": "Legal Information",
+        "legal_text": "This app uses Amadeus Flight Offers Search and SeatMap Display APIs...",
+        "warranty_disclaimer": "Data provided as is without warranty."
+    },
+    "window": {
+        "minimize": "Minimize",
+        "maximize": "Maximize",
+        "close": "Close"
+    }
+}

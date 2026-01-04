@@ -1,620 +1,620 @@
 [
   {
     "iata": "HND",
-    "city": "東京",
-    "name": "羽田空港",
+    "city": "Tokyo",
+    "name": "Haneda Airport",
     "country": "JP"
   },
   {
     "iata": "NRT",
-    "city": "東京",
-    "name": "成田国際空港",
+    "city": "Tokyo",
+    "name": "Narita International Airport",
     "country": "JP"
   },
   {
     "iata": "KIX",
-    "city": "大阪",
-    "name": "関西国際空港",
+    "city": "Osaka",
+    "name": "Kansai International Airport",
     "country": "JP"
   },
   {
     "iata": "ITM",
-    "city": "大阪",
-    "name": "伊丹空港",
+    "city": "Osaka",
+    "name": "Itami Airport",
     "country": "JP"
   },
   {
     "iata": "NGO",
-    "city": "名古屋",
-    "name": "中部国際空港",
+    "city": "Nagoya",
+    "name": "Chubu Centrair International Airport",
     "country": "JP"
   },
   {
     "iata": "FUK",
-    "city": "福岡",
-    "name": "福岡空港",
+    "city": "Fukuoka",
+    "name": "Fukuoka Airport",
     "country": "JP"
   },
   {
     "iata": "CTS",
-    "city": "札幌",
-    "name": "新千歳空港",
+    "city": "Sapporo",
+    "name": "New Chitose Airport",
     "country": "JP"
   },
   {
     "iata": "OKA",
-    "city": "沖縄",
-    "name": "那覇空港",
+    "city": "Okinawa",
+    "name": "Naha Airport",
     "country": "JP"
   },
   {
     "iata": "AOJ",
-    "city": "青森",
-    "name": "青森空港",
+    "city": "Aomori",
+    "name": "Aomori Airport",
     "country": "JP"
   },
   {
     "iata": "MSJ",
-    "city": "三沢",
-    "name": "三沢空港",
+    "city": "Misawa",
+    "name": "Misawa Airport",
     "country": "JP"
   },
   {
     "iata": "HAK",
-    "city": "函館",
-    "name": "函館空港",
+    "city": "Hakodate",
+    "name": "Hakodate Airport",
     "country": "JP"
   },
   {
     "iata": "AKJ",
-    "city": "旭川",
-    "name": "旭川空港",
+    "city": "Asahikawa",
+    "name": "Asahikawa Airport",
     "country": "JP"
   },
   {
     "iata": "MMB",
-    "city": "女満別",
-    "name": "女満別空港",
+    "city": "Memanbetsu",
+    "name": "Memanbetsu Airport",
     "country": "JP"
   },
   {
     "iata": "OBO",
-    "city": "帯広",
-    "name": "とかち帯広空港",
+    "city": "Obihiro",
+    "name": "Tokachi-Obihiro Airport",
     "country": "JP"
   },
   {
     "iata": "KUH",
-    "city": "釧路",
-    "name": "たんちょう釧路空港",
+    "city": "Kushiro",
+    "name": "Tancho Kushiro Airport",
     "country": "JP"
   },
   {
     "iata": "SDJ",
-    "city": "仙台",
-    "name": "仙台空港",
+    "city": "Sendai",
+    "name": "Sendai Airport",
     "country": "JP"
   },
   {
     "iata": "KMQ",
-    "city": "小松",
-    "name": "小松空港",
+    "city": "Komatsu",
+    "name": "Komatsu Airport",
     "country": "JP"
   },
   {
     "iata": "MYJ",
-    "city": "松山",
-    "name": "松山空港",
+    "city": "Matsuyama",
+    "name": "Matsuyama Airport",
     "country": "JP"
   },
   {
     "iata": "HIJ",
-    "city": "広島",
-    "name": "広島空港",
+    "city": "Hiroshima",
+    "name": "Hiroshima Airport",
     "country": "JP"
   },
   {
     "iata": "TAK",
-    "city": "高松",
-    "name": "高松空港",
+    "city": "Takamatsu",
+    "name": "Takamatsu Airport",
     "country": "JP"
   },
   {
     "iata": "UKB",
-    "city": "神戸",
-    "name": "神戸空港",
+    "city": "Kobe",
+    "name": "Kobe Airport",
     "country": "JP"
   },
   {
     "iata": "KOJ",
-    "city": "鹿児島",
-    "name": "鹿児島空港",
+    "city": "Kagoshima",
+    "name": "Kagoshima Airport",
     "country": "JP"
   },
   {
     "iata": "KMI",
-    "city": "宮崎",
-    "name": "宮崎空港",
+    "city": "Miyazaki",
+    "name": "Miyazaki Airport",
     "country": "JP"
   },
   {
     "iata": "NGS",
-    "city": "長崎",
-    "name": "長崎空港",
+    "city": "Nagasaki",
+    "name": "Nagasaki Airport",
     "country": "JP"
   },
   {
     "iata": "KMJ",
-    "city": "熊本",
-    "name": "熊本空港",
+    "city": "Kumamoto",
+    "name": "Kumamoto Airport",
     "country": "JP"
   },
   {
     "iata": "OIT",
-    "city": "大分",
-    "name": "大分空港",
+    "city": "Oita",
+    "name": "Oita Airport",
     "country": "JP"
   },
   {
     "iata": "ICN",
-    "city": "ソウル",
-    "name": "仁川国際空港",
+    "city": "Seoul",
+    "name": "Incheon International Airport",
     "country": "KR"
   },
   {
     "iata": "GMP",
-    "city": "ソウル",
-    "name": "金浦国際空港",
+    "city": "Seoul",
+    "name": "Gimpo International Airport",
     "country": "KR"
   },
   {
     "iata": "PUS",
-    "city": "釜山",
-    "name": "金海国際空港",
+    "city": "Busan",
+    "name": "Gimhae International Airport",
     "country": "KR"
   },
   {
     "iata": "TPE",
-    "city": "台北",
-    "name": "台湾桃園国際空港",
+    "city": "Taipei",
+    "name": "Taoyuan International Airport",
     "country": "TW"
   },
   {
     "iata": "TSA",
-    "city": "台北",
-    "name": "台北松山空港",
+    "city": "Taipei",
+    "name": "Songshan Airport",
     "country": "TW"
   },
   {
     "iata": "KHH",
-    "city": "高雄",
-    "name": "高雄国際空港",
+    "city": "Kaohsiung",
+    "name": "Kaohsiung International Airport",
     "country": "TW"
   },
   {
     "iata": "HKG",
-    "city": "香港",
-    "name": "香港国際空港",
+    "city": "Hong Kong",
+    "name": "Hong Kong International Airport",
     "country": "HK"
   },
   {
     "iata": "PVG",
-    "city": "上海",
-    "name": "上海浦東国際空港",
+    "city": "Shanghai",
+    "name": "Pudong International Airport",
     "country": "CN"
   },
   {
     "iata": "SHA",
-    "city": "上海",
-    "name": "上海虹橋国際空港",
+    "city": "Shanghai",
+    "name": "Hongqiao International Airport",
     "country": "CN"
   },
   {
     "iata": "PEK",
-    "city": "北京",
-    "name": "北京首都国際空港",
+    "city": "Beijing",
+    "name": "Capital International Airport",
     "country": "CN"
   },
   {
     "iata": "PKX",
-    "city": "北京",
-    "name": "北京大興国際空港",
+    "city": "Beijing",
+    "name": "Daxing International Airport",
     "country": "CN"
   },
   {
     "iata": "CAN",
-    "city": "広州",
-    "name": "広州白雲国際空港",
+    "city": "Guangzhou",
+    "name": "Baiyun International Airport",
     "country": "CN"
   },
   {
     "iata": "SZX",
-    "city": "深セン",
-    "name": "深セン宝安国際空港",
+    "city": "Shenzhen",
+    "name": "Bao'an International Airport",
     "country": "CN"
   },
   {
     "iata": "SIN",
-    "city": "シンガポール",
-    "name": "シンガポール・チャンギ国際空港",
+    "city": "Singapore",
+    "name": "Changi Airport",
     "country": "SG"
   },
   {
     "iata": "BKK",
-    "city": "バンコク",
-    "name": "スワンナプーム国際空港",
+    "city": "Bangkok",
+    "name": "Suvarnabhumi Airport",
     "country": "TH"
   },
   {
     "iata": "DMK",
-    "city": "バンコク",
-    "name": "ドンムアン空港",
+    "city": "Bangkok",
+    "name": "Don Mueang International Airport",
     "country": "TH"
   },
   {
     "iata": "SGN",
-    "city": "ホーチミン",
-    "name": "タンソンニャット国際空港",
+    "city": "Ho Chi Minh City",
+    "name": "Tan Son Nhat International Airport",
     "country": "VN"
   },
   {
     "iata": "HAN",
-    "city": "ハノイ",
-    "name": "ノイバイ国際空港",
+    "city": "Hanoi",
+    "name": "Noi Bai International Airport",
     "country": "VN"
   },
   {
     "iata": "DAD",
-    "city": "ダナン",
-    "name": "ダナン国際空港",
+    "city": "Da Nang",
+    "name": "Da Nang International Airport",
     "country": "VN"
   },
   {
     "iata": "KUL",
-    "city": "クアラルンプール",
-    "name": "クアラルンプール国際空港",
+    "city": "Kuala Lumpur",
+    "name": "Kuala Lumpur International Airport",
     "country": "MY"
   },
   {
     "iata": "MNL",
-    "city": "マニラ",
-    "name": "ニノイ・アキノ国際空港",
+    "city": "Manila",
+    "name": "Ninoy Aquino International Airport",
     "country": "PH"
   },
   {
     "iata": "JKT",
-    "city": "ジャカルタ",
-    "name": "スカルノ・ハッタ国際空港",
+    "city": "Jakarta",
+    "name": "Soekarno-Hatta International Airport",
     "country": "ID"
   },
   {
     "iata": "DPS",
-    "city": "バリ",
-    "name": "ディパサール・イング・ライ国際空港",
+    "city": "Bali",
+    "name": "Ngurah Rai International Airport",
     "country": "ID"
   },
   {
     "iata": "DEL",
-    "city": "デリー",
-    "name": "インディラ・ガンディー国際空港",
+    "city": "Delhi",
+    "name": "Indira Gandhi International Airport",
     "country": "IN"
   },
   {
     "iata": "BOM",
-    "city": "ムンバイ",
-    "name": "チャトラパティ・シヴァージー国際空港",
+    "city": "Mumbai",
+    "name": "Chhatrapati Shivaji Maharaj International Airport",
     "country": "IN"
   },
   {
     "iata": "LHR",
-    "city": "ロンドン",
-    "name": "ロンドン・ヒースロー空港",
+    "city": "London",
+    "name": "Heathrow Airport",
     "country": "GB"
   },
   {
     "iata": "LGW",
-    "city": "ロンドン",
-    "name": "ロンドン・ガトウィック空港",
+    "city": "London",
+    "name": "Gatwick Airport",
     "country": "GB"
   },
   {
     "iata": "CDG",
-    "city": "パリ",
-    "name": "パリ・シャルル・ド・ゴール空港",
+    "city": "Paris",
+    "name": "Charles de Gaulle Airport",
     "country": "FR"
   },
   {
     "iata": "ORY",
-    "city": "パリ",
-    "name": "パリ・オルリー空港",
+    "city": "Paris",
+    "name": "Orly Airport",
     "country": "FR"
   },
   {
     "iata": "FRA",
-    "city": "フランクフルト",
-    "name": "フランクフルト空港",
+    "city": "Frankfurt",
+    "name": "Frankfurt Airport",
     "country": "DE"
   },
   {
     "iata": "MUC",
-    "city": "ミュンヘン",
-    "name": "ミュンヘン空港",
+    "city": "Munich",
+    "name": "Munich Airport",
     "country": "DE"
   },
   {
     "iata": "AMS",
-    "city": "アムステルダム",
-    "name": "アムステルダム・スキポール空港",
+    "city": "Amsterdam",
+    "name": "Schiphol Airport",
     "country": "NL"
   },
   {
     "iata": "MAD",
-    "city": "マドリード",
-    "name": "アドルフォ・スアレス・マドリード＝バラハス空港",
+    "city": "Madrid",
+    "name": "Adolfo Suárez Madrid–Barajas Airport",
     "country": "ES"
   },
   {
     "iata": "BCN",
-    "city": "バルセロナ",
-    "name": "バルセロナ＝エル・プラット空港",
+    "city": "Barcelona",
+    "name": "Josep Tarradellas Barcelona-El Prat Airport",
     "country": "ES"
   },
   {
     "iata": "FCO",
-    "city": "ローマ",
-    "name": "フィウミチーノ空港",
+    "city": "Rome",
+    "name": "Fiumicino Airport",
     "country": "IT"
   },
   {
     "iata": "MXP",
-    "city": "ミラノ",
-    "name": "ミラノ・マルペンサ空港",
+    "city": "Milan",
+    "name": "Malpensa Airport",
     "country": "IT"
   },
   {
     "iata": "ZRH",
-    "city": "チューリッヒ",
-    "name": "チューリッヒ空港",
+    "city": "Zurich",
+    "name": "Zurich Airport",
     "country": "CH"
   },
   {
     "iata": "VIE",
-    "city": "ウィーン",
-    "name": "ウィーン国際空港",
+    "city": "Vienna",
+    "name": "Vienna International Airport",
     "country": "AT"
   },
   {
     "iata": "CPH",
-    "city": "コペンハーゲン",
-    "name": "コペンハーゲン空港",
+    "city": "Copenhagen",
+    "name": "Copenhagen Airport",
     "country": "DK"
   },
   {
     "iata": "ARN",
-    "city": "ストックホルム",
-    "name": "ストックホルム・アーランダ空港",
+    "city": "Stockholm",
+    "name": "Arlanda Airport",
     "country": "SE"
   },
   {
     "iata": "HEL",
-    "city": "ヘルシンキ",
-    "name": "ヘルシンキ・ヴァンター空港",
+    "city": "Helsinki",
+    "name": "Helsinki Airport",
     "country": "FI"
   },
   {
     "iata": "SVO",
-    "city": "モスクワ",
-    "name": "シェレメーチエヴォ国際空港",
+    "city": "Moscow",
+    "name": "Sheremetyevo International Airport",
     "country": "RU"
   },
   {
     "iata": "IST",
-    "city": "イスタンブール",
-    "name": "イスタンブール空港",
+    "city": "Istanbul",
+    "name": "Istanbul Airport",
     "country": "TR"
   },
   {
     "iata": "ATH",
-    "city": "アテネ",
-    "name": "アテネ国際空港",
+    "city": "Athens",
+    "name": "Athens International Airport",
     "country": "GR"
   },
   {
     "iata": "JFK",
-    "city": "ニューヨーク",
-    "name": "ジョン・F・ケネディ国際空港",
+    "city": "New York",
+    "name": "John F. Kennedy International Airport",
     "country": "US"
   },
   {
     "iata": "EWR",
-    "city": "ニューアーク",
-    "name": "ニューアーク・リバティー国際空港",
+    "city": "Newark",
+    "name": "Newark Liberty International Airport",
     "country": "US"
   },
   {
     "iata": "LGA",
-    "city": "ニューヨーク",
-    "name": "ラガーディア空港",
+    "city": "New York",
+    "name": "LaGuardia Airport",
     "country": "US"
   },
   {
     "iata": "LAX",
-    "city": "ロサンゼルス",
-    "name": "ロサンゼルス国際空港",
+    "city": "Los Angeles",
+    "name": "Los Angeles International Airport",
     "country": "US"
   },
   {
     "iata": "SFO",
-    "city": "サンフランシスコ",
-    "name": "サンフランシスコ国際空港",
+    "city": "San Francisco",
+    "name": "San Francisco International Airport",
     "country": "US"
   },
   {
     "iata": "ORD",
-    "city": "シカゴ",
-    "name": "シカゴ・オヘア国際空港",
+    "city": "Chicago",
+    "name": "O'Hare International Airport",
     "country": "US"
   },
   {
     "iata": "SEA",
-    "city": "シアトル",
-    "name": "シアトル・タコマ国際空港",
+    "city": "Seattle",
+    "name": "Seattle-Tacoma International Airport",
     "country": "US"
   },
   {
     "iata": "DFW",
-    "city": "ダラス",
-    "name": "ダラス・フォートワース国際空港",
+    "city": "Dallas",
+    "name": "Dallas/Fort Worth International Airport",
     "country": "US"
   },
   {
     "iata": "ATL",
-    "city": "アトランタ",
-    "name": "ハーツフィールド・ジャクソン・アトランタ国際空港",
+    "city": "Atlanta",
+    "name": "Hartsfield-Jackson Atlanta International Airport",
     "country": "US"
   },
   {
     "iata": "DEN",
-    "city": "デンバー",
-    "name": "デンバー国際空港",
+    "city": "Denver",
+    "name": "Denver International Airport",
     "country": "US"
   },
   {
     "iata": "MIA",
-    "city": "マイアミ",
-    "name": "マイアミ国際空港",
+    "city": "Miami",
+    "name": "Miami International Airport",
     "country": "US"
   },
   {
     "iata": "HNL",
-    "city": "ホノルル",
-    "name": "ダニエル・K・イノウエ国際空港",
+    "city": "Honolulu",
+    "name": "Daniel K. Inouye International Airport",
     "country": "US"
   },
   {
     "iata": "YVR",
-    "city": "バンクーバー",
-    "name": "バンクーバー国際空港",
+    "city": "Vancouver",
+    "name": "Vancouver International Airport",
     "country": "CA"
   },
   {
     "iata": "YYZ",
-    "city": "トロント",
-    "name": "トロント・ピアソン国際空港",
+    "city": "Toronto",
+    "name": "Toronto Pearson International Airport",
     "country": "CA"
   },
   {
     "iata": "MEX",
-    "city": "メキシコシティ",
-    "name": "ベニート・フアレス国際空港",
+    "city": "Mexico City",
+    "name": "Benito Juárez International Airport",
     "country": "MX"
   },
   {
     "iata": "SYD",
-    "city": "シドニー",
-    "name": "シドニー・キングスフォード・スミス国際空港",
+    "city": "Sydney",
+    "name": "Kingsford Smith Airport",
     "country": "AU"
   },
   {
     "iata": "MEL",
-    "city": "メルボルン",
-    "name": "メルボルン空港",
+    "city": "Melbourne",
+    "name": "Melbourne Airport",
     "country": "AU"
   },
   {
     "iata": "BNE",
-    "city": "ブリスベン",
-    "name": "ブリスベン空港",
+    "city": "Brisbane",
+    "name": "Brisbane Airport",
     "country": "AU"
   },
   {
     "iata": "AKL",
-    "city": "オークランド",
-    "name": "オークランド空港",
+    "city": "Auckland",
+    "name": "Auckland Airport",
     "country": "NZ"
   },
   {
     "iata": "DXB",
-    "city": "ドバイ",
-    "name": "ドバイ国際空港",
+    "city": "Dubai",
+    "name": "Dubai International Airport",
     "country": "AE"
   },
   {
     "iata": "AUH",
-    "city": "アブダビ",
-    "name": "アブダビ国際空港",
+    "city": "Abu Dhabi",
+    "name": "Zayed International Airport",
     "country": "AE"
   },
   {
     "iata": "DOH",
-    "city": "ドーハ",
-    "name": "ハマド国際空港",
+    "city": "Doha",
+    "name": "Hamad International Airport",
     "country": "QA"
   },
   {
     "iata": "RUH",
-    "city": "リヤド",
-    "name": "キング・ハーリド国際空港",
+    "city": "Riyadh",
+    "name": "King Khalid International Airport",
     "country": "SA"
   },
   {
     "iata": "JED",
-    "city": "ジェッダ",
-    "name": "キング・アブドゥルアズィーズ国際空港",
+    "city": "Jeddah",
+    "name": "King Abdulaziz International Airport",
     "country": "SA"
   },
   {
     "iata": "AMM",
-    "city": "アンマン",
-    "name": "クィーンアリア国際空港",
+    "city": "Amman",
+    "name": "Queen Alia International Airport",
     "country": "JO"
   },
   {
     "iata": "CAI",
-    "city": "カイロ",
-    "name": "カイロ国際空港",
+    "city": "Cairo",
+    "name": "Cairo International Airport",
     "country": "EG"
   },
   {
     "iata": "CPT",
-    "city": "ケープタウン",
-    "name": "ケープタウン国際空港",
+    "city": "Cape Town",
+    "name": "Cape Town International Airport",
     "country": "ZA"
   },
   {
     "iata": "JNB",
-    "city": "ヨハネスブルグ",
-    "name": "O・R・タンボ国際空港",
+    "city": "Johannesburg",
+    "name": "O.R. Tambo International Airport",
     "country": "ZA"
   },
   {
     "iata": "GRU",
-    "city": "サンパウロ",
-    "name": "グアルーリョス国際空港",
+    "city": "Sao Paulo",
+    "name": "Guarulhos International Airport",
     "country": "BR"
   },
   {
     "iata": "GIG",
-    "city": "リオデジャネイロ",
-    "name": "アントニオ・カルロス・ジョビン国際空港",
+    "city": "Rio de Janeiro",
+    "name": "Galeao International Airport",
     "country": "BR"
   },
   {
     "iata": "EZE",
-    "city": "ブエノスアイレス",
-    "name": "ミニストロ・ピスタリーニ国際空港",
+    "city": "Buenos Aires",
+    "name": "Ministro Pistarini International Airport",
     "country": "AR"
   },
   {
     "iata": "SCL",
-    "city": "サンティアゴ",
-    "name": "アルトゥーロ・メリノ・ベニテス国際空港",
+    "city": "Santiago",
+    "name": "Arturo Merino Benitez International Airport",
     "country": "CL"
   },
   {
     "iata": "NCE",
-    "city": "ニース",
-    "name": "コート・ダジュール空港",
+    "city": "Nice",
+    "name": "Nice Côte d'Azur Airport",
     "country": "FR"
   },
   {
@@ -1652,7 +1652,7 @@
   {
     "iata": "KEF",
     "city": "Reykjavik",
-    "name": "Keflavik International Airport",
+    "name": "Keflavík International Airport",
     "country": "IS"
   },
   {
@@ -2335,8 +2335,8 @@
   },
   {
     "iata": "YEG",
-    "city": "エドモントン",
-    "name": "エドモントン国際空港",
+    "city": "Edmonton",
+    "name": "Edmonton International Airport",
     "country": "CA"
   },
   {
@@ -3055,8 +3055,8 @@
   },
   {
     "iata": "YOW",
-    "city": "オタワ",
-    "name": "オタワ・マクドナルド・カルティエ国際空港",
+    "city": "Ottawa",
+    "name": "Ottawa Macdonald-Cartier International Airport",
     "country": "CA"
   },
   {
@@ -3499,8 +3499,8 @@
   },
   {
     "iata": "YUL",
-    "city": "モントリオール",
-    "name": "モントリオール・ピエール・エリオット・トルドー国際空港",
+    "city": "Montreal",
+    "name": "Montréal-Trudeau International Airport",
     "country": "CA"
   },
   {
@@ -3745,8 +3745,8 @@
   },
   {
     "iata": "YYC",
-    "city": "カルガリー",
-    "name": "カルガリー国際空港",
+    "city": "Calgary",
+    "name": "Calgary International Airport",
     "country": "CA"
   },
   {
@@ -4873,8 +4873,8 @@
   },
   {
     "iata": "LOS",
-    "city": "ラゴス",
-    "name": "ムルタラ・ムハンマド国際空港",
+    "city": "Lagos",
+    "name": "Murtala Muhammed International Airport",
     "country": "NG"
   },
   {
@@ -4963,8 +4963,8 @@
   },
   {
     "iata": "TUN",
-    "city": "チュニス",
-    "name": "チュニス・カルタゴ国際空港",
+    "city": "Tunis",
+    "name": "Tunis-Carthage International Airport",
     "country": "TN"
   },
   {
@@ -5029,8 +5029,8 @@
   },
   {
     "iata": "BRU",
-    "city": "ブリュッセル",
-    "name": "ブリュッセル空港",
+    "city": "Brussels",
+    "name": "Brussels Airport",
     "country": "BE"
   },
   {
@@ -5149,8 +5149,8 @@
   },
   {
     "iata": "BER",
-    "city": "ベルリン",
-    "name": "ベルリン・ブランデンブルク空港",
+    "city": "Berlin",
+    "name": "Berlin Brandenburg Airport",
     "country": "DE"
   },
   {
@@ -5173,8 +5173,8 @@
   },
   {
     "iata": "HAM",
-    "city": "ハンブルク",
-    "name": "ハンブルク空港",
+    "city": "Hamburg",
+    "name": "Hamburg Airport",
     "country": "DE"
   },
   {
@@ -5191,8 +5191,8 @@
   },
   {
     "iata": "DUS",
-    "city": "デュッセルドルフ",
-    "name": "デュッセルドルフ空港",
+    "city": "Dusseldorf",
+    "name": "Dusseldorf Airport",
     "country": "DE"
   },
   {
@@ -5215,8 +5215,8 @@
   },
   {
     "iata": "STR",
-    "city": "シュトゥットガルト",
-    "name": "シュトゥットガルト空港",
+    "city": "Stuttgart",
+    "name": "Stuttgart Airport",
     "country": "DE"
   },
   {
@@ -5911,8 +5911,8 @@
   },
   {
     "iata": "MAN",
-    "city": "マンチェスター",
-    "name": "マンチェスター空港",
+    "city": "Manchester",
+    "name": "Manchester Airport",
     "country": "GB"
   },
   {
@@ -6055,8 +6055,8 @@
   },
   {
     "iata": "LTN",
-    "city": "ロンドン",
-    "name": "ロンドン・ルートン空港",
+    "city": "London",
+    "name": "Luton Airport",
     "country": "GB"
   },
   {
@@ -6151,8 +6151,8 @@
   },
   {
     "iata": "LCY",
-    "city": "ロンドン",
-    "name": "ロンドン・シティ空港",
+    "city": "London",
+    "name": "London City Airport",
     "country": "GB"
   },
   {
@@ -6295,8 +6295,8 @@
   },
   {
     "iata": "EDI",
-    "city": "エディンバラ",
-    "name": "エディンバラ空港",
+    "city": "Edinburgh",
+    "name": "Edinburgh Airport",
     "country": "GB"
   },
   {
@@ -6397,8 +6397,8 @@
   },
   {
     "iata": "STN",
-    "city": "ロンドン",
-    "name": "ロンドン・スタンステッド空港",
+    "city": "London",
+    "name": "London Stansted Airport",
     "country": "GB"
   },
   {
@@ -6925,8 +6925,8 @@
   },
   {
     "iata": "OSL",
-    "city": "オスロ",
-    "name": "オスロ空港",
+    "city": "Oslo",
+    "name": "Oslo Airport",
     "country": "NO"
   },
   {
@@ -7315,8 +7315,8 @@
   },
   {
     "iata": "WAW",
-    "city": "ワルシャワ",
-    "name": "ワルシャワ・ショパン空港",
+    "city": "Warsaw",
+    "name": "Warsaw Chopin Airport",
     "country": "PL"
   },
   {
@@ -11035,8 +11035,8 @@
   },
   {
     "iata": "CMN",
-    "city": "カサブランカ",
-    "name": "ムハンマド5世国際空港",
+    "city": "Casablanca",
+    "name": "Mohammed V International Airport",
     "country": "MA"
   },
   {
@@ -11053,8 +11053,8 @@
   },
   {
     "iata": "RAK",
-    "city": "Marrakech",
-    "name": "Menara Airport",
+    "city": "Marrakesh",
+    "name": "Marrakesh Menara Airport",
     "country": "MA"
   },
   {
@@ -11407,8 +11407,8 @@
   },
   {
     "iata": "ADD",
-    "city": "アディスアベバ",
-    "name": "ボレ国際空港",
+    "city": "Addis Ababa",
+    "name": "Bole International Airport",
     "country": "ET"
   },
   {
@@ -12007,8 +12007,8 @@
   },
   {
     "iata": "NBO",
-    "city": "ナイロビ",
-    "name": "ジョモ・ケニヤッタ国際空港",
+    "city": "Nairobi",
+    "name": "Jomo Kenyatta International Airport",
     "country": "KE"
   },
   {
@@ -13783,8 +13783,8 @@
   },
   {
     "iata": "BOS",
-    "city": "ボストン",
-    "name": "ロガン国際空港",
+    "city": "Boston",
+    "name": "Logan International Airport",
     "country": "US"
   },
   {
@@ -13981,8 +13981,8 @@
   },
   {
     "iata": "BWI",
-    "city": "ボルチモア",
-    "name": "ボルチモア・ワシントン国際空港",
+    "city": "Baltimore",
+    "name": "Baltimore/Washington International Airport",
     "country": "US"
   },
   {
@@ -14407,8 +14407,8 @@
   },
   {
     "iata": "CLT",
-    "city": "シャーロット",
-    "name": "シャーロット・ダグラス国際空港",
+    "city": "Charlotte",
+    "name": "Charlotte Douglas International Airport",
     "country": "US"
   },
   {
@@ -14785,8 +14785,8 @@
   },
   {
     "iata": "DAL",
-    "city": "ダラス",
-    "name": "ダラス・ラブフィールド空港",
+    "city": "Dallas",
+    "name": "Dallas Love Field",
     "country": "US"
   },
   {
@@ -14815,8 +14815,8 @@
   },
   {
     "iata": "DCA",
-    "city": "ワシントンD.C.",
-    "name": "ロナルド・レーガン・ワシントン・ナショナル空港",
+    "city": "Washington, D.C.",
+    "name": "Ronald Reagan Washington National Airport",
     "country": "US"
   },
   {
@@ -15049,8 +15049,8 @@
   },
   {
     "iata": "DTW",
-    "city": "デトロイト",
-    "name": "デトロイト・メトロポリタン・ウェイン・カウンティ空港",
+    "city": "Detroit",
+    "name": "Detroit Metropolitan Airport",
     "country": "US"
   },
   {
@@ -15709,8 +15709,8 @@
   },
   {
     "iata": "FLL",
-    "city": "フォートローダーデール",
-    "name": "フォートローダーデール・ハリウッド国際空港",
+    "city": "Fort Lauderdale",
+    "name": "Fort Lauderdale-Hollywood International Airport",
     "country": "US"
   },
   {
@@ -16627,8 +16627,8 @@
   },
   {
     "iata": "HOU",
-    "city": "ヒューストン",
-    "name": "ウィリアム・P・ホビー空港",
+    "city": "Houston",
+    "name": "William P. Hobby Airport",
     "country": "US"
   },
   {
@@ -16849,8 +16849,8 @@
   },
   {
     "iata": "IAD",
-    "city": "ワシントンD.C.",
-    "name": "ワシントン・ダレス国際空港",
+    "city": "Washington, D.C.",
+    "name": "Dulles International Airport",
     "country": "US"
   },
   {
@@ -16861,8 +16861,8 @@
   },
   {
     "iata": "IAH",
-    "city": "ヒューストン",
-    "name": "ジョージ・ブッシュ・インターコンチネンタル空港",
+    "city": "Houston",
+    "name": "George Bush Intercontinental Airport",
     "country": "US"
   },
   {
@@ -17317,8 +17317,8 @@
   },
   {
     "iata": "LAS",
-    "city": "ラスベガス",
-    "name": "ハリー・リード国際空港",
+    "city": "Las Vegas",
+    "name": "Harry Reid International Airport",
     "country": "US"
   },
   {
@@ -17911,8 +17911,8 @@
   },
   {
     "iata": "MCO",
-    "city": "オーランド",
-    "name": "オーランド国際空港",
+    "city": "Orlando",
+    "name": "Orlando International Airport",
     "country": "US"
   },
   {
@@ -17947,8 +17947,8 @@
   },
   {
     "iata": "MDW",
-    "city": "シカゴ",
-    "name": "シカゴ・ミッドウェイ国際空港",
+    "city": "Chicago",
+    "name": "Midway International Airport",
     "country": "US"
   },
   {
@@ -18457,8 +18457,8 @@
   },
   {
     "iata": "MSP",
-    "city": "ミネアポリス",
-    "name": "ミネアポリス・セントポール国際空港",
+    "city": "Minneapolis",
+    "name": "Minneapolis-Saint Paul International Airport",
     "country": "US"
   },
   {
@@ -19153,8 +19153,8 @@
   },
   {
     "iata": "ORL",
-    "city": "オーランド",
-    "name": "オーランド国際空港",
+    "city": "Orlando",
+    "name": "Orlando Executive Airport",
     "country": "US"
   },
   {
@@ -19381,8 +19381,8 @@
   },
   {
     "iata": "PDX",
-    "city": "ポートランド",
-    "name": "ポートランド国際空港",
+    "city": "Portland",
+    "name": "Portland International Airport",
     "country": "US"
   },
   {
@@ -19453,8 +19453,8 @@
   },
   {
     "iata": "PHL",
-    "city": "フィラデルフィア",
-    "name": "フィラデルフィア国際空港",
+    "city": "Philadelphia",
+    "name": "Philadelphia International Airport",
     "country": "US"
   },
   {
@@ -19477,8 +19477,8 @@
   },
   {
     "iata": "PHX",
-    "city": "フェニックス",
-    "name": "フェニックス・スカイハーバー国際空港",
+    "city": "Phoenix",
+    "name": "Phoenix Sky Harbor International Airport",
     "country": "US"
   },
   {
@@ -20341,8 +20341,8 @@
   },
   {
     "iata": "SAN",
-    "city": "サンディエゴ",
-    "name": "サンディエゴ国際空港",
+    "city": "San Diego",
+    "name": "San Diego International Airport",
     "country": "US"
   },
   {
@@ -20653,8 +20653,8 @@
   },
   {
     "iata": "SLC",
-    "city": "ソルトレイクシティ",
-    "name": "ソルトレイクシティ国際空港",
+    "city": "Salt Lake City",
+    "name": "Salt Lake City International Airport",
     "country": "US"
   },
   {
@@ -21247,8 +21247,8 @@
   },
   {
     "iata": "TPA",
-    "city": "タンパ",
-    "name": "タンパ国際空港",
+    "city": "Tampa",
+    "name": "Tampa International Airport",
     "country": "US"
   },
   {
@@ -22159,8 +22159,8 @@
   },
   {
     "iata": "AGP",
-    "city": "マラガ",
-    "name": "マラガ＝コスタ・デル・ソル空港",
+    "city": "Malaga",
+    "name": "Malaga-Costa del Sol Airport",
     "country": "ES"
   },
   {
@@ -22183,8 +22183,8 @@
   },
   {
     "iata": "PMI",
-    "city": "パルマ・デ・マヨルカ",
-    "name": "パルマ・デ・マヨルカ空港",
+    "city": "Palma de Mallorca",
+    "name": "Palma de Mallorca Airport",
     "country": "ES"
   },
   {
@@ -22705,8 +22705,8 @@
   },
   {
     "iata": "LYS",
-    "city": "リヨン",
-    "name": "リヨン・サン＝テグジュペリ空港",
+    "city": "Lyon",
+    "name": "Lyon-Saint Exupéry Airport",
     "country": "FR"
   },
   {
@@ -22807,8 +22807,8 @@
   },
   {
     "iata": "MRS",
-    "city": "マルセイユ",
-    "name": "マルセイユ・プロヴァンス空港",
+    "city": "Marseille",
+    "name": "Marseille Provence Airport",
     "country": "FR"
   },
   {
@@ -23533,8 +23533,8 @@
   },
   {
     "iata": "BUD",
-    "city": "ブダペスト",
-    "name": "リスト・フェレンツ国際空港",
+    "city": "Budapest",
+    "name": "Ferenc Liszt International Airport",
     "country": "HU"
   },
   {
@@ -23660,7 +23660,7 @@
   {
     "iata": "PMO",
     "city": "Palermo",
-    "name": "Palermo / Punta Raisi Airport",
+    "name": "Falcone Borsellino Airport",
     "country": "IT"
   },
   {
@@ -23749,8 +23749,8 @@
   },
   {
     "iata": "BGY",
-    "city": "ベルガモ",
-    "name": "オリオ・アル・セリオ空港",
+    "city": "Bergamo",
+    "name": "Orio al Serio International Airport",
     "country": "IT"
   },
   {
@@ -23773,8 +23773,8 @@
   },
   {
     "iata": "LIN",
-    "city": "ミラノ",
-    "name": "ミラノ・リナーテ空港",
+    "city": "Milan",
+    "name": "Linate Airport",
     "country": "IT"
   },
   {
@@ -23881,8 +23881,8 @@
   },
   {
     "iata": "VCE",
-    "city": "ヴェネツィア",
-    "name": "ヴェネツィア・テッセラ空港",
+    "city": "Venice",
+    "name": "Venice Marco Polo Airport",
     "country": "IT"
   },
   {
@@ -23911,8 +23911,8 @@
   },
   {
     "iata": "CIA",
-    "city": "ローマ",
-    "name": "チャンピーノ空港",
+    "city": "Rome",
+    "name": "Ciampino Airport",
     "country": "IT"
   },
   {
@@ -23941,8 +23941,8 @@
   },
   {
     "iata": "NAP",
-    "city": "ナポリ",
-    "name": "ナポリ国際空港",
+    "city": "Naples",
+    "name": "Naples International Airport",
     "country": "IT"
   },
   {
@@ -24037,8 +24037,8 @@
   },
   {
     "iata": "PRG",
-    "city": "プラハ",
-    "name": "ヴァーツラフ・ハヴェル・プラハ国際空港",
+    "city": "Prague",
+    "name": "Václav Havel Airport Prague",
     "country": "CZ"
   },
   {
@@ -24061,8 +24061,8 @@
   },
   {
     "iata": "TLV",
-    "city": "テルアビブ",
-    "name": "ベン・グリオン国際空港",
+    "city": "Tel Aviv",
+    "name": "Ben Gurion Airport",
     "country": "IL"
   },
   {
@@ -24295,8 +24295,8 @@
   },
   {
     "iata": "OPO",
-    "city": "ポルト",
-    "name": "フランシスコ・サ・カルネイロ空港",
+    "city": "Porto",
+    "name": "Francisco Sá Carneiro Airport",
     "country": "PT"
   },
   {
@@ -24307,8 +24307,8 @@
   },
   {
     "iata": "LIS",
-    "city": "リスボン",
-    "name": "ウンベルト・デルガード空港",
+    "city": "Lisbon",
+    "name": "Humberto Delgado Airport",
     "country": "PT"
   },
   {
@@ -24427,8 +24427,8 @@
   },
   {
     "iata": "OTP",
-    "city": "ブカレスト",
-    "name": "アンリ・コアンダ国際空港",
+    "city": "Bucharest",
+    "name": "Henri Coandă International Airport",
     "country": "RO"
   },
   {
@@ -24469,8 +24469,8 @@
   },
   {
     "iata": "GVA",
-    "city": "ジュネーヴ",
-    "name": "ジュネーヴ空港",
+    "city": "Geneva",
+    "name": "Geneva Airport",
     "country": "CH"
   },
   {
@@ -24559,8 +24559,8 @@
   },
   {
     "iata": "ESB",
-    "city": "アンカラ",
-    "name": "エセンボーア国際空港",
+    "city": "Ankara",
+    "name": "Esenboğa Airport",
     "country": "TR"
   },
   {
@@ -24931,8 +24931,8 @@
   },
   {
     "iata": "SAW",
-    "city": "イスタンブール",
-    "name": "サビハ・ギョクチェン国際空港",
+    "city": "Istanbul",
+    "name": "Sabiha Gökçen International Airport",
     "country": "TR"
   },
   {
@@ -25981,8 +25981,8 @@
   },
   {
     "iata": "CUN",
-    "city": "カンクン",
-    "name": "カンクン国際空港",
+    "city": "Cancun",
+    "name": "Cancún International Airport",
     "country": "MX"
   },
   {
@@ -26155,8 +26155,8 @@
   },
   {
     "iata": "PTY",
-    "city": "パナマシティ",
-    "name": "トクメン国際空港",
+    "city": "Panama City",
+    "name": "Tocumen International Airport",
     "country": "PA"
   },
   {
@@ -26281,8 +26281,8 @@
   },
   {
     "iata": "SJO",
-    "city": "サンホセ",
-    "name": "フアン・サンタマリア国際空港",
+    "city": "San Jose",
+    "name": "Juan Santamaría International Airport",
     "country": "CR"
   },
   {
@@ -26875,8 +26875,8 @@
   },
   {
     "iata": "NAN",
-    "city": "ナンディ",
-    "name": "ナンディ国際空港",
+    "city": "Nadi",
+    "name": "Nadi International Airport",
     "country": "FJ"
   },
   {
@@ -27205,8 +27205,8 @@
   },
   {
     "iata": "PPT",
-    "city": "パペーテ",
-    "name": "パペーテ・タヒチ・ファアア国際空港",
+    "city": "Papeete",
+    "name": "Fa'a'ā International Airport",
     "country": "PF"
   },
   {
@@ -27751,8 +27751,8 @@
   },
   {
     "iata": "NOU",
-    "city": "ヌメア",
-    "name": "ヌメア・トントゥータ国際空港",
+    "city": "Noumea",
+    "name": "La Tontouta International Airport",
     "country": "NC"
   },
   {
@@ -27775,8 +27775,8 @@
   },
   {
     "iata": "CHC",
-    "city": "クライストチャーチ",
-    "name": "クライストチャーチ国際空港",
+    "city": "Christchurch",
+    "name": "Christchurch International Airport",
     "country": "NZ"
   },
   {
@@ -28057,8 +28057,8 @@
   },
   {
     "iata": "WLG",
-    "city": "ウェリントン",
-    "name": "ウェリントン国際空港",
+    "city": "Wellington",
+    "name": "Wellington International Airport",
     "country": "NZ"
   },
   {
@@ -28237,8 +28237,8 @@
   },
   {
     "iata": "BAH",
-    "city": "マナマ",
-    "name": "バーレーン国際空港",
+    "city": "Manama",
+    "name": "Bahrain International Airport",
     "country": "BH"
   },
   {
@@ -28273,8 +28273,8 @@
   },
   {
     "iata": "DMM",
-    "city": "ダンマーム",
-    "name": "キング・ファハド国際空港",
+    "city": "Dammam",
+    "name": "King Fahd International Airport",
     "country": "SA"
   },
   {
@@ -28639,8 +28639,8 @@
   },
   {
     "iata": "THR",
-    "city": "テヘラン",
-    "name": "エマーム・ホメイニー国際空港",
+    "city": "Tehran",
+    "name": "Imam Khomeini International Airport",
     "country": "IR"
   },
   {
@@ -28933,14 +28933,14 @@
   },
   {
     "iata": "KWI",
-    "city": "クウェート",
-    "name": "クウェート国際空港",
+    "city": "Kuwait",
+    "name": "Kuwait International Airport",
     "country": "KW"
   },
   {
     "iata": "BEY",
-    "city": "ベイルート",
-    "name": "ラフィク・ハリリ国際空港",
+    "city": "Beirut",
+    "name": "Beirut-Rafic Hariri International Airport",
     "country": "LB"
   },
   {
@@ -28981,8 +28981,8 @@
   },
   {
     "iata": "DWC",
-    "city": "ドバイ",
-    "name": "アル・マクトゥーム国際空港",
+    "city": "Dubai",
+    "name": "Al Maktoum International Airport",
     "country": "AE"
   },
   {
@@ -29053,8 +29053,8 @@
   },
   {
     "iata": "MCT",
-    "city": "マスカット",
-    "name": "マスカット国際空港",
+    "city": "Muscat",
+    "name": "Muscat International Airport",
     "country": "OM"
   },
   {
@@ -29197,8 +29197,8 @@
   },
   {
     "iata": "KHI",
-    "city": "カラチ",
-    "name": "ジンナー国際空港",
+    "city": "Karachi",
+    "name": "Jinnah International Airport",
     "country": "PK"
   },
   {
@@ -29233,8 +29233,8 @@
   },
   {
     "iata": "LHE",
-    "city": "ラホール",
-    "name": "オール・イマーム・イクバール国際空港",
+    "city": "Lahore",
+    "name": "Allama Iqbal International Airport",
     "country": "PK"
   },
   {
@@ -30295,8 +30295,8 @@
   },
   {
     "iata": "ANC",
-    "city": "アンカレッジ",
-    "name": "テッド・スティーブンス・アンカレッジ国際空港",
+    "city": "Anchorage",
+    "name": "Ted Stevens Anchorage International Airport",
     "country": "US"
   },
   {
@@ -30829,8 +30829,8 @@
   },
   {
     "iata": "SPN",
-    "city": "サイパン",
-    "name": "サイパン国際空港",
+    "city": "Saipan",
+    "name": "Saipan International Airport",
     "country": "MP"
   },
   {
@@ -30841,8 +30841,8 @@
   },
   {
     "iata": "GUM",
-    "city": "グアム",
-    "name": "グアム国際空港",
+    "city": "Guam",
+    "name": "Antonio B. Won Pat International Airport",
     "country": "GU"
   },
   {
@@ -30889,14 +30889,14 @@
   },
   {
     "iata": "KOA",
-    "city": "ハワイ島",
-    "name": "エリソン・オニヅカ・コナ国際空港",
+    "city": "Kona",
+    "name": "Ellison Onizuka Kona International Airport",
     "country": "US"
   },
   {
     "iata": "LIH",
-    "city": "カウアイ島",
-    "name": "リフエ空港",
+    "city": "Lihue",
+    "name": "Lihue Airport",
     "country": "US"
   },
   {
@@ -30931,8 +30931,8 @@
   },
   {
     "iata": "OGG",
-    "city": "マウイ島",
-    "name": "カフルイ空港",
+    "city": "Kahului",
+    "name": "Kahului Airport",
     "country": "US"
   },
   {
@@ -31147,8 +31147,8 @@
   },
   {
     "iata": "MMJ",
-    "city": "松本",
-    "name": "信州まつもと空港",
+    "city": "Matsumoto",
+    "name": "Shinshu Matsumoto Airport",
     "country": "JP"
   },
   {
@@ -31171,8 +31171,8 @@
   },
   {
     "iata": "SHM",
-    "city": "白浜",
-    "name": "南紀白浜空港",
+    "city": "Shirahama",
+    "name": "Nanki Shirahama Airport",
     "country": "JP"
   },
   {
@@ -31183,14 +31183,14 @@
   },
   {
     "iata": "TJH",
-    "city": "豊岡",
-    "name": "但馬空港",
+    "city": "Toyooka",
+    "name": "Tajima Airport",
     "country": "JP"
   },
   {
     "iata": "HKD",
-    "city": "函館",
-    "name": "函館空港",
+    "city": "Hakodate",
+    "name": "Hakodate Airport",
     "country": "JP"
   },
   {
@@ -31201,8 +31201,8 @@
   },
   {
     "iata": "OKD",
-    "city": "札幌",
-    "name": "丘珠空港",
+    "city": "Sapporo",
+    "name": "Okadama Airport",
     "country": "JP"
   },
   {
@@ -31213,8 +31213,8 @@
   },
   {
     "iata": "WKJ",
-    "city": "稚内",
-    "name": "稚内空港",
+    "city": "Wakkanai",
+    "name": "Wakkanai Airport",
     "country": "JP"
   },
   {
@@ -31225,38 +31225,38 @@
   },
   {
     "iata": "IKI",
-    "city": "壱岐",
-    "name": "壱岐空港",
+    "city": "Iki",
+    "name": "Iki Airport",
     "country": "JP"
   },
   {
     "iata": "UBJ",
-    "city": "宇部",
-    "name": "山口宇部空港",
+    "city": "Ube",
+    "name": "Yamaguchi Ube Airport",
     "country": "JP"
   },
   {
     "iata": "TSJ",
-    "city": "対馬",
-    "name": "対馬空港",
+    "city": "Tsushima",
+    "name": "Tsushima Airport",
     "country": "JP"
   },
   {
     "iata": "MBE",
-    "city": "紋別",
-    "name": "オホーツク紋別空港",
+    "city": "Monbetsu",
+    "name": "Monbetsu Airport",
     "country": "JP"
   },
   {
     "iata": "OIR",
-    "city": "奥尻",
-    "name": "奥尻空港",
+    "city": "Okushiri",
+    "name": "Okushiri Airport",
     "country": "JP"
   },
   {
     "iata": "RIS",
-    "city": "利尻島",
-    "name": "利尻空港",
+    "city": "Rishiri",
+    "name": "Rishiri Airport",
     "country": "JP"
   },
   {
@@ -31267,8 +31267,8 @@
   },
   {
     "iata": "FUJ",
-    "city": "福江",
-    "name": "福江空港",
+    "city": "Goto",
+    "name": "Fukue Airport",
     "country": "JP"
   },
   {
@@ -31279,32 +31279,32 @@
   },
   {
     "iata": "KKJ",
-    "city": "北九州",
-    "name": "北九州空港",
+    "city": "Kitakyushu",
+    "name": "Kitakyushu Airport",
     "country": "JP"
   },
   {
     "iata": "HSG",
-    "city": "佐賀",
-    "name": "九州佐賀国際空港",
+    "city": "Saga",
+    "name": "Saga Airport",
     "country": "JP"
   },
   {
     "iata": "ASJ",
-    "city": "奄美",
-    "name": "奄美空港",
+    "city": "Amami",
+    "name": "Amami Airport",
     "country": "JP"
   },
   {
     "iata": "OKE",
-    "city": "和泊",
-    "name": "沖永良部空港",
+    "city": "Okinoerabu",
+    "name": "Okinoerabu Airport",
     "country": "JP"
   },
   {
     "iata": "KKX",
-    "city": "喜界島",
-    "name": "喜界空港",
+    "city": "Kikai",
+    "name": "Kikai Airport",
     "country": "JP"
   },
   {
@@ -31321,8 +31321,8 @@
   },
   {
     "iata": "FKJ",
-    "city": "福井",
-    "name": "福井空港",
+    "city": "Fukui",
+    "name": "Fukui Airport",
     "country": "JP"
   },
   {
@@ -31333,44 +31333,44 @@
   },
   {
     "iata": "OKI",
-    "city": "隠岐",
-    "name": "隠岐空港",
+    "city": "Okinoshima",
+    "name": "Oki Airport",
     "country": "JP"
   },
   {
     "iata": "FSZ",
-    "city": "静岡",
-    "name": "富士山静岡空港",
+    "city": "Shizuoka",
+    "name": "Mt. Fuji Shizuoka Airport",
     "country": "JP"
   },
   {
     "iata": "TOY",
-    "city": "富山",
-    "name": "富山きときと空港",
+    "city": "Toyama",
+    "name": "Toyama Kitokito Airport",
     "country": "JP"
   },
   {
     "iata": "NTQ",
-    "city": "輪島",
-    "name": "能登空港",
+    "city": "Wajima",
+    "name": "Noto Airport",
     "country": "JP"
   },
   {
     "iata": "OKJ",
-    "city": "岡山",
-    "name": "岡山空港",
+    "city": "Okayama",
+    "name": "Okayama Airport",
     "country": "JP"
   },
   {
     "iata": "IZO",
-    "city": "出雲",
-    "name": "出雲空港",
+    "city": "Izumo",
+    "name": "Izumo Enmusubi Airport",
     "country": "JP"
   },
   {
     "iata": "YGJ",
-    "city": "米子",
-    "name": "米子鬼太郎空港",
+    "city": "Yonago",
+    "name": "Yonago Kitaro Airport",
     "country": "JP"
   },
   {
@@ -31381,26 +31381,26 @@
   },
   {
     "iata": "KCZ",
-    "city": "高知",
-    "name": "高知龍馬空港",
+    "city": "Kochi",
+    "name": "Kochi Ryoma Airport",
     "country": "JP"
   },
   {
     "iata": "TTJ",
-    "city": "鳥取",
-    "name": "鳥取砂丘コナン空港",
+    "city": "Tottori",
+    "name": "Tottori Sand Dunes Conan Airport",
     "country": "JP"
   },
   {
     "iata": "TKS",
-    "city": "徳島",
-    "name": "徳島阿波おどり空港",
+    "city": "Tokushima",
+    "name": "Tokushima Awaodori Airport",
     "country": "JP"
   },
   {
     "iata": "IWJ",
-    "city": "石見",
-    "name": "萩・石見空港",
+    "city": "Masuda",
+    "name": "Hagi-Iwami Airport",
     "country": "JP"
   },
   {
@@ -31417,8 +31417,8 @@
   },
   {
     "iata": "FKS",
-    "city": "福島",
-    "name": "福島空港",
+    "city": "Fukushima",
+    "name": "Fukushima Airport",
     "country": "JP"
   },
   {
@@ -31429,14 +31429,14 @@
   },
   {
     "iata": "HNA",
-    "city": "花巻",
-    "name": "いわて花巻空港",
+    "city": "Hanamaki",
+    "name": "Iwate Hanamaki Airport",
     "country": "JP"
   },
   {
     "iata": "AXT",
-    "city": "秋田",
-    "name": "秋田空港",
+    "city": "Akita",
+    "name": "Akita Airport",
     "country": "JP"
   },
   {
@@ -31447,14 +31447,14 @@
   },
   {
     "iata": "ONJ",
-    "city": "大館能代",
-    "name": "大館能代空港",
+    "city": "Odate",
+    "name": "Odate-Noshiro Airport",
     "country": "JP"
   },
   {
     "iata": "SYO",
-    "city": "庄内",
-    "name": "庄内空港",
+    "city": "Shonai",
+    "name": "Shonai Airport",
     "country": "JP"
   },
   {
@@ -31465,8 +31465,8 @@
   },
   {
     "iata": "HAC",
-    "city": "八丈島",
-    "name": "八丈島空港",
+    "city": "Hachijojima",
+    "name": "Hachijojima Airport",
     "country": "JP"
   },
   {
@@ -31477,8 +31477,8 @@
   },
   {
     "iata": "MYE",
-    "city": "三宅島",
-    "name": "三宅島空港",
+    "city": "Miyakejima",
+    "name": "Miyakejima Airport",
     "country": "JP"
   },
   {
@@ -31501,8 +31501,8 @@
   },
   {
     "iata": "KWJ",
-    "city": "光州",
-    "name": "光州空港",
+    "city": "Gwangju",
+    "name": "Gwangju Airport",
     "country": "KR"
   },
   {
@@ -31555,8 +31555,8 @@
   },
   {
     "iata": "CJU",
-    "city": "済州",
-    "name": "済州国際空港",
+    "city": "Jeju",
+    "name": "Jeju International Airport",
     "country": "KR"
   },
   {
@@ -31615,8 +31615,8 @@
   },
   {
     "iata": "TAE",
-    "city": "大邱",
-    "name": "大邱国際空港",
+    "city": "Daegu",
+    "name": "Daegu International Airport",
     "country": "KR"
   },
   {
@@ -31645,8 +31645,8 @@
   },
   {
     "iata": "ISG",
-    "city": "石垣",
-    "name": "新石垣空港",
+    "city": "Ishigaki",
+    "name": "New Ishigaki Airport",
     "country": "JP"
   },
   {
@@ -31657,14 +31657,14 @@
   },
   {
     "iata": "KJP",
-    "city": "慶良間",
-    "name": "慶良間空港",
+    "city": "Kerama",
+    "name": "Kerama Airport",
     "country": "JP"
   },
   {
     "iata": "MMD",
-    "city": "南大東島",
-    "name": "南大東空港",
+    "city": "Minamidaito",
+    "name": "Minami Daito Airport",
     "country": "JP"
   },
   {
@@ -31675,50 +31675,50 @@
   },
   {
     "iata": "AGJ",
-    "city": "粟国",
-    "name": "粟国空港",
+    "city": "Aguni",
+    "name": "Aguni Airport",
     "country": "JP"
   },
   {
     "iata": "IEJ",
-    "city": "伊江島",
-    "name": "伊江島空港",
+    "city": "Iejima",
+    "name": "Ie Jima Airport",
     "country": "JP"
   },
   {
     "iata": "HTR",
-    "city": "波照間",
-    "name": "波照間空港",
+    "city": "Hateruma",
+    "name": "Hateruma Airport",
     "country": "JP"
   },
   {
     "iata": "KTD",
-    "city": "北大東島",
-    "name": "北大東空港",
+    "city": "Kitadaito",
+    "name": "Kitadaito Airport",
     "country": "JP"
   },
   {
     "iata": "SHI",
-    "city": "下地島",
-    "name": "下地島空港",
+    "city": "Shimojishima",
+    "name": "Shimojishima Airport",
     "country": "JP"
   },
   {
     "iata": "TRA",
-    "city": "多良間島",
-    "name": "多良間空港",
+    "city": "Tarama",
+    "name": "Tarama Airport",
     "country": "JP"
   },
   {
     "iata": "RNJ",
-    "city": "与論島",
-    "name": "与論空港",
+    "city": "Yoron",
+    "name": "Yoron Airport",
     "country": "JP"
   },
   {
     "iata": "OGN",
-    "city": "与那国島",
-    "name": "与那国空港",
+    "city": "Yonaguni",
+    "name": "Yonaguni Airport",
     "country": "JP"
   },
   {
@@ -32041,8 +32041,8 @@
   },
   {
     "iata": "CEB",
-    "city": "セブ",
-    "name": "マクタン・セブ国際空港",
+    "city": "Cebu",
+    "name": "Mactan-Cebu International Airport",
     "country": "PH"
   },
   {
@@ -32137,8 +32137,8 @@
   },
   {
     "iata": "AEP",
-    "city": "ブエノスアイレス",
-    "name": "ホルヘ・ニューベリー空港",
+    "city": "Buenos Aires",
+    "name": "Jorge Newbery Airfield",
     "country": "AR"
   },
   {
@@ -32767,8 +32767,8 @@
   },
   {
     "iata": "BSB",
-    "city": "ブラジリア",
-    "name": "ブラジリア国際空港",
+    "city": "Brasilia",
+    "name": "Brasilia International Airport",
     "country": "BR"
   },
   {
@@ -33289,8 +33289,8 @@
   },
   {
     "iata": "SDU",
-    "city": "リオデジャネイロ",
-    "name": "サントス・ドゥモン空港",
+    "city": "Rio de Janeiro",
+    "name": "Santos Dumont Airport",
     "country": "BR"
   },
   {
@@ -33337,8 +33337,8 @@
   },
   {
     "iata": "CGH",
-    "city": "サンパウロ",
-    "name": "コンゴニャス空港",
+    "city": "Sao Paulo",
+    "name": "Congonhas Airport",
     "country": "BR"
   },
   {
@@ -34021,8 +34021,8 @@
   },
   {
     "iata": "UIO",
-    "city": "キト",
-    "name": "マリスカル・スクレ国際空港",
+    "city": "Quito",
+    "name": "Mariscal Sucre International Airport",
     "country": "EC"
   },
   {
@@ -34273,8 +34273,8 @@
   },
   {
     "iata": "BOG",
-    "city": "ボゴタ",
-    "name": "エルドラド国際空港",
+    "city": "Bogota",
+    "name": "El Dorado International Airport",
     "country": "CO"
   },
   {
@@ -35707,8 +35707,8 @@
   },
   {
     "iata": "LIM",
-    "city": "リマ",
-    "name": "ホルヘ・チャベス国際空港",
+    "city": "Lima",
+    "name": "Jorge Chávez International Airport",
     "country": "PE"
   },
   {
@@ -37921,8 +37921,8 @@
   },
   {
     "iata": "KBP",
-    "city": "キエフ",
-    "name": "ボルィスパリ国際空港",
+    "city": "Kyiv",
+    "name": "Boryspil International Airport",
     "country": "UA"
   },
   {
@@ -38029,8 +38029,8 @@
   },
   {
     "iata": "IEV",
-    "city": "キエフ",
-    "name": "キエフ・ジュリャーヌィ国際空港",
+    "city": "Kyiv",
+    "name": "Igor Sikorsky Kyiv International Airport",
     "country": "UA"
   },
   {
@@ -38167,8 +38167,8 @@
   },
   {
     "iata": "LED",
-    "city": "サンクトペテルブルク",
-    "name": "プルコヴォ空港",
+    "city": "Saint Petersburg",
+    "name": "Pulkovo Airport",
     "country": "RU"
   },
   {
@@ -38797,8 +38797,8 @@
   },
   {
     "iata": "DME",
-    "city": "モスクワ",
-    "name": "ドモジェドヴォ空港",
+    "city": "Moscow",
+    "name": "Domodedovo Airport",
     "country": "RU"
   },
   {
@@ -38869,8 +38869,8 @@
   },
   {
     "iata": "VKO",
-    "city": "モスクワ",
-    "name": "ヴヌーコヴォ国際空港",
+    "city": "Moscow",
+    "name": "Vnukovo International Airport",
     "country": "RU"
   },
   {
@@ -39331,8 +39331,8 @@
   },
   {
     "iata": "CMB",
-    "city": "コロンボ",
-    "name": "バンダラナイケ国際空港",
+    "city": "Colombo",
+    "name": "Bandaranaike International Airport",
     "country": "LK"
   },
   {
@@ -39433,8 +39433,8 @@
   },
   {
     "iata": "PNH",
-    "city": "プノンペン",
-    "name": "プノンペン国際空港",
+    "city": "Phnom Penh",
+    "name": "Phnom Penh International Airport",
     "country": "KH"
   },
   {
@@ -39451,8 +39451,8 @@
   },
   {
     "iata": "REP",
-    "city": "シェムリアップ",
-    "name": "シェムリアップ・アンコール国際空港",
+    "city": "Siem Reap",
+    "name": "Siem Reap Angkor International Airport",
     "country": "KH"
   },
   {
@@ -39529,8 +39529,8 @@
   },
   {
     "iata": "CCU",
-    "city": "コルカタ",
-    "name": "ネタージー・スバース・チャンドラ・ボース国際空港",
+    "city": "Kolkata",
+    "name": "Netaji Subhash Chandra Bose International Airport",
     "country": "IN"
   },
   {
@@ -39775,8 +39775,8 @@
   },
   {
     "iata": "DAC",
-    "city": "ダッカ",
-    "name": "シャージャラール国際空港",
+    "city": "Dhaka",
+    "name": "Hazrat Shahjalal International Airport",
     "country": "BD"
   },
   {
@@ -40087,8 +40087,8 @@
   },
   {
     "iata": "VTE",
-    "city": "ビエンチャン",
-    "name": "ワッタイ国際空港",
+    "city": "Vientiane",
+    "name": "Wattay International Airport",
     "country": "LA"
   },
   {
@@ -40099,8 +40099,8 @@
   },
   {
     "iata": "MFM",
-    "city": "マカオ",
-    "name": "マカオ国際空港",
+    "city": "Macau",
+    "name": "Macau International Airport",
     "country": "MO"
   },
   {
@@ -40213,8 +40213,8 @@
   },
   {
     "iata": "KTM",
-    "city": "カトマンズ",
-    "name": "トリブバン国際空港",
+    "city": "Kathmandu",
+    "name": "Tribhuvan International Airport",
     "country": "NP"
   },
   {
@@ -40369,8 +40369,8 @@
   },
   {
     "iata": "BLR",
-    "city": "バンガロール",
-    "name": "ケンペゴウダ国際空港",
+    "city": "Bengaluru",
+    "name": "Kempegowda International Airport",
     "country": "IN"
   },
   {
@@ -40387,8 +40387,8 @@
   },
   {
     "iata": "COK",
-    "city": "コーチン",
-    "name": "コーチン国際空港",
+    "city": "Kochi",
+    "name": "Cochin International Airport",
     "country": "IN"
   },
   {
@@ -40429,8 +40429,8 @@
   },
   {
     "iata": "HYD",
-    "city": "ハイデラバード",
-    "name": "ラジーヴ・ガンディー国際空港",
+    "city": "Hyderabad",
+    "name": "Rajiv Gandhi International Airport",
     "country": "IN"
   },
   {
@@ -40471,8 +40471,8 @@
   },
   {
     "iata": "MAA",
-    "city": "チェンナイ",
-    "name": "チェンナイ国際空港",
+    "city": "Chennai",
+    "name": "Chennai International Airport",
     "country": "IN"
   },
   {
@@ -40627,8 +40627,8 @@
   },
   {
     "iata": "MLE",
-    "city": "マレ",
-    "name": "ヴェラナ国際空港",
+    "city": "Male",
+    "name": "Velana International Airport",
     "country": "MV"
   },
   {
@@ -40693,8 +40693,8 @@
   },
   {
     "iata": "CNX",
-    "city": "チェンマイ",
-    "name": "チェンマイ国際空港",
+    "city": "Chiang Mai",
+    "name": "Chiang Mai International Airport",
     "country": "TH"
   },
   {
@@ -40837,8 +40837,8 @@
   },
   {
     "iata": "HKT",
-    "city": "プーケット",
-    "name": "プーケット国際空港",
+    "city": "Phuket",
+    "name": "Phuket International Airport",
     "country": "TH"
   },
   {
@@ -41323,8 +41323,8 @@
   },
   {
     "iata": "RGN",
-    "city": "ヤンゴン",
-    "name": "ヤンゴン国際空港",
+    "city": "Yangon",
+    "name": "Yangon International Airport",
     "country": "MM"
   },
   {
@@ -41833,8 +41833,8 @@
   },
   {
     "iata": "SUB",
-    "city": "スラバヤ",
-    "name": "ジュアンダ国際空港",
+    "city": "Surabaya",
+    "name": "Juanda International Airport",
     "country": "ID"
   },
   {
@@ -42157,8 +42157,8 @@
   },
   {
     "iata": "BKI",
-    "city": "コタキナバル",
-    "name": "コタキナバル国際空港",
+    "city": "Kota Kinabalu",
+    "name": "Kota Kinabalu International Airport",
     "country": "MY"
   },
   {
@@ -42223,8 +42223,8 @@
   },
   {
     "iata": "BWN",
-    "city": "バンダルスリブガワン",
-    "name": "ブルネイ国際空港",
+    "city": "Bandar Seri Begawan",
+    "name": "Brunei International Airport",
     "country": "BN"
   },
   {
@@ -42625,8 +42625,8 @@
   },
   {
     "iata": "PEN",
-    "city": "ペナン",
-    "name": "ペナン国際空港",
+    "city": "Penang",
+    "name": "Penang International Airport",
     "country": "MY"
   },
   {
@@ -42943,8 +42943,8 @@
   },
   {
     "iata": "OOL",
-    "city": "ゴールドコースト",
-    "name": "ゴールドコースト空港",
+    "city": "Gold Coast",
+    "name": "Gold Coast Airport",
     "country": "AU"
   },
   {
@@ -42955,8 +42955,8 @@
   },
   {
     "iata": "CNS",
-    "city": "ケアンズ",
-    "name": "ケアンズ空港",
+    "city": "Cairns",
+    "name": "Cairns Airport",
     "country": "AU"
   },
   {
@@ -45037,8 +45037,8 @@
   },
   {
     "iata": "ADL",
-    "city": "アデレード",
-    "name": "アデレード空港",
+    "city": "Adelaide",
+    "name": "Adelaide Airport",
     "country": "AU"
   },
   {
@@ -45187,8 +45187,8 @@
   },
   {
     "iata": "PER",
-    "city": "パース",
-    "name": "パース空港",
+    "city": "Perth",
+    "name": "Perth Airport",
     "country": "AU"
   },
   {
@@ -46297,8 +46297,8 @@
   },
   {
     "iata": "WUH",
-    "city": "武漢",
-    "name": "武漢天河国際空港",
+    "city": "Wuhan",
+    "name": "Wuhan Tianhe International Airport",
     "country": "CN"
   },
   {
@@ -46471,8 +46471,8 @@
   },
   {
     "iata": "XIY",
-    "city": "西安",
-    "name": "西安咸陽国際空港",
+    "city": "Xi'an",
+    "name": "Xi'an Xianyang International Airport",
     "country": "CN"
   },
   {
@@ -46645,8 +46645,8 @@
   },
   {
     "iata": "KMG",
-    "city": "昆明",
-    "name": "昆明長水国際空港",
+    "city": "Kunming",
+    "name": "Kunming Changshui International Airport",
     "country": "CN"
   },
   {
@@ -46663,8 +46663,8 @@
   },
   {
     "iata": "XMN",
-    "city": "アモイ",
-    "name": "アモイ高崎国際空港",
+    "city": "Xiamen",
+    "name": "Xiamen Gaoqi International Airport",
     "country": "CN"
   },
   {
@@ -46723,8 +46723,8 @@
   },
   {
     "iata": "HGH",
-    "city": "杭州",
-    "name": "杭州蕭山国際空港",
+    "city": "Hangzhou",
+    "name": "Hangzhou Xiaoshan International Airport",
     "country": "CN"
   },
   {
@@ -46789,8 +46789,8 @@
   },
   {
     "iata": "NKG",
-    "city": "南京",
-    "name": "南京禄口国際空港",
+    "city": "Nanjing",
+    "name": "Nanjing Lukou International Airport",
     "country": "CN"
   },
   {
@@ -46807,8 +46807,8 @@
   },
   {
     "iata": "TAO",
-    "city": "青島",
-    "name": "青島膠東国際空港",
+    "city": "Qingdao",
+    "name": "Qingdao Jiaodong International Airport",
     "country": "CN"
   },
   {
@@ -46957,8 +46957,8 @@
   },
   {
     "iata": "CKG",
-    "city": "重慶",
-    "name": "重慶江北国際空港",
+    "city": "Chongqing",
+    "name": "Chongqing Jiangbei International Airport",
     "country": "CN"
   },
   {
@@ -47107,8 +47107,8 @@
   },
   {
     "iata": "TFU",
-    "city": "成都",
-    "name": "成都天府国際空港",
+    "city": "Chengdu",
+    "name": "Chengdu Tianfu International Airport",
     "country": "CN"
   },
   {
@@ -47119,8 +47119,8 @@
   },
   {
     "iata": "CTU",
-    "city": "成都",
-    "name": "成都双流国際空港",
+    "city": "Chengdu",
+    "name": "Chengdu Shuangliu International Airport",
     "country": "CN"
   },
   {
@@ -47413,8 +47413,8 @@
   },
   {
     "iata": "DLC",
-    "city": "大連",
-    "name": "大連周水子国際空港",
+    "city": "Dalian",
+    "name": "Dalian Zhoushuizi International Airport",
     "country": "CN"
   },
   {

@@ -1,0 +1,87 @@
+{
+    "app_title": "SeatXray",
+    "common": {
+        "search": "検索",
+        "settings": "設定",
+        "close": "閉じる",
+        "loading": "読み込み中...",
+        "error": "エラー",
+        "date": "日付",
+        "time": "時刻"
+    },
+    "nav": {
+        "search": "検索",
+        "settings": "設定"
+    },
+    "search": {
+        "header_title": "フライト検索",
+        "header_subtitle": "便を選択して座席表を解析します",
+        "label_origin": "出発地",
+        "label_dest": "目的地",
+        "label_search_range": "検索範囲",
+        "range_1h": "＋ 1時間",
+        "range_2h": "＋ 2時間",
+        "range_4h": "＋ 4時間",
+        "range_12h": "＋ 12時間",
+        "hint_airport": "空港名、都市名、IATAコードで検索...",
+        "results_count": "検索結果: {count} 便",
+        "no_results": "条件に一致するフライトが見つかりませんでした。"
+    },
+    "flight_card": {
+        "cabin_economy": "エコノミー",
+        "cabin_premium_economy": "プレエコ",
+        "cabin_business": "ビジネス",
+        "cabin_first": "ファースト",
+        "details_template": "機材: {ac_name}  |  所要時間: {duration}"
+    },
+    "seatmap": {
+        "loading": "座席データを解析中...",
+        "fetch_error": "座席データの取得に失敗しました。",
+        "status_available": "空席",
+        "status_occupied": "指定済み",
+        "status_blocked": "ブロック",
+        "feature_exit": "非常口",
+        "feature_legroom": "足元広め",
+        "seat_number": "座席 {number}",
+        "cabin_first": "ファーストクラス",
+        "cabin_business": "ビジネスクラス",
+        "cabin_premium_economy": "プレミアムエコノミー",
+        "cabin_economy": "エコノミークラス"
+    },
+    "settings": {
+        "title": "設定",
+        "subtitle": "API接続設定とモード管理",
+        "section_api": "Amadeus API 接続設定",
+        "section_display": "表示設定",
+        "section_stats": "API利用統計",
+        "section_about": "このアプリについて / ライセンス",
+        "desc_api": "Amadeus APIキーを取得し、以下に入力してください。",
+        "desc_stats": "※ この数値は目安です。正確な利用回数はAmadeus開発者ポータルで確認してください。",
+        "label_api_key": "API Key",
+        "label_api_secret": "API Secret",
+        "btn_save_test": "保存して接続テスト",
+        "btn_delete": "設定を削除",
+        "label_dark_mode": "ダークモード",
+        "label_stat_search": "検索実行",
+        "label_stat_seatmap": "座席表取得",
+        "msg_testing": "接続テスト中...",
+        "msg_success": "接続成功！設定を保存しました。",
+        "msg_auth_error": "認証エラー: キーを確認してください。",
+        "msg_demo_reset": "デモモードにリセットしました。"
+    },
+    "about": {
+        "version": "v0.1.1",
+        "license_label": "License: AGPL-3.0",
+        "tooltip_license": "ライセンス全文を表示",
+        "section_tech": "使用技術",
+        "section_libs": "オープンソースライブラリ",
+        "section_legal": "法的情報",
+        "legal_text": "本アプリは Amadeus Flight Offers Search および SeatMap Display API を使用しています。...",
+        "warranty_disclaimer": "データは現状有姿で提供され、いかなる保証もありません。"
+    },
+    "window": {
+        "minimize": "最小化",
+        "maximize": "最大化",
+        "close": "閉じる"
+    }
+}

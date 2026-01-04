@@ -11,14 +11,21 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 async def main(page: ft.Page):
     # --- 1. Global Setup ---
-    page.title = "SeatXray"
+    # Initialize i18n
+    from utils.i18n import TranslationService
+    i18n = TranslationService.get_instance()
+    
+    # Auto-detect and load locale
+    await i18n.init_locale(page)
+    
+    page.title = i18n.tr("app_title")
     page.window.min_width = 1000
     page.window.min_height = 800
-    
-    
-    # Hide native title bar (we use CustomWindowHeader in views)
+    page.window.frameless = True
     page.window.title_bar_hidden = True
     page.window.title_bar_buttons_hidden = True # Custom buttons in Header
+    page.bgcolor = ft.Colors.TRANSPARENT
+    page.window.bgcolor = ft.Colors.TRANSPARENT
     
     # Default Theme
     page.theme_mode = ft.ThemeMode.DARK
@@ -81,8 +88,9 @@ async def main(page: ft.Page):
     # Force initial render manually because page.go("/") might not trigger if already at "/"
     route_change(None)
 
-    # Ensure window is visible
+    # Show window after all initialization is complete
     page.window.visible = True
+    page.update()
 
 if __name__ == "__main__":
-    ft.run(main)
+    ft.run(main, assets_dir="assets")

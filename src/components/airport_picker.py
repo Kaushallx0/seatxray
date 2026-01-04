@@ -1,17 +1,15 @@
 import flet as ft
-import json
-import asyncio
-import aiofiles
-import os
+from utils.i18n import TranslationService
 
 class AirportPicker(ft.Container):
-    def __init__(self, label, initial_value, palette, width=150):
+    def __init__(self, label_key, initial_value, palette, width=150):
         super().__init__()
-        self.label = label
+        self.i18n = TranslationService.get_instance()
+        self.label_key = label_key # Store key, not translated text
         self.initial_value = initial_value
         self.palette = palette
         self.width = width
-        self.airports_data = []
+        self.airports_data = [] # Will be fetched from service
         self.filtered_data = []
         
         # State
@@ -19,7 +17,7 @@ class AirportPicker(ft.Container):
         
         # UI Components
         self.search_anchor = ft.SearchAnchor(
-            view_hint_text="空港名、都市名、IATAコードで検索...",
+            view_hint_text=self.i18n.tr("search.hint_airport"),
             view_elevation=4,
             width=width,
             header_height=60,
@@ -28,7 +26,7 @@ class AirportPicker(ft.Container):
             view_bgcolor=palette["surface"],
             bar_bgcolor=palette["surface_container"],
             bar_overlay_color=ft.Colors.with_opacity(0.1, palette["accent"]),
-            bar_hint_text=label,
+            bar_hint_text=self.i18n.tr(label_key),
         )
         
         # Set up event handlers
@@ -42,28 +40,13 @@ class AirportPicker(ft.Container):
         # Set initial label
         self._update_bar_text(initial_value)
 
-        # Load Data
-        asyncio.create_task(self._load_data())
-
-    async def _load_data(self):
-        try:
-            # Robust path finding
-            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            path = os.path.join(base_dir, "assets", "airports.json")
-            
-            async with aiofiles.open(path, mode='r', encoding='utf-8') as f:
-                content = await f.read()
-                self.airports_data = json.loads(content)
-                self.filtered_data = self.airports_data[:50] # Initial subset
-        except Exception as e:
-            print(f"Error loading airports: {e}")
+        # Load Data from Service (Immediate, as it's already loaded in main)
+        self.airports_data = self.i18n.get_airports()
+        self.filtered_data = self.airports_data[:50]
 
     def _update_bar_text(self, text):
-        # We simulate a "TextField" look with the bar
-        # SearchAnchor bar properties
-        self.search_anchor.bar_leading = ft.Icon(ft.Icons.FLIGHT_TAKEOFF if "出発" in self.label else ft.Icons.FLIGHT_LAND, color=self.palette["text_secondary"])
-        # We can't easily change the bar text value programmaticly in Flet 0.80.0 without opening view?
-        # Actually value property exists.
+        icon = ft.Icons.FLIGHT_TAKEOFF if "origin" in self.label_key else ft.Icons.FLIGHT_LAND
+        self.search_anchor.bar_leading = ft.Icon(icon, color=self.palette["text_secondary"])
         self.search_anchor.value = text
 
     async def _handle_tap(self, e):
@@ -94,7 +77,6 @@ class AirportPicker(ft.Container):
         self.search_anchor.update()
 
     async def _handle_submit(self, e):
-        # If user types "HND" and hits enter
         self.value = e.data.upper()
         self.search_anchor.close_view()
         self.update()

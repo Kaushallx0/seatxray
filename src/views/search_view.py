@@ -6,12 +6,13 @@ import json
 import os
 import asyncio
 from datetime import datetime, timedelta
-
+from utils.i18n import TranslationService
 
 class SearchContent(ft.Column):
     """検索画面のコンテンツ"""
     
     def __init__(self, page: ft.Page, app_state, amadeus, on_navigate_seatmap, **kwargs):
+        self.i18n = TranslationService.get_instance()
         self.page_ref = page
         self.app_state = app_state
         self.amadeus = amadeus
@@ -21,9 +22,9 @@ class SearchContent(ft.Column):
         self.palette = get_color_palette(self.is_dark)
         
         self.seat_service = SeatService()
-        self.airports = self._load_airports()
+        self.airports = self.i18n.get_airports()
         self.flights = getattr(app_state, "offers", []) or []
-        self.has_searched = bool(self.flights) # 既に検索結果があればTrue
+        self.has_searched = bool(self.flights) 
         self.expanded_flight_id = None
         self.saved_input_state = kwargs.get("input_state", {})
         
@@ -41,6 +42,7 @@ class SearchContent(ft.Column):
         self.results_ref = ft.Ref[ft.Column]()
         
         p = self.palette
+        tr = self.i18n.tr
         
         # デフォルト値
         def_ori = self.saved_input_state.get("origin", "HND")
@@ -52,8 +54,8 @@ class SearchContent(ft.Column):
         
         # ヘッダー
         header = ft.Column([
-            ft.Text("フライト検索", size=48, weight="bold", color=p["text"]),
-            ft.Text("便を選択して座席表を解析します", size=18, color=p["text_secondary"]),
+            ft.Text(tr("search.header_title"), size=48, weight="bold", color=p["text"]),
+            ft.Text(tr("search.header_subtitle"), size=18, color=p["text_secondary"]),
         ], spacing=5)
         
         # 検索バー
@@ -61,7 +63,7 @@ class SearchContent(ft.Column):
             content=ft.Row([
                 ft.TextField(
                     ref=self.origin_ref,
-                    label="出発地",
+                    label=tr("search.label_origin"),
                     value=def_ori,
                     width=160,
                     border_color=p["border"],
@@ -72,7 +74,7 @@ class SearchContent(ft.Column):
                 ),
                 ft.TextField(
                     ref=self.dest_ref,
-                    label="目的地",
+                    label=tr("search.label_dest"),
                     value=def_dst,
                     width=160,
                     border_color=p["border"],
@@ -83,7 +85,7 @@ class SearchContent(ft.Column):
                 ),
                 ft.TextField(
                     ref=self.date_ref,
-                    label="日付", 
+                    label=tr("common.date"), 
                     value=def_dat, 
                     width=140,
                     border_color=p["border"],
@@ -92,7 +94,7 @@ class SearchContent(ft.Column):
                 ),
                 ft.TextField(
                     ref=self.time_ref,
-                    label="時刻", 
+                    label=tr("common.time"), 
                     value=def_tim, 
                     width=100,
                     border_color=p["border"],
@@ -101,24 +103,24 @@ class SearchContent(ft.Column):
                 ),
                 ft.Dropdown(
                     ref=self.window_ref,
-                    label="検索範囲",
+                    label=tr("search.label_search_range"),
                     value=def_win,
                     width=160,
                     border_color=p["border"],
                     color=p["text"],
                     text_size=18,
                     options=[
-                        ft.dropdown.Option("1H", text="＋ 1時間"),
-                        ft.dropdown.Option("2H", text="＋ 2時間"),
-                        ft.dropdown.Option("4H", text="＋ 4時間"),
-                        ft.dropdown.Option("12H", text="＋ 12時間"),
+                        ft.dropdown.Option("1H", text=tr("search.range_1h")),
+                        ft.dropdown.Option("2H", text=tr("search.range_2h")),
+                        ft.dropdown.Option("4H", text=tr("search.range_4h")),
+                        ft.dropdown.Option("12H", text=tr("search.range_12h")),
                     ],
                 ),
                 ft.Container(
                     content=ft.ElevatedButton(
                         content=ft.Row([
                             ft.Icon(ft.Icons.SEARCH, color="white", size=20),
-                            ft.Text("検索", size=16, color="white"),
+                            ft.Text(tr("common.search"), size=16, color="white"),
                         ], spacing=8),
                         bgcolor=COLOR_ACCENT,
                         on_click=self.run_search,
@@ -170,15 +172,6 @@ class SearchContent(ft.Column):
         
         if self.flights:
             self._render_results()
-
-    def _load_airports(self):
-        try:
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            path = os.path.join(os.path.dirname(current_dir), "assets", "airports.json")
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except:
-            return []
 
     def update_palette(self, new_palette):
         """テーマ変更時にパレットを更新（ビュー再作成なし）"""
@@ -234,8 +227,7 @@ class SearchContent(ft.Column):
         
         matches = [a for a in self.airports if 
                    q in a["iata"] or 
-                   q in (a.get("city") or "").upper() or
-                   q in (a.get("city_ja") or "")][:5]
+                   q in (a.get("city") or "").upper()][:5]
         
         if not matches:
             return
@@ -246,8 +238,8 @@ class SearchContent(ft.Column):
         suggestions = ft.Column([], spacing=0)
         for m in matches:
             code = m["iata"]
-            city = m.get('city_ja', m.get('city', ''))
-            name = m.get('name_ja', m.get('name', ''))
+            city = m.get('city', '')
+            name = m.get('name', '')
             
             tile = ft.ListTile(
                 title=ft.Text(f"{code} - {city}", size=13, weight="bold", color=p["text"]),
@@ -312,7 +304,7 @@ class SearchContent(ft.Column):
     def _get_city_name(self, code):
         for a in self.airports:
             if a["iata"] == code:
-                return a.get("city_ja", a.get("city", code))
+                return a.get("city", code)
         return code
 
     def get_input_state(self):
@@ -382,10 +374,11 @@ class SearchContent(ft.Column):
             return
         col.controls.clear()
         p = self.palette
+        tr = self.i18n.tr
         
         if self.flights:
             col.controls.append(
-                ft.Text(f"検索結果: {len(self.flights)} 便", size=20, color=p["text"], weight="bold")
+                ft.Text(tr("search.results_count", count=len(self.flights)), size=20, color=p["text"], weight="bold")
             )
             for f in self.flights:
                 is_expanded = (f["id"] == self.expanded_flight_id)
@@ -400,7 +393,7 @@ class SearchContent(ft.Column):
                 col.controls.append(card)
         elif self.has_searched:
             col.controls.append(
-                ft.Text("条件に一致するフライトが見つかりませんでした。", size=18, color=p["text"])
+                ft.Text(tr("search.no_results"), size=18, color=p["text"])
             )
 
     def _handle_select(self, offers, flight_data):

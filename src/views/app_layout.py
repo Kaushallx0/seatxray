@@ -5,10 +5,12 @@ from views.search_view import SearchContent
 from views.seatmap_content import SeatMapContent
 from components.window_header import CustomWindowHeader
 from theme import get_color_palette
+from utils.i18n import TranslationService
 
 class AppLayout(ft.View):
     def __init__(self, page: ft.Page, app_state, amadeus):
         # 1. State Init
+        self.i18n = TranslationService.get_instance()
         self.page_ref = page
         self.app_state = app_state
         self.amadeus = amadeus
@@ -69,6 +71,7 @@ class AppLayout(ft.View):
         self._set_view(0)
 
     def _build_sidebar(self):
+        tr = self.i18n.tr
         return ft.NavigationRail(
             selected_index=self.current_idx, 
             label_type=ft.NavigationRailLabelType.ALL,
@@ -77,12 +80,12 @@ class AppLayout(ft.View):
                 ft.NavigationRailDestination(
                     icon=ft.Icons.SEARCH, 
                     selected_icon=ft.Icons.SEARCH, 
-                    label="検索"
+                    label=tr("nav.search")
                 ),
                 ft.NavigationRailDestination(
                     icon=ft.Icons.SETTINGS, 
                     selected_icon=ft.Icons.SETTINGS, 
-                    label="設定"
+                    label=tr("nav.settings")
                 ),
             ],
             min_width=100,
@@ -92,18 +95,19 @@ class AppLayout(ft.View):
         )
 
     def _build_bottom_bar(self):
+        tr = self.i18n.tr
         return ft.NavigationBar(
             selected_index=self.current_idx,
             destinations=[
                 ft.NavigationDestination(
                     icon=ft.Icons.SEARCH, 
                     selected_icon=ft.Icons.SEARCH, 
-                    label="検索"
+                    label=tr("nav.search")
                 ),
                 ft.NavigationDestination(
                     icon=ft.Icons.SETTINGS, 
                     selected_icon=ft.Icons.SETTINGS, 
-                    label="設定"
+                    label=tr("nav.settings")
                 ),
             ],
             bgcolor=self.palette["surface"],

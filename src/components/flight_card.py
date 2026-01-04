@@ -1,10 +1,12 @@
 import flet as ft
 from theme import COLOR_ACCENT, glass_style
 from datetime import datetime
+from utils.i18n import TranslationService
 
 class FlightCard(ft.Container):
     def __init__(self, flight_data, palette, is_expanded, on_toggle, on_select_seatmap, get_city_name):
         super().__init__()
+        self.i18n = TranslationService.get_instance()
         self.flight_data = flight_data
         self.palette = palette
         self.is_expanded = is_expanded
@@ -16,14 +18,14 @@ class FlightCard(ft.Container):
         style = glass_style(opacity=0.08, blur=10, dark=(palette["bg"] != "#f0f2f5"), surface_color=palette["surface"])
         self.bgcolor = style["bgcolor"]
         self.border_radius = style["border_radius"]
-        self.padding = ft.Padding(15, 10, 15, 10)  # コンパクト化
+        self.padding = ft.Padding(15, 10, 15, 10)
         self.border = style["border"]
         self.blur = style["blur"]
         
         self.content = self._build_content()
         self.animate_size = 200
         
-        # カード全体をクリック可能にする
+        # Card Clickable
         self.on_click = lambda e: self.on_toggle()
         self.ink = True
 
@@ -33,32 +35,30 @@ class FlightCard(ft.Container):
         route = f["route"]
         p = self.palette
         
-        # 便名
+        # Flight Info
         flight_name = f"{identity['carrierCode']} {identity['flightNumber']}"
         carrier_name = identity['carrierName'].upper()
         
-        # キャビンクラス（複数ある場合は最初の1つ）
+        # Cabin Class (First found)
         cabins = list(f["pricing"].keys()) if f["pricing"] else []
         cabin_labels = [self._get_cabin_label(c) for c in cabins]
         cabin_text = " / ".join(cabin_labels) if cabin_labels else ""
         
-        # 時刻
+        # Time
         dep_time = datetime.fromisoformat(route['departure']['at']).strftime("%H:%M")
         arr_time = datetime.fromisoformat(route['arrival']['at']).strftime("%H:%M")
         
         dep_city = self.get_city_name(route['departure']['iata'])
         arr_city = self.get_city_name(route['arrival']['iata'])
         
-        # 左側：便名
+        # Layout components...
         flight_info = ft.Column([
             ft.Text(flight_name, size=18, weight="bold", color=p["text"]),
             ft.Text(carrier_name, size=12, color=p["text_secondary"])
         ], spacing=0, alignment=ft.MainAxisAlignment.CENTER)
         
-        # 中央：キャビン
         cabin_info = ft.Text(cabin_text, size=14, color=COLOR_ACCENT, weight="w500")
         
-        # 右側：時刻
         time_info = ft.Column([
             ft.Text(f"{dep_time} - {arr_time}", size=18, weight="bold", color=p["text"]),
             ft.Row([
@@ -91,11 +91,11 @@ class FlightCard(ft.Container):
         return ft.Column(card_content, spacing=5)
 
     def _get_cabin_label(self, k):
-        m = {"ECONOMY": "エコノミー", "PREMIUM_ECONOMY": "プレエコ", "BUSINESS": "ビジネス", "FIRST": "ファースト"}
-        return m.get(k, k)
+        # i18n lookup
+        key = f"flight_card.cabin_{k.lower()}"
+        return self.i18n.tr(key)
 
     def _build_details(self, f, p, identity, route):
-        # Expanded detail view with buttons for seatmap
         btns = []
         for cabin, price_info in f["pricing"].items():
             label = self._get_cabin_label(cabin)
@@ -118,11 +118,15 @@ class FlightCard(ft.Container):
             btns.append(btn)
         
         ac_name = identity['aircraftName']
-        duration = route['duration'].replace("PT", "").lower()
+        duration = route['duration']
+        # Note: SeatService already pre-formatted duration to 日本語 "X時間Y分". 
+        # i18n for duration needs SeatService refactor, skipping for now as per plan focus on View.
+        
+        detail_text = self.i18n.tr("flight_card.details_template", ac_name=ac_name, duration=duration)
         
         return ft.Column([
             ft.Divider(color=p["border_opacity"]),
-            ft.Text(f"機材: {ac_name}  |  所要時間: {duration}", size=14, color=p["text_secondary"]),
+            ft.Text(detail_text, size=14, color=p["text_secondary"]),
             ft.Container(height=5),
             ft.Column(btns, spacing=8)
         ], spacing=5)

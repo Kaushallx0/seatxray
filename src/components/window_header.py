@@ -2,20 +2,23 @@ import flet as ft
 import asyncio
 
 
+from utils.i18n import TranslationService
+
 class WindowControls(ft.Row):
     """
     Windows 11 スタイルのウィンドウコントロール
     全てのボタンを TextButton で統一
     """
     def __init__(self, page: ft.Page):
+        self.i18n = TranslationService.get_instance()
         self.page_ref = page
         self.max_icon_ref = ft.Ref[ft.Text]()
         
         super().__init__(
             controls=[
-                self._create_btn("\uE921", self._minimize, "最小化"),
-                self._create_btn("\uE922", self._maximize, "最大化", icon_ref=self.max_icon_ref),
-                self._create_btn("\uE8BB", self._close_app, "閉じる", is_close=True),
+                self._create_btn("\uE921", self._minimize, self.i18n.tr("window.minimize")),
+                self._create_btn("\uE922", self._maximize, self.i18n.tr("window.maximize"), icon_ref=self.max_icon_ref),
+                self._create_btn("\uE8BB", self._close_app, self.i18n.tr("window.close"), is_close=True),
             ],
             spacing=0,
         )
