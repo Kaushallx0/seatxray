@@ -36,25 +36,14 @@ else {
     Write-Host "  [WARN] Plugin directory not found. Is this the first run?" -ForegroundColor Red
 }
 
-# 3. Hack 2: Hide Native Title Bar (Flash fix)
-$windowCpp = ".\build\flutter\windows\runner\win32_window.cpp"
-if (Test-Path $windowCpp) {
-    $cppContent = Get-Content $windowCpp
-    if ($cppContent -match 'WS_OVERLAPPEDWINDOW') {
-        ($cppContent -replace 'WS_OVERLAPPEDWINDOW', 'WS_POPUP') | Set-Content $windowCpp
-        Write-Host "  [OK] Changed window style to WS_POPUP (No TitleBar)." -ForegroundColor Green
-    }
-    else {
-        Write-Host "  [SKIP] Window style already set or custom." -ForegroundColor Gray
-    }
-}
+# 3. Hack 2 moved to after final build to prevent overwrite
 
-# 4. Final Build
-Write-Host "`n[Phase 3] Final Build..." -ForegroundColor Yellow
+# 4. Final Flet Build
+Write-Host "`n[Phase 3] Final Flet Build..." -ForegroundColor Yellow
 flet build windows --verbose
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "`nBuild Complete! Output in build\windows\runner\Release" -ForegroundColor Green
+    Write-Host "`nBuild Complete! Output in build\windows" -ForegroundColor Green
 }
 else {
     Write-Host "`nBuild Failed. Check output above." -ForegroundColor Red

@@ -241,7 +241,7 @@ class SearchContent(ft.Column):
         search_bar.bgcolor = ft.Colors.with_opacity(0.05, new_palette["text"]) if self.is_dark else "#f9f9f9"
         search_bar.border = ft.border.all(1, new_palette["border_opacity"])
         
-        # Update input field color
+        # Update input field color (including nested fields in ft.Column)
         search_row = search_bar.content
         for control in search_row.controls:
             if isinstance(control, ft.TextField):
@@ -250,6 +250,12 @@ class SearchContent(ft.Column):
             elif isinstance(control, ft.Dropdown):
                 control.border_color = new_palette["border"]
                 control.color = new_palette["text"]
+            elif isinstance(control, ft.Column):
+                # Airport fields are nested inside ft.Column
+                for child in control.controls:
+                    if isinstance(child, ft.TextField):
+                        child.border_color = new_palette["border"]
+                        child.color = new_palette["text"]
         
         # Redraw results
         self._render_results()
