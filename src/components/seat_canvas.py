@@ -95,7 +95,7 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
         
         cabin_col_order = sorted(cabin_col_chars.keys())
         
-        # --- Per-cabin aisle detection (Smart Logic) ---
+        # --- Per-cabin aisle detection ---
         cabin_aisles = set()
         for i in range(len(cabin_col_order) - 1):
             col_left = cabin_col_order[i]

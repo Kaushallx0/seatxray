@@ -65,19 +65,9 @@ class SeatService:
                 aircraft_name = aircraft_map.get(aircraft_code, aircraft_code)
                 
                 # Resolve Location Names (e.g. NCE -> NICE)
-                dep_name = location_map.get(dep_iata, {}).get("cityCode", dep_iata) # Amadeus loc dict structure varies, try safe access
-                # Actually Amadeus dictionary for locations usually returns { "NCE": { "cityCode": "NCE", "countryCode": "FR" } } 
-                # or simplified. Let's try to get cityCode or just the code if complex.
-                # Ideally we want "Nice". The dictionary might just be code-to-code mapping in some endpoints.
-                # If Search V2 returns full objects, we use them.
-                # Let's assume the dictionary is { "IATA": { ... } } or { "IATA": "NAME" }?
-                # V2 Shopping response 'locations' is usually { "CDG": { "cityCode": "PAR", "countryCode": "FR" } }
-                # It doesn't always contain the full name in 'locations' depending on params.
-                # BUT, we have our OWN airports.json in SearchView! 
-                # SeatService doesn't have access to airports.json easily unless passed.
-                # Logic: We will return the codes here, and let UI layer (SearchView) do the final mapping if it has the lookup,
-                # OR we try to use what's in 'dictionaries' if it has names.
-                # Often 'locations' in search response ONLY has codes.
+                # Note: Amadeus search response dictionaries often only provide codes or limited city info.
+                # Full mapping to city names is handled by the UI layer (SearchView) using the local airport database.
+                dep_name = location_map.get(dep_iata, {}).get("cityCode", dep_iata)
                 
                 # Calculate Days Difference for Arrival
                 dep_dt = datetime.fromisoformat(dep_time)
@@ -110,7 +100,7 @@ class SeatService:
             
             # Aggregate Pricing & Keep Offer
             # Determine Cabin (Economy, Business, etc.)
-            # We look at the first segment's cabin for simplicity in labeling
+            # We look at the first segment's cabin for labeling
             cabin_breakdown = offer["travelerPricings"][0]["fareDetailsBySegment"][0]["cabin"]
             price_amount = offer["price"]["total"]
             price_currency = offer["price"].get("currency", "JPY")
@@ -124,7 +114,7 @@ class SeatService:
             except:
                 price_fmt = f"{price_currency} {price_amount}"
 
-            # Store absolute simplest lowest price per cabin
+            # Store lowest price per cabin
             if cabin_breakdown not in grouped[key]["pricing"]:
                 grouped[key]["pricing"][cabin_breakdown] = {
                     "amount": float(price_amount), 
@@ -169,7 +159,7 @@ class SeatService:
         # Only if BLOCKED in all, remains BLOCKED.
         
         for seatmap in seatmaps_response["data"]:
-            # Capture facilities from the first map (assuming static layout)
+            # Capture facilities from the first map
             if not facilities and "decks" in seatmap:
                  for deck in seatmap["decks"]:
                      if "facilities" in deck:
@@ -186,7 +176,6 @@ class SeatService:
                         status = pricing[0].get("seatAvailabilityStatus", "UNKNOWN")
                     
                     # Normalize Status
-                    # Amadeus sometimes returns different strings? adhering to docs.
                     
                     if number not in merged_seats:
                         merged_seats[number] = seat

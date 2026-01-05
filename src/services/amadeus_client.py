@@ -91,9 +91,7 @@ class AmadeusClient:
         
         # Cleanup existing client if any
         if self.http_client:
-            # We can't easily await here in a sync method, but typically 
-            # this is called from an async context or during init.
-            # In Flet, we'll call this from an async event handler.
+            # Cleanup existing client if any
             pass
 
         if not self.is_demo:
@@ -143,7 +141,7 @@ class AmadeusClient:
         if self.is_demo:
             # Simulate network delay
             await asyncio.sleep(1) 
-            # Robust path resolution compatible with packaged environments
+            # Path resolution compatible with packaged environments
             base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             path = os.path.join(base_dir, "assets", "dummy_data", "flight_offers.json")
             
@@ -155,7 +153,7 @@ class AmadeusClient:
                 print(f"[Error] Dummy data not found at {path}")
                 return {"data": []}
 
-        # Live Implementation (Basic for now)
+        # Live Implementation
         try:
             departure_range = {"date": date}
             if time:
@@ -227,7 +225,7 @@ class AmadeusClient:
             flight_offer_or_list: A single FlightOffer dict or a list of FlightOffer dicts.
         """
         if self.is_demo:
-            await asyncio.sleep(0.8) # Slight delay for realism
+            await asyncio.sleep(0.8)
             # Use dummy wide-body seatmap data
             path = "src/assets/dummy_data/seatmap_wide.json"
             if not os.path.exists(path):

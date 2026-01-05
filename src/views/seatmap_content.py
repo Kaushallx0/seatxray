@@ -18,7 +18,7 @@ class SeatMapContent(ft.Column):
         self.on_back = on_back
         
         self.is_dark = (app_state.theme_mode == "DARK")
-        self.is_dark = (app_state.theme_mode == "DARK")
+
         self.palette = get_color_palette(self.is_dark)
         self.seat_service = SeatService()
         self.selected_seat = None # Holds selected seat data (for redraw on theme change)
