@@ -1,3 +1,9 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""SeatMap Content. Integrates canvas and details."""
+
 import flet as ft
 import asyncio
 import traceback
@@ -18,6 +24,7 @@ class SeatMapContent(ft.Column):
         self.on_back = on_back
         
         self.is_dark = (app_state.theme_mode == "DARK")
+        self.is_mobile = page.platform in [ft.PagePlatform.ANDROID, ft.PagePlatform.IOS]
 
         self.palette = get_color_palette(self.is_dark)
         self.seat_service = SeatService()
@@ -69,7 +76,15 @@ class SeatMapContent(ft.Column):
                     icon_color=p["text"],
                     icon_size=24,
                 ),
-                ft.Text(flight_info, size=18, weight="bold", color=p["text"]),
+                ft.Text(
+                    flight_info, 
+                    size=18, 
+                    weight="bold", 
+                    color=p["text"],
+                    expand=True,
+                    max_lines=1,
+                    overflow=ft.TextOverflow.ELLIPSIS,
+                ),
             ], spacing=10, vertical_alignment=ft.CrossAxisAlignment.CENTER),
             bgcolor=p["surface"],
             padding=ft.Padding(15, 10, 15, 10),
@@ -113,7 +128,8 @@ class SeatMapContent(ft.Column):
                 master_map, 
                 facilities, 
                 self._on_seat_click, 
-                palette=p
+                palette=p,
+                is_mobile=self.is_mobile
             )
             self.page_ref.update()
             return
@@ -150,7 +166,8 @@ class SeatMapContent(ft.Column):
                     master_map, 
                     facilities, 
                     self._on_seat_click, 
-                    palette=p
+                    palette=p,
+                    is_mobile=self.is_mobile
                 )
         except Exception as e:
             traceback.print_exc()
@@ -183,27 +200,31 @@ class SeatMapContent(ft.Column):
         for label, icon in features:
             feature_layout.append(ft.Row([ft.Icon(icon), ft.Text(label)]))
 
-        # Detail Panel Content (Single line display)
+        # Detail Panel Content - Mobile: smaller sizes
+        title_size = 20 if self.is_mobile else 28
+        status_size = 14 if self.is_mobile else 18
+        icon_size = 14 if self.is_mobile else 16
+        
         info_items = [
-            ft.Text(tr("seatmap.seat_number", number=number), size=28, weight="bold", color=p["text"]),
-            ft.Container(width=10),
-            ft.Text(STATUS_MAP.get(status, status), size=18, color=COLOR_ACCENT if status=="AVAILABLE" else p["text_secondary"]),
-            ft.Container(width=10),
+            ft.Text(tr("seatmap.seat_number", number=number), size=title_size, weight="bold", color=p["text"]),
+            ft.Container(width=8 if self.is_mobile else 10),
+            ft.Text(STATUS_MAP.get(status, status), size=status_size, color=COLOR_ACCENT if status=="AVAILABLE" else p["text_secondary"]),
+            ft.Container(width=8 if self.is_mobile else 10),
         ]
         
         # Add feature icons
         if features:
-            info_items.append(ft.Container(width=1, height=20, bgcolor=p["divider"]))
-            info_items.append(ft.Container(width=10))
+            info_items.append(ft.Container(width=1, height=16 if self.is_mobile else 20, bgcolor=p["divider"]))
+            info_items.append(ft.Container(width=8 if self.is_mobile else 10))
             for label, icon in features:
-                info_items.append(ft.Row([ft.Icon(icon, size=16, color=p["text"]), ft.Text(label, color=p["text"])], spacing=2))
-                info_items.append(ft.Container(width=10))
+                info_items.append(ft.Row([ft.Icon(icon, size=icon_size, color=p["text"]), ft.Text(label, color=p["text"], size=12 if self.is_mobile else 14)], spacing=2))
+                info_items.append(ft.Container(width=8 if self.is_mobile else 10))
 
         # Close Button (Right end)
         self.details_panel.content = ft.Row(
             controls=[
                 ft.Row(info_items, alignment=ft.MainAxisAlignment.START, scroll=ft.ScrollMode.HIDDEN, expand=True),
-                ft.IconButton(ft.Icons.CLOSE, on_click=lambda e: self._close_panel(), icon_color=p["text"])
+                ft.IconButton(ft.Icons.CLOSE, on_click=lambda e: self._close_panel(), icon_color=p["text"], icon_size=20 if self.is_mobile else 24)
             ],
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN
         )

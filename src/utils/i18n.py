@@ -1,3 +1,9 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""I18n Utils. Handles translations and locale."""
+
 import json
 import os
 import aiofiles

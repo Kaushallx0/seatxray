@@ -1,3 +1,9 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""Settings View. Manages config and keys."""
+
 import flet as ft
 from services.amadeus_client import AmadeusClient
 from theme import get_color_palette, COLOR_ACCENT
@@ -38,6 +44,7 @@ class SettingsContent(ft.Column):
         
         self.is_dark = (app_state.theme_mode == "DARK")
         self.palette = get_color_palette(self.is_dark)
+        self.is_mobile = page.platform in [ft.PagePlatform.ANDROID, ft.PagePlatform.IOS]
         
         # Refs
         self.api_key_ref = ft.Ref[ft.TextField]()
@@ -95,7 +102,22 @@ class SettingsContent(ft.Column):
                     text_size=18,
                     width=500,
                 ),
-                ft.Row([
+                # Button layout: vertical on mobile, horizontal on desktop
+                ft.Column([
+                    ft.ElevatedButton(
+                        content=ft.Text(tr("settings.btn_save_test"), size=16),
+                        on_click=self._on_save,
+                        bgcolor=COLOR_ACCENT,
+                        color="white",
+                        height=45
+                    ),
+                    ft.OutlinedButton(
+                        content=ft.Text(tr("settings.btn_delete"), size=16),
+                        on_click=self._on_reset,
+                        style=ft.ButtonStyle(color=p["text"]),
+                        height=45
+                    ),
+                ], spacing=10) if self.is_mobile else ft.Row([
                     ft.ElevatedButton(
                         content=ft.Text(tr("settings.btn_save_test"), size=16),
                         on_click=self._on_save,
@@ -112,9 +134,15 @@ class SettingsContent(ft.Column):
                 ]),
                 ft.Container(
                     ref=self.status_container_ref,
-                    content=ft.Text("", ref=self.status_text_ref, size=16, color=p["text"]),
+                    content=ft.Text(
+                        "", 
+                        ref=self.status_text_ref, 
+                        size=14 if self.is_mobile else 16, 
+                        color=p["text"],
+                        no_wrap=False,  # Allow wrapping
+                    ),
                     visible=False,
-                    height=30,
+                    # Remove fixed height to allow wrapping
                 )
             ],
             palette=p
@@ -145,7 +173,32 @@ class SettingsContent(ft.Column):
             tr("settings.section_preferences"),
             None,
             [
-                ft.Row([
+                # Layout: vertical on mobile, horizontal on desktop
+                ft.Column([
+                    ft.Column([
+                        ft.Text(tr("settings.label_language"), size=18, color=p["text"], weight="w600"),
+                        ft.Dropdown(
+                            ref=self.language_dropdown_ref,
+                            value=self.app_state.locale,
+                            options=[
+                                ft.dropdown.Option("ja", "日本語 (Japanese)"),
+                                ft.dropdown.Option("en", "English"),
+                            ],
+                            width=280,
+                            text_size=16,
+                        ),
+                    ], spacing=8),
+                    ft.Column([
+                        ft.Text(tr("settings.label_currency"), size=18, color=p["text"], weight="w600"),
+                        ft.Dropdown(
+                            ref=self.currency_dropdown_ref,
+                            value=self.app_state.currency,
+                            options=self._build_currency_options(),
+                            width=280,
+                            text_size=16,
+                        ),
+                    ], spacing=8),
+                ], spacing=20) if self.is_mobile else ft.Row([
                     ft.Column([
                         ft.Text(tr("settings.label_language"), size=18, color=p["text"], weight="w600"),
                         ft.Dropdown(
@@ -205,8 +258,13 @@ class SettingsContent(ft.Column):
                     size=14,
                     color=p["text_secondary"]
                 ),
+                # Link: Use smaller text and no icon on mobile to prevent overflow
                 ft.Container(
-                    content=ft.Row([
+                    content=ft.Text(
+                        "Amadeus API Usage →" if self.is_mobile else "Amadeus for Developers API Usage", 
+                        color=COLOR_ACCENT, 
+                        size=14 if self.is_mobile else 16
+                    ) if self.is_mobile else ft.Row([
                         ft.Text("Amadeus for Developers API Usage", color=COLOR_ACCENT, size=16),
                         ft.Icon(ft.Icons.OPEN_IN_NEW, color=COLOR_ACCENT, size=16)
                     ], spacing=5, vertical_alignment=ft.CrossAxisAlignment.CENTER),
@@ -261,7 +319,8 @@ class SettingsContent(ft.Column):
         dialog = AboutDialog(
             page=self.page_ref, 
             on_close=self._hide_about_dialog, 
-            palette=self.palette
+            palette=self.palette,
+            is_mobile=self.is_mobile
         )
         
         # Create as centered overlay
@@ -329,10 +388,19 @@ class SettingsContent(ft.Column):
             self.api_secret_ref.current.update()
 
     async def _on_save(self, e):
-        key = self.api_key_ref.current.value
-        sec = self.api_secret_ref.current.value
+        key = self.api_key_ref.current.value.strip() if self.api_key_ref.current.value else ""
+        sec = self.api_secret_ref.current.value.strip() if self.api_secret_ref.current.value else ""
         
         self.status_container_ref.current.visible = True
+        
+        # Validate input
+        if not key or not sec:
+            self.status_text_ref.current.value = self.i18n.tr("settings.msg_empty_credentials")
+            self.status_text_ref.current.color = ft.Colors.ORANGE
+            self.status_text_ref.current.update()
+            self.status_container_ref.current.update()
+            return
+        
         self.status_text_ref.current.value = self.i18n.tr("settings.msg_testing")
         self.status_text_ref.current.color = self.palette["text"]
         self.status_container_ref.current.update()

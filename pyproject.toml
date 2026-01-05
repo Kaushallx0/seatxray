@@ -1,6 +1,6 @@
 [project]
 name = "seatxray"
-version = "0.1.1"
+version = "0.2.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -28,3 +28,14 @@ executable_name = "SeatXray"
 publisher_display_name = "SeatXray"
 identity_name = "SeatXray.SeatXray"
 publisher = "CN=33D8BA06-78D8-4319-B5F0-45A7789CD09B"
+
+[tool.flet.android]
+package_name = "com.seatxray.app"
+adaptive_icon_foreground = "assets/icon.png"
+adaptive_icon_background = "#16191d"
+
+[tool.flet.android.permission]
+"android.permission.INTERNET" = true
+
+[tool.flet.android.meta_data]
+"android:extractNativeLibs" = "true"

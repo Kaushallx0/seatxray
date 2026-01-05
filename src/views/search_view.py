@@ -1,3 +1,9 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""Search View. Flight search interface."""
+
 import flet as ft
 from theme import get_color_palette, COLOR_ACCENT
 from services.seat_service import SeatService
@@ -27,6 +33,7 @@ class SearchContent(ft.Column):
         self.has_searched = bool(self.flights) 
         self.expanded_flight_id = None
         self.saved_input_state = kwargs.get("input_state", {})
+        self.is_mobile = page.platform in [ft.PagePlatform.ANDROID, ft.PagePlatform.IOS]
         
         # For autocomplete
         self._active_field = None
@@ -40,6 +47,8 @@ class SearchContent(ft.Column):
         self.window_ref = ft.Ref[ft.Dropdown]()
         self.loading_ref = ft.Ref[ft.ProgressBar]()
         self.results_ref = ft.Ref[ft.Column]()
+        self.origin_suggestions_ref = ft.Ref[ft.Container]()
+        self.dest_suggestions_ref = ft.Ref[ft.Container]()
         
         p = self.palette
         tr = self.i18n.tr
@@ -61,28 +70,44 @@ class SearchContent(ft.Column):
         # Search Bar
         search_bar = ft.Container(
             content=ft.Row([
-                ft.TextField(
-                    ref=self.origin_ref,
-                    label=tr("search.label_origin"),
-                    value=def_ori,
-                    width=160,
-                    border_color=p["border"],
-                    color=p["text"],
-                    text_size=18,
-                    on_change=lambda e: self._on_airport_change(e, "origin"),
-                    on_focus=lambda e: self._on_airport_focus(e, "origin"),
+                # Origin Field Group
+                ft.Column([
+                    ft.TextField(
+                        ref=self.origin_ref,
+                        label=tr("search.label_origin"),
+                        value=def_ori,
+                        width=160,
+                        border_color=p["border"],
+                        color=p["text"],
+                        text_size=18,
+                        on_change=lambda e: self._on_airport_change(e, "origin"),
+                        on_focus=lambda e: self._on_airport_focus(e, "origin"),
+                    ),
+                    ft.Container(ref=self.origin_suggestions_ref, visible=False)
+                ], spacing=0),
+
+                ft.IconButton(
+                    ft.Icons.SWAP_HORIZ, 
+                    icon_color=COLOR_ACCENT,
+                    on_click=self.swap_locations,
+                    width=40, # Explicit width for coordinate calculation
                 ),
-                ft.TextField(
-                    ref=self.dest_ref,
-                    label=tr("search.label_dest"),
-                    value=def_dst,
-                    width=160,
-                    border_color=p["border"],
-                    color=p["text"],
-                    text_size=18,
-                    on_change=lambda e: self._on_airport_change(e, "dest"),
-                    on_focus=lambda e: self._on_airport_focus(e, "dest"),
-                ),
+
+                # Dest Field Group
+                ft.Column([
+                    ft.TextField(
+                        ref=self.dest_ref,
+                        label=tr("search.label_dest"),
+                        value=def_dst,
+                        width=160,
+                        border_color=p["border"],
+                        color=p["text"],
+                        text_size=18,
+                        on_change=lambda e: self._on_airport_change(e, "dest"),
+                        on_focus=lambda e: self._on_airport_focus(e, "dest"),
+                    ),
+                    ft.Container(ref=self.dest_suggestions_ref, visible=False)
+                ], spacing=0),
                 ft.TextField(
                     ref=self.date_ref,
                     label=tr("common.date"), 
@@ -116,6 +141,7 @@ class SearchContent(ft.Column):
                         ft.dropdown.Option("12H", text=tr("search.range_12h")),
                     ],
                 ),
+                # Platform-specific search button (fixed width on desktop, auto on mobile)
                 ft.Container(
                     content=ft.ElevatedButton(
                         content=ft.Row([
@@ -126,7 +152,7 @@ class SearchContent(ft.Column):
                         on_click=self.run_search,
                         height=50,
                     ),
-                    width=120,
+                    width=120 if not self.is_mobile else None,
                 ),
             ], spacing=15, wrap=True, run_spacing=15, vertical_alignment=ft.CrossAxisAlignment.START),
             bgcolor=ft.Colors.with_opacity(0.05, p["text"]) if self.is_dark else "#f9f9f9",
@@ -148,27 +174,52 @@ class SearchContent(ft.Column):
             ref=self.results_ref,
             controls=[],
             spacing=15,
-            scroll=ft.ScrollMode.AUTO,
-            expand=True,
         )
         
-        super().__init__(
-            controls=[
-                ft.Container(
-                    content=ft.Column([
-                        header,
-                        ft.Container(height=20),
-                        search_bar,
-                        ft.Container(height=20),
-                        loading_bar,
-                        results_column,
-                    ], spacing=0, expand=True),
-                    padding=40,
-                    expand=True,
-                )
-            ],
-            expand=True,
-        )
+        # Mobile: Header, search bar, results all scroll together
+        # Desktop: Header and search bar fixed, only results scroll
+        # Mobile: Header, search bar, results all scroll together
+        if self.is_mobile:
+            scrollable_content = ft.Column([
+                header,
+                ft.Container(height=15),
+                search_bar,
+                ft.Container(height=15),
+                loading_bar,
+                results_column,
+            ], spacing=0, scroll=ft.ScrollMode.AUTO, expand=True)
+            
+            super().__init__(
+                controls=[
+                    ft.Container(
+                        content=scrollable_content,
+                        padding=20,  # Smaller padding on mobile
+                        expand=True,
+                    )
+                ],
+                expand=True,
+            )
+        else:
+            results_column.scroll = ft.ScrollMode.AUTO
+            results_column.expand = True
+            
+            super().__init__(
+                controls=[
+                    ft.Container(
+                        content=ft.Column([
+                            header,
+                            ft.Container(height=20),
+                            search_bar,
+                            ft.Container(height=20),
+                            loading_bar,
+                            results_column,
+                        ], spacing=0, expand=True),
+                        padding=40,
+                        expand=True,
+                    )
+                ],
+                expand=True,
+            )
         
         if self.flights:
             self._render_results()
@@ -250,41 +301,95 @@ class SearchContent(ft.Column):
             )
             suggestions.controls.append(tile)
         
-        # Position calculation:
-        # NavigationRail (100px) + VerticalDivider (1px) + padding (40px) + search_bar padding (20px)
-        base_left = 100 + 1 + 40 + 20  # 161px
-        field_width = 160
-        
-        if self._active_field == "origin":
-            left_pos = base_left
-        else:  # dest
-            left_pos = base_left + field_width + 15  # spacing 15px
-        
-        # Vertical: Directly below the input field
-        # Consider the entire search bar position
-        top_pos = 265  # Below the input field
-        
-        # Suggestion box
-        suggestions_box = ft.Container(
-            content=suggestions,
-            bgcolor=p["surface_container"],
-            border=ft.border.all(1, p["border_opacity"]),
-            border_radius=8,
-            width=field_width,  # Same width as input field
-            left=left_pos,
-            top=top_pos,
-        )
-        
-        self._suggestions_overlay = ft.Stack([
-            ft.GestureDetector(
-                content=ft.Container(bgcolor=ft.Colors.TRANSPARENT, expand=True),
-                on_tap=lambda e: self._hide_suggestions(),
-            ),
-            suggestions_box,
-        ], expand=True)
-        
-        self.page_ref.overlay.append(self._suggestions_overlay)
-        self.page_ref.update()
+        if self.is_mobile:
+            # Inline suggestions for mobile (pushing down content)
+            
+            # 1. Clear both containers first
+            if self.origin_suggestions_ref.current:
+                self.origin_suggestions_ref.current.visible = False
+                self.origin_suggestions_ref.current.content = None
+            if self.dest_suggestions_ref.current:
+                self.dest_suggestions_ref.current.visible = False
+                self.dest_suggestions_ref.current.content = None
+            
+            # 2. Determine target container
+            target_ref = self.origin_suggestions_ref if self._active_field == "origin" else self.dest_suggestions_ref
+            
+            if target_ref.current:
+                # 3. Inject suggestions
+                suggestions_box = ft.Container(
+                    content=suggestions,
+                    bgcolor=p["surface_container"],
+                    border=ft.border.only(bottom=ft.border.BorderSide(1, p["border_opacity"]), left=ft.border.BorderSide(1, p["border_opacity"]), right=ft.border.BorderSide(1, p["border_opacity"])),
+                    border_radius=ft.border_radius.only(bottom_left=8, bottom_right=8),
+                    padding=0,
+                )
+                
+                target_ref.current.content = suggestions_box
+                target_ref.current.visible = True
+                
+                # Update page to show changes
+                self.page_ref.update()
+            
+        else:
+            # Desktop implementation: Use absolute positioning with Overlay
+            # Position calculation:
+            # NavigationRail (100px) + VerticalDivider (1px) + padding (40px) + search_bar padding (20px)
+            base_left = 100 + 1 + 40 + 20  # 161px
+            field_width = 160
+            
+            if self._active_field == "origin":
+                left_pos = base_left
+            else:  # dest
+                # Origin(160) + Spacing(15) + SwapButton(40) + Spacing(15)
+                left_pos = base_left + 160 + 15 + 40 + 15
+            
+            # Vertical: Directly below the input field
+            # Consider the entire search bar position
+            top_pos = 265  # Below the input field
+            
+            # Suggestion box
+            suggestions_box = ft.Container(
+                content=suggestions,
+                bgcolor=p["surface_container"],
+                border=ft.border.all(1, p["border_opacity"]),
+                border_radius=8,
+                width=field_width,  # Same width as input field
+                left=left_pos,
+                top=top_pos,
+            )
+            
+            self._suggestions_overlay = ft.Stack([
+                ft.GestureDetector(
+                    content=ft.Container(bgcolor=ft.Colors.TRANSPARENT, expand=True),
+                    on_tap=lambda e: self._hide_suggestions(),
+                ),
+                suggestions_box,
+            ], expand=True)
+            
+            self.page_ref.overlay.append(self._suggestions_overlay)
+            self.page_ref.update()
+
+    def _hide_suggestions(self):
+        if self.is_mobile:
+            # Hide inline containers
+            updated = False
+            if self.origin_suggestions_ref.current and self.origin_suggestions_ref.current.visible:
+                self.origin_suggestions_ref.current.visible = False
+                updated = True
+            if self.dest_suggestions_ref.current and self.dest_suggestions_ref.current.visible:
+                self.dest_suggestions_ref.current.visible = False
+                updated = True
+            
+            if updated:
+                self.page_ref.update()
+        else:
+            # Desktop: Remove overlay
+            if self._suggestions_overlay:
+                if self._suggestions_overlay in self.page_ref.overlay:
+                    self.page_ref.overlay.remove(self._suggestions_overlay)
+                    self.page_ref.update()
+                self._suggestions_overlay = None
 
     def _select_airport(self, code):
         if self._active_field == "origin":
@@ -295,11 +400,16 @@ class SearchContent(ft.Column):
             self.dest_ref.current.update()
         self._hide_suggestions()
 
-    def _hide_suggestions(self):
-        if self._suggestions_overlay and self._suggestions_overlay in self.page_ref.overlay:
-            self.page_ref.overlay.remove(self._suggestions_overlay)
-            self.page_ref.update()
-        self._suggestions_overlay = None
+    def swap_locations(self, e):
+        # Swap values
+        org = self.origin_ref.current.value
+        dst = self.dest_ref.current.value
+        self.origin_ref.current.value = dst
+        self.dest_ref.current.value = org
+        
+        # Update fields
+        self.origin_ref.current.update()
+        self.dest_ref.current.update()
 
     def _get_city_name(self, code):
         for a in self.airports:
@@ -390,7 +500,8 @@ class SearchContent(ft.Column):
                     is_expanded=is_expanded,
                     on_toggle=lambda fd=f: self._handle_toggle(fd["id"]),
                     on_select_seatmap=lambda offers, fd=f: self._handle_select(offers, fd),
-                    get_city_name=self._get_city_name
+                    get_city_name=self._get_city_name,
+                    is_mobile=self.is_mobile
                 )
                 col.controls.append(card)
         elif self.has_searched:

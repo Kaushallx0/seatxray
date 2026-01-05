@@ -2,11 +2,11 @@
     <a href="README.md">English</a> | <a href="README.ja.md">日本語</a>
 </div>
 
-# SeatXray
-
 <div align="center">
 
 <img src="src/assets/icon.png" width="128" alt="SeatXray Logo">
+
+# SeatXray
 
 **X-ray vision for flight seats.**
 **See beyond "Unavailable". Know if it's Occupied or Blocked.**
@@ -20,10 +20,17 @@
 
 ## Overview
 
-**SeatXray** is a desktop application designed to analyze and visualize flight seat availability in depth.
+**SeatXray** is a desktop & mobile application designed to analyze and visualize flight seat availability in depth.
 It distinguishes whether seats that are grayed out and unavailable on standard sites are **"actually occupied"** or **"merely blocked by the airline"**.
 
-It uses the Amadeus Self-Service API to retrieve information more detailed than what is typically available on airline official websites.
+It uses the Amadeus Self-Service API to retrieve information more detailed than what is typically available on airline official websites. Currently available for Windows and Android.
+
+> ### Notice
+>
+> This application is currently in the development stage and may contain unexpected bugs.
+> Be aware that optimization for the smartphone (Android) version is not yet complete, and issues such as reduced performance or layout glitches may occur.
+>
+> Plans for iOS and macOS versions exist, but development is currently paused due to developer environment constraints.
 
 ## Features
 
@@ -41,7 +48,12 @@ Download and install from the Microsoft Store.
 <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
 
-### macOS / Linux
+### Android
+Download the latest APK file (`app-release.apk`) from the [Releases page](https://github.com/SeatXray/seatxray/releases) and install it on your Android device.
+
+* Note: Currently not available on the Google Play Store.
+
+### macOS / Linux / iOS
 Currently not supported.
 
 ## Usage
@@ -76,8 +88,14 @@ cd seatxray
 # Install dependencies
 pip install -r requirements.txt
 
-# Run
+# Run (Windows)
 flet run src/main.py
+
+# Run (Android)
+# Check device/emulator ID
+flet devices
+# Specify using --device-id option
+flet debug android --device-id emulator-XXXX
 ```
 
 ### Windows Build
@@ -89,10 +107,15 @@ flet run src/main.py
 .\package_msix.ps1
 ```
 
+### Android Build
+```bash
+# No special command required
+flet build apk
+```
+
 ## Disclaimer
 
-**Data provided as is without warranty.**
-The data displayed by this app is retrieved from the Amadeus Test/Production API, but there is no guarantee that it perfectly matches the airline's real-time inventory.
+The data displayed by this app is retrieved from the Amadeus Self-Service API, but there is no guarantee that it perfectly matches the airline's real-time seat availability.
 
 Usage of the Amadeus API incurs fees as per their schedule. Different free tiers and pricing apply to each API; please refer to the [pricing page](https://developers.amadeus.com/pricing) on Amadeus for Developers for details.
 
@@ -103,5 +126,8 @@ This app is provided "as is", and the developer assumes no responsibility for an
 This project is released under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 See the [LICENSE](LICENSE) file for details.
 
----
-Created by SeatXray/ryyr-ry
+<br>
+
+<div align="right">
+    Created by <a href="https://github.com/SeatXray">SeatXray</a> / <a href="https://github.com/ryyr-ry">ryyr-ry</a>
+</div>

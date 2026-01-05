@@ -1,10 +1,16 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""Flight Card. Displays individual flight details."""
+
 import flet as ft
 from theme import COLOR_ACCENT, glass_style
 from datetime import datetime
 from utils.i18n import TranslationService
 
 class FlightCard(ft.Container):
-    def __init__(self, flight_data, palette, is_expanded, on_toggle, on_select_seatmap, get_city_name):
+    def __init__(self, flight_data, palette, is_expanded, on_toggle, on_select_seatmap, get_city_name, is_mobile=False):
         super().__init__()
         self.i18n = TranslationService.get_instance()
         self.flight_data = flight_data
@@ -13,6 +19,7 @@ class FlightCard(ft.Container):
         self.on_toggle = on_toggle
         self.on_select_seatmap = on_select_seatmap
         self.get_city_name = get_city_name
+        self.is_mobile = is_mobile
         
         # Apply Glassmorphism using theme helper
         style = glass_style(opacity=0.08, blur=10, dark=(palette["bg"] != "#f0f2f5"), surface_color=palette["surface"])
@@ -68,18 +75,28 @@ class FlightCard(ft.Container):
             ], spacing=3)
         ], spacing=0, horizontal_alignment=ft.CrossAxisAlignment.END)
         
-        top_row = ft.Row([
-            flight_info,
-            cabin_info,
-            ft.Row([
-                time_info, 
-                ft.IconButton(
-                    ft.Icons.KEYBOARD_ARROW_UP if self.is_expanded else ft.Icons.KEYBOARD_ARROW_DOWN,
-                    icon_color=p["text_secondary"], icon_size=24,
-                    on_click=lambda e: self.on_toggle()
-                )
-            ])
-        ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+        # Mobile: Use wrap=True Row to prevent overflow, no expand arrow
+        # Desktop: Use fixed Row layout with expand arrow
+        if self.is_mobile:
+            top_row = ft.Row([
+                flight_info,
+                cabin_info,
+                time_info,
+                # No expand arrow on mobile - card is still fully clickable
+            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, wrap=True, run_spacing=8)
+        else:
+            top_row = ft.Row([
+                flight_info,
+                cabin_info,
+                ft.Row([
+                    time_info, 
+                    ft.IconButton(
+                        ft.Icons.KEYBOARD_ARROW_UP if self.is_expanded else ft.Icons.KEYBOARD_ARROW_DOWN,
+                        icon_color=p["text_secondary"], icon_size=24,
+                        on_click=lambda e: self.on_toggle()
+                    )
+                ])
+            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
 
         card_content = [top_row]
         

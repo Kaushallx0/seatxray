@@ -1,4 +1,11 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""About Dialog. Shows app info and license."""
+
 import flet as ft
+import os
 import platform
 from theme import get_color_palette, COLOR_ACCENT, glass_style
 from utils.i18n import TranslationService
@@ -7,12 +14,13 @@ class AboutDialog(ft.Container):
     """
     Custom "About" dialog for SeatXray
     """
-    def __init__(self, page: ft.Page, on_close: callable, palette: dict):
+    def __init__(self, page: ft.Page, on_close: callable, palette: dict, is_mobile: bool = False):
         super().__init__()
         self.i18n = TranslationService.get_instance()
         self._page_ref = page
         self.on_close_callback = on_close
         self.palette = palette
+        self.is_mobile = is_mobile
         
         # Design settings
         is_dark = (palette["bg"] != "#f0f2f5")
@@ -22,9 +30,10 @@ class AboutDialog(ft.Container):
         self.blur = style["blur"]
         self.border = style["border"]
         self.border_radius = ft.border_radius.all(16)
-        self.padding = 30
-        self.width = 500
-        self.height = 600
+        self.padding = 20 if is_mobile else 30
+        # Responsive size: mobile uses smaller dimensions
+        self.width = 340 if is_mobile else 500
+        self.height = 500 if is_mobile else 600
         self.shadow = ft.BoxShadow(
             blur_radius=50,
             color=ft.Colors.with_opacity(0.5, "black")
@@ -117,7 +126,7 @@ class AboutDialog(ft.Container):
                 on_tap=lambda _: self._hide_license_viewer()
             ),
             ft.Container(
-                content=LicenseViewer(self._page_ref, self._hide_license_viewer, self.palette),
+                content=LicenseViewer(self._page_ref, self._hide_license_viewer, self.palette, is_mobile=self.is_mobile),
                 alignment=ft.Alignment(0, 0)
             )
         ], expand=True)
@@ -147,12 +156,13 @@ class AboutDialog(ft.Container):
 
 class LicenseViewer(ft.Container):
     """Dialog displaying full license text"""
-    def __init__(self, page: ft.Page, on_close: callable, palette: dict):
+    def __init__(self, page: ft.Page, on_close: callable, palette: dict, is_mobile: bool = False):
         super().__init__()
         self.i18n = TranslationService.get_instance()
         self._page_ref = page
         self.on_close = on_close
         self.palette = palette
+        self.is_mobile = is_mobile
         
         # Design settings
         is_dark = (palette["bg"] != "#f0f2f5")
@@ -162,10 +172,11 @@ class LicenseViewer(ft.Container):
         self.blur = style["blur"]
         self.border = style["border"]
         self.border_radius = ft.border_radius.all(16)
-        self.padding = 20
+        self.padding = 15 if is_mobile else 20
         self.item_padding = 10
-        self.width = 520
-        self.height = 700
+        # Responsive size: mobile uses smaller dimensions
+        self.width = 340 if is_mobile else 520
+        self.height = 550 if is_mobile else 700
         self.shadow = ft.BoxShadow(blur_radius=50, color=ft.Colors.with_opacity(0.5, "black"))
         
         self.content = self._build_content()
@@ -184,8 +195,15 @@ class LicenseViewer(ft.Container):
         
         return ft.Column([
             ft.Row([
-                ft.Text("GNU Affero General Public License v3.0", size=18, weight="bold", color=p["text"]),
-                ft.Container(expand=True),
+                ft.Text(
+                    "GNU Affero General Public License v3.0", 
+                    size=16 if self.is_mobile else 18, 
+                    weight="bold", 
+                    color=p["text"],
+                    expand=True,  # Allow expanding/wrapping
+                    no_wrap=False  # Allow wrapping
+                ),
+                # ft.Container(expand=True),  # Removed spacer since Text expands
                 ft.IconButton(ft.Icons.CLOSE, on_click=lambda e: self.on_close(), icon_color=p["text_secondary"])
             ], vertical_alignment=ft.CrossAxisAlignment.CENTER),
             ft.Divider(color=p["divider"]),
@@ -200,7 +218,12 @@ class LicenseViewer(ft.Container):
 
     def _load_license_text(self):
         try:
-            with open("LICENSE", "r", encoding="utf-8") as f:
+            # Resolve path relative to this file to find src/assets/LICENSE
+            # This file is in src/components, so ../assets/LICENSE points to src/assets/LICENSE
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            license_path = os.path.join(current_dir, "..", "assets", "LICENSE")
+            
+            with open(license_path, "r", encoding="utf-8") as f:
                 self.text_view.value = f.read()
         except Exception as e:
             self.text_view.value = f"{self.i18n.tr('common.error')}:\n{e}"

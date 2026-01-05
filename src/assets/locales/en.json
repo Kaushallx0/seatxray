@@ -74,6 +74,7 @@
         "msg_success": "Connected! Settings saved.",
         "msg_auth_error": "Auth Error: Please check your keys.",
         "msg_demo_reset": "Reset to Demo Mode.",
+        "msg_empty_credentials": "Please enter API Key and Secret.",
         "stat_unit": "{count} times"
     },
     "about": {

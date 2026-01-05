@@ -1,20 +1,33 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""Seat Canvas. Renders seat map via Flet Canvas."""
+
 import flet as ft
 import re
 from utils.i18n import TranslationService
 
-def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: dict):
+def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: dict, is_mobile: bool = False):
     """
     Function to render the seat map.
     Uses characteristicsCodes (W=Window, A=Aisle) to accurately detect aisle positions.
     """
     i18n = TranslationService.get_instance()
     
-    # --- Constants ---
-    FUSELAGE_WIDTH = 650
-    SEAT_GAP = 4
-    AISLE_GAP = 20  # Wider gap for aisles
-    MIN_SEAT_SIZE = 40
-    MAX_SEAT_SIZE = 56
+    # --- Constants (adjusted for mobile) ---
+    if is_mobile:
+        FUSELAGE_WIDTH = 540  # Increased for wide rows
+        SEAT_GAP = 3
+        AISLE_GAP = 14
+        MIN_SEAT_SIZE = 44  # Larger seats for easy touch
+        MAX_SEAT_SIZE = 52
+    else:
+        FUSELAGE_WIDTH = 650
+        SEAT_GAP = 4
+        AISLE_GAP = 20
+        MIN_SEAT_SIZE = 40
+        MAX_SEAT_SIZE = 56
     
     # --- Data Organization Logic ---
     cabin_rows = {}  # cabin -> { row_num: [seats...] }
@@ -194,27 +207,65 @@ def SeatCanvas(seats: dict, facilities: list, on_seat_click: callable, palette: 
                 controls=seat_widgets, spacing=SEAT_GAP, alignment=ft.MainAxisAlignment.CENTER,
             ))
     
-    seat_grid = ft.Column(
-        controls=ui_controls, spacing=SEAT_GAP, scroll=ft.ScrollMode.AUTO,
-        expand=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+    # Seat grid - on mobile, enable 2D scrolling by wrapping in scrollable containers
+    if is_mobile:
+        # Create a Column with vertical scroll that contains all rows
+        # Each row has fixed width (FUSELAGE_WIDTH) to enable horizontal scroll at parent level
+        inner_column = ft.Column(
+            controls=ui_controls, 
+            spacing=SEAT_GAP, 
+            horizontal_alignment=ft.CrossAxisAlignment.START,
+        )
+        # Wrap in container with fixed width for horizontal scroll
+        seat_grid = ft.Container(
+            content=inner_column,
+            width=FUSELAGE_WIDTH,
+        )
+        # Outer container: horizontal scroll + vertical scroll
+        seat_grid = ft.Column(
+            controls=[
+                ft.Row(
+                    controls=[seat_grid],
+                    scroll=ft.ScrollMode.AUTO,  # Horizontal scroll
+                )
+            ],
+            scroll=ft.ScrollMode.AUTO,  # Vertical scroll
+            expand=True,
+        )
+    else:
+        seat_grid = ft.Column(
+            controls=ui_controls, spacing=SEAT_GAP, scroll=ft.ScrollMode.AUTO,
+            expand=True, horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+    
+    # Legend (responsive for mobile - larger but horizontally scrollable)
+    legend_icon_size = 20 if is_mobile else 24
+    legend_text_size = 14 if is_mobile else 16
+    legend_spacing = 12 if is_mobile else 24
+    
+    legend_row = ft.Row(
+        controls=[
+            ft.Container(width=legend_icon_size, height=legend_icon_size, bgcolor="#00b96b", border_radius=4),
+            ft.Text(i18n.tr("seatmap.status_available"), size=legend_text_size, color=palette["text"]),
+            ft.Container(width=legend_spacing),
+            ft.Container(width=legend_icon_size, height=legend_icon_size, bgcolor="#555555", border_radius=4),
+            ft.Text(i18n.tr("seatmap.status_occupied"), size=legend_text_size, color=palette["text_secondary"]),
+            ft.Container(width=legend_spacing),
+            ft.Container(width=legend_icon_size, height=legend_icon_size, bgcolor="#ffb020", border_radius=4),
+            ft.Text(i18n.tr("seatmap.status_blocked"), size=legend_text_size, color=palette["text_secondary"]),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER if not is_mobile else ft.MainAxisAlignment.START,
+        spacing=6,
     )
     
-    legend = ft.Row(
-        controls=[
-            ft.Container(width=24, height=24, bgcolor="#00b96b", border_radius=6),
-            ft.Text(i18n.tr("seatmap.status_available"), size=16, color=palette["text"]),
-            ft.Container(width=24),
-            ft.Container(width=24, height=24, bgcolor="#555555", border_radius=6),
-            ft.Text(i18n.tr("seatmap.status_occupied"), size=16, color=palette["text_secondary"]),
-            ft.Container(width=24),
-            ft.Container(width=24, height=24, bgcolor="#ffb020", border_radius=6),
-            ft.Text(i18n.tr("seatmap.status_blocked"), size=16, color=palette["text_secondary"]),
-            ft.Container(width=24),
-            ft.Container(width=24, height=24, border=ft.Border.all(3, "#00ff88"), border_radius=6),
-            ft.Text(i18n.tr("seatmap.feature_exit"), size=16, color="#00ff88" if palette["text"] == "white" else "#009944"),
-        ],
-        alignment=ft.MainAxisAlignment.CENTER,
-    )
+    # Wrap in horizontal scroll container for mobile
+    if is_mobile:
+        legend = ft.Container(
+            content=ft.Row([legend_row], scroll=ft.ScrollMode.AUTO),
+            padding=ft.Padding(8, 8, 8, 8),
+        )
+    else:
+        legend = legend_row
     
     return ft.Column(
         controls=[

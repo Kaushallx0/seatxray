@@ -1,3 +1,9 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""Airport Picker. Autocomplete airport search."""
+
 import flet as ft
 from utils.i18n import TranslationService
 

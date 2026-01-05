@@ -1,4 +1,10 @@
 
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""Amadeus Client. Handles API communication."""
+
 import os
 import json
 import time

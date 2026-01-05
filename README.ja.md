@@ -17,12 +17,20 @@
 
 ## 概要
 
-**SeatXray** は、航空便の空席状況を詳細に解析・可視化するためのデスクトップアプリケーションです。
+**SeatXray** は、航空便の空席状況を詳細に解析・可視化するためのデスクトップ・モバイルアプリケーションです。
+
 通常のサイトではグレーアウトしていて指定できない座席が、「本当に人が座っている」のか、それとも「航空会社がブロックしている」のかを判別します。
 
-Amadeus Self-Service APIを使用し、航空会社公式サイトよりも詳しい情報を取得しています。
+Amadeus Self-Service APIを使用し、航空会社公式サイトよりも詳しい情報を取得しています。現在はWindowsとAndroidにてご利用いただけます。
 
-## 主な機能
+> ### お知らせ
+>
+> 本アプリケーションは現在開発段階であり、予期せぬバグが含まれている可能性があります。
+> 特にスマートフォン（Android）版に関しては最適化が完了しておらず、パフォーマンスの低下や表示崩れなどの問題が発生する場合があります。予めご了承ください。
+>
+> また、iOS版やmacOS版も計画しておりますが、開発者の環境の都合上当面の間は開発を進めることができません。
+
+## 特長
 
 - 航空便の検索
 - 各座席の空席、予約済み、ブロック中を色分けして座席表として表示
@@ -38,7 +46,12 @@ Microsoft Store からダウンロードしてインストールしてくださ�
 <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
 
-### macOS / Linux
+### Android
+[Releasesページ](https://github.com/SeatXray/seatxray/releases)より最新の APK ファイル (`app-release.apk`) をダウンロードし、お使いのAndroidデバイスにインストールしてください。
+
+※ 現在、Google Play Store での配信を行えておりません。ご了承ください。
+
+### macOS / Linux / iOS
 現状はサポートしておりません。
 
 ## 使い方
@@ -73,8 +86,14 @@ cd seatxray
 # 依存関係のインストール
 pip install -r requirements.txt
 
-# 実行
+# 実行(Windows)
 flet run src/main.py
+
+# 実行(Android)
+# 実行するデバイス・エミュレーターのIDを確認
+flet devices
+# --device-id オプションにて指定
+flet debug android --devide-id emulator-XXXX
 ```
 
 ### Windows ビルド
@@ -86,9 +105,15 @@ flet run src/main.py
 .\package_msix.ps1
 ```
 
+### Android ビルド
+```bash
+# 特に特別なコマンドは必要ありません
+flet build apk
+```
+
 ## 免責事項
 
-本アプリが表示するデータは Amadeus Test/Production API から取得したものですが、航空会社のリアルタイムな在庫状況と完全に一致することを保証するものではありません。
+本アプリが表示するデータは Amadeus Self-Service API から取得したものですが、航空会社のリアルタイムな空席状況と完全に一致することを保証するものではありません。
 
 Amadeus APIの利用には所定の利用料が発生します。各APIごとに異なる無料枠や利用料が設定されておりますので、詳細はAmadeus for Developersの[pricingページ](https://developers.amadeus.com/pricing)をご確認ください。
 
@@ -99,5 +124,8 @@ Amadeus APIの利用には所定の利用料が発生します。各APIごとに
 このプロジェクトは **GNU Affero General Public License v3.0 (AGPL-3.0)** の下で公開されています。
 詳細は [LICENSE](LICENSE) ファイルをご確認ください。
 
----
-Created by SeatXray/ryyr-ry
+<br>
+
+<div align="right">
+    Created by <a href="https://github.com/SeatXray">SeatXray</a> / <a href="https://github.com/ryyr-ry">ryyr-ry</a>
+</div>

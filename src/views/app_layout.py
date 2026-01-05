@@ -1,3 +1,9 @@
+# Copyright (c) 2026 SeatXray Developers
+# Licensed under the terms of the GNU Affero General Public License (AGPL) version 3.
+# See LICENSE file in the project root for details.
+
+"""App Layout. Responsive shell with nav."""
+
 import flet as ft
 import asyncio
 from views.settings_view import SettingsContent
@@ -33,22 +39,22 @@ class AppLayout(ft.View):
         # 2b. Platform Check
         self.is_mobile = page.platform in [ft.PagePlatform.ANDROID, ft.PagePlatform.IOS]
         
-        # 3. Super Init
-        super().__init__(
-            route="/", 
-            padding=0,
-        )
-
+        # 3. Build Layout based on platform
         if self.is_mobile:
             # === Mobile Layout ===
-            self.navigation_bar = self._build_bottom_bar()
-            self.controls = [
-                ft.SafeArea(self.content_area, expand=True)
+            print(f"[AppLayout] Mobile layout detected")
+            nav_bar = self._build_bottom_bar()
+            # Ensure content_area has a valid child
+            self.content_area.content = ft.Text("Loading...", color="white")
+            layout_controls = [
+                ft.SafeArea(content=self.content_area, expand=True)
             ]
+            print(f"[AppLayout] Mobile controls built: {len(layout_controls)} items")
         else:
             # === Desktop Layout ===
+            nav_bar = None
             self.nav_rail = self._build_sidebar()
-            self.controls = [
+            layout_controls = [
                 ft.Row(
                     [
                         self.nav_rail,
@@ -63,7 +69,15 @@ class AppLayout(ft.View):
                 ) 
             ]
         
-        # 4. Set Initial Content (Do not call update() in init!)
+        # 4. Super Init with controls passed to constructor
+        super().__init__(
+            route="/", 
+            padding=0,
+            controls=layout_controls,
+            navigation_bar=nav_bar,
+        )
+        
+        # 5. Set Initial Content (Do not call update() in init!)
         self._set_initial_view()
 
     def _set_initial_view(self):
@@ -99,12 +113,12 @@ class AppLayout(ft.View):
         return ft.NavigationBar(
             selected_index=self.current_idx,
             destinations=[
-                ft.NavigationDestination(
+                ft.NavigationBarDestination(
                     icon=ft.Icons.SEARCH, 
                     selected_icon=ft.Icons.SEARCH, 
                     label=tr("nav.search")
                 ),
-                ft.NavigationDestination(
+                ft.NavigationBarDestination(
                     icon=ft.Icons.SETTINGS, 
                     selected_icon=ft.Icons.SETTINGS, 
                     label=tr("nav.settings")
@@ -168,8 +182,17 @@ class AppLayout(ft.View):
                 on_theme_toggle=self._rebuild_app
             )
         
+        # Only update if already added to page (avoid errors during init)
+        # Check is_mobile to use appropriate update logic
         try:
-            self.content_area.update()
+            if self.is_mobile:
+                # Mobile: check page.controls
+                if self.page_ref and len(self.page_ref.controls) > 0:
+                    self.content_area.update()
+            else:
+                # Desktop: check page.views
+                if self.page_ref and len(self.page_ref.views) > 0:
+                    self.content_area.update()
         except:
             pass
 
@@ -185,7 +208,9 @@ class AppLayout(ft.View):
         
         # Recreate navigation
         if self.is_mobile:
-             self.navigation_bar = self._build_bottom_bar()
+            # On mobile, navigation_bar is attached to page directly
+            self.navigation_bar = self._build_bottom_bar()
+            self.page_ref.navigation_bar = self.navigation_bar
         else:
             self.controls[0].controls[0] = self._build_sidebar()
             self.controls[0].controls[0].selected_index = self.current_idx
