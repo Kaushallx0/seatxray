@@ -30,20 +30,26 @@ theme:
 extra:
   generator: false
 
-nav:
-  - Welcome: index.md
-  - Japanese:
-      - 概要: ja/index.md
-      - セットアップガイド: ja/setup.md
-      - プライバシーポリシー: ja/privacy.md
-      - 免責事項: ja/disclaimer.md
-  - English:
-      - Home: en/index.md
-      - Setup Guide: en/setup.md
-      - Privacy Policy: en/privacy.md
-      - Disclaimer: en/disclaimer.md
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: ja
+          name: 日本語
+          build: true
 
-copyright: "Copyright &copy; 2025 SeatXray Project"
+nav:
+  - Home: index.md
+  - Setup: setup.md
+  - Privacy Policy: privacy.md
+  - Disclaimer: disclaimer.md
+
+copyright: "Copyright &copy; 2026 SeatXray Project"
 
 markdown_extensions:
   - admonition

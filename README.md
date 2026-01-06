@@ -44,8 +44,8 @@ It uses the Amadeus Self-Service API to retrieve information more detailed than 
 ### Windows
 Download and install from the Microsoft Store.
 
-<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH" target="_blank">
-<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge&mode=direct">
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250" alt="Get it from Microsoft"/>
 </a>
 
 ### Android

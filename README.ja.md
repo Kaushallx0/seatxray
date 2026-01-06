@@ -1,8 +1,8 @@
-# SeatXray
-
 <div align="right">
     <a href="README.md">English</a> | <a href="README.ja.md">日本語</a>
 </div>
+
+# SeatXray
 
 <div align="center">
 
@@ -42,8 +42,8 @@ Amadeus Self-Service APIを使用し、航空会社公式サイトよりも詳�
 ### Windows
 Microsoft Store からダウンロードしてインストールしてください。
 
-<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH" target="_blank">
-<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge&mode=direct">
+    <img src="https://get.microsoft.com/images/ja%20dark.svg" width="250" alt="Microsoft Storeから入手"/>
 </a>
 
 ### Android

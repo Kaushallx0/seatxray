@@ -125,9 +125,9 @@ config.json
 # Force English Locale execution script
 run_en.py
 
-# Documentation & Personal
+# Personal
 # Private TODO list for development tracking
-docs/TODO.md
+TODO.md
 
 # MS Store Assets & Tools
 # Script to process app icon for Microsoft Store

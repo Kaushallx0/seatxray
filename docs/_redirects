@@ -1,0 +1,5 @@
+# Redirect /en/* to root (default language is English)
+/en/ / 301
+/en/setup/ /setup/ 301
+/en/privacy/ /privacy/ 301
+/en/disclaimer/ /disclaimer/ 301

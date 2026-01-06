@@ -1,19 +1,24 @@
 # SeatXray
 
-**SeatXray** is a tool that analyzes flight seat maps and visualizes the distinction between "Blocked" and "Occupied" seats, which are normally grayed out and hidden.
+**SeatXray** analyzes flight seat maps and provides detailed visualization of "Blocked" and "Occupied" seats, which are typically grayed out and indistinguishable.
 
-> This application is currently under development. Analysis logic may be incomplete and bugs may exist. We do not guarantee the accuracy of the information displayed.
+> This application is currently under development. Analysis logic may be incomplete and bugs may exist. We do not guarantee the accuracy of the information displayed. Especially for the Android version, please note that it is currently experimental, and performance issues or display glitches may occur.
 
-## Key Features
+## Features
 
-- **Detailed Seat Analysis**: Distinguishes whether a seat is "Occupied" (by another passenger) or "Blocked" (by the airline), rather than just showing it as "Unavailable".
-- **Privacy**: No data is sent to or collected by external parties (including the developers). All information is securely recorded only on your device or your specified storage locations.
-- **Intuitive Operation**: Organizes complex data to allow anyone to easily understand seat availability at a glance.
+- Visualizes detailed seat statuses that are normally indistinguishable, showing whether a seat is occupied by another passenger or blocked by the airline
+- Secure design that stores all data only on your device or your specified cloud storage, without passing through external servers
+- Cross-platform support for Windows and Android, offering the same comfortable experience on both your home PC and mobile device
+- Provides an intuitive interface that organizes complex airline data with color-coded layouts, allowing anyone to understand seat availability at a glance
 
 ## Getting Started
+
+<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge&mode=direct">
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250" alt="Get it from Microsoft"/>
+</a>
 
 Please refer to the [Setup Guide](setup.md) to acquire and configure your API keys.
 
 ## Technology Stack
-- **Flet**: A framework that enables fast and modern UI.
-- **Amadeus API**: An industry-standard system for managing global flight data.
+- Flet (Python framework for cross-platform development)
+- Amadeus API (Global flight data management system)
