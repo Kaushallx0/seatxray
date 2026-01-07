@@ -25,4 +25,4 @@ API requests are executed only in response to user actions such as searches or s
 
 ### 5. Statistics and Disclaimer
 
-Data such as statistics on the number of API calls are completed within the App and are not sent externally, but data handling during communication is subject to the [Amadeus Privacy Policy](https://developers.amadeus.com/legal/privacy-policy).
+Data such as statistics on the number of API calls are completed within the App and are not sent externally, but data handling during API communication is subject to the [Amadeus Privacy Policy](https://developers.amadeus.com/legal/privacy-policy).

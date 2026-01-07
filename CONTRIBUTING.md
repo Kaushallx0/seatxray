@@ -1,62 +1,75 @@
 # Contributing to SeatXray
 
-First off, thanks for taking the time to contribute! 🎉
+Thank you for your interest in contributing to SeatXray. This document outlines the process for reporting bugs, suggesting features, and submitting code changes.
 
-SeatXray is an open-source project, and we welcome contributions from the community. Whether you're fixing a bug, improving documentation, or adding a new feature, your help is appreciated.
+## Bug Reports
 
-## How Can I Contribute?
+When reporting a bug, please include:
 
-### Reporting Bugs
+1.  **Title**: Clear and descriptive.
+2.  **Reproduction Steps**: Detailed actions to reproduce the issue.
+3.  **Expected vs. Actual Behavior**: What should have happened vs. what happened.
+4.  **Environment**: OS version, App version.
+5.  **Screenshots/Logs**: Any relevant visual aids or error logs.
 
-This section guides you through submitting a bug report for SeatXray. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
+## Feature Requests
 
-- **Check existing issues** to see if the bug has already been reported.
-- **Use a clear and descriptive title** for the issue to identify the problem.
-- **Describe the reproduction steps** in detail.
-- **Include screenshots** if possible.
+Please provide:
 
-### Suggesting Enhancements
+1.  **Goal**: What you want to achieve.
+2.  **Use Case**: Why this feature is necessary.
+3.  **Proposed Solution**: How you envision it working.
 
-This section guides you through submitting an enhancement suggestion for SeatXray, including completely new features and minor improvements to existing functionality.
+## Development Workflow
 
-- **Check existing issues** to see if the feature has already been requested.
-- **Explain why this enhancement would be useful** to most SeatXray users.
+1.  **Fork** the repository.
+2.  **Clone** your fork.
+3.  **Branch** for your changes (e.g., `fix/ui-alignment`, `feat/new-language`).
+4.  **Commit** with descriptive messages.
+5.  **Pull Request** to the `main` branch.
 
-### Contributing Code
+### Environment Setup
 
-1.  **Fork the repository** on GitHub.
-2.  **Clone your fork** locally:
-    ```bash
-    git clone https://github.com/YOUR-USERNAME/seatxray.git
-    cd seatxray
-    ```
-3.  **Create a branch** for your edits.
-4.  **Make your changes**.
-5.  **Test your changes** locally.
-6.  **Submit a Pull Request** to the `main` branch of the original repository.
-
-### Development Setup
-
-Please refer to the [README](README.md#development) for detailed instructions on setting up the development environment.
-
-**Key Requirements:**
-- Python 3.12+
-- Flutter (for Flet build)
-
-### Translations
-
-We welcome translations! If you want to add a new language or improve an existing one:
-
-1.  Locate the locale files in `src/assets/locales/`.
-2.  Create a new JSON file for your language (e.g., `fr.json`) or edit an existing one.
-3.  Keep the structure consistent with `en.json`.
+Refer to [README.md](README.md#development).
+Requirements: Python 3.12+, Flutter (for Flet build).
 
 ## Code Style
 
-- Follow **PEP 8** guidelines for Python code.
-- Ensure variable and function names are descriptive.
-- Add comments for complex logic.
+-   Follow **PEP 8** for Python.
+-   Use type hints.
+-   Write comments for complex logic.
+
+## Adding a New Language
+
+To add support for a new language (e.g., French `fr`), you must modify the following four components.
+
+### 1. Translation File
+
+Create a new JSON file in `src/assets/locales/`.
+*   Path: `src/assets/locales/fr.json`
+*   Copy the structure from `en.json` and translate all values.
+
+### 2. Airport Database
+
+Create a specific directory and file for airport names.
+*   Path: `src/assets/locales/fr/airports.json`
+*   Format: List of airport objects. See `src/assets/locales/en/airports.json` for reference.
+
+### 3. Settings UI
+
+Update the language selection dropdown in `src/views/settings_view.py`.
+Add your new option to the `ft.Dropdown` configuration:
+
+```python
+ft.dropdown.Option("fr", "Français (French)")
+```
+
+### 4. Currency & formatting
+
+Update `src/utils/i18n.py` to define the default currency and formatting rules for the new locale.
+*   Update `get_default_currency`: Map `fr` to `EUR`.
+*   Update `format_currency`: Ensure appropriate symbol usage if not already present.
 
 ## License
 
-By contributing to SeatXray, you agree that your contributions will be licensed under its **AGPL-3.0** license.
+Contributed code will be licensed under the project's **AGPL-3.0** license.

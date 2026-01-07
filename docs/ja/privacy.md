@@ -25,4 +25,4 @@ APIリクエストは検索やスキャンなどのユーザー操作に応じ�
 
 ### 5. 統計および免責
 
-API呼び出し回数の統計などのデータはアプリ内で完結し、外部送信は行われませんが、通信時のデータ取り扱いは[Amadeus社のプライバシーポリシー](https://developers.amadeus.com/legal/privacy-policy)が適用されます。
+API呼び出し回数の統計などのデータはアプリ内で完結し、外部送信は行われませんが、API通信時のデータ取り扱いは[Amadeus社のプライバシーポリシー](https://developers.amadeus.com/legal/privacy-policy)が適用されます。

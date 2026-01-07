@@ -6,12 +6,12 @@
 
 ## Features
 
-- Visualizes detailed seat statuses that are normally indistinguishable, showing whether a seat is occupied by another passenger or blocked by the airline
+- Visualizes detailed occupied/blocked seat statuses that are typically indistinguishable
 - Secure design that stores all data only on your device or your specified cloud storage, without passing through external servers
 - Cross-platform support for Windows and Android, offering the same comfortable experience on both your home PC and mobile device
-- Provides an intuitive interface that organizes complex airline data with color-coded layouts, allowing anyone to understand seat availability at a glance
+- Provides an intuitive interface with color-coded layouts, allowing anyone to understand seat availability at a glance
 
-## Getting Started
+## Usage
 
 <a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge&mode=direct">
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250" alt="Get it from Microsoft"/>
@@ -20,5 +20,5 @@
 Please refer to the [Setup Guide](setup.md) to acquire and configure your API keys.
 
 ## Technology Stack
-- Flet (Python framework for cross-platform development)
+- Flet (Python GUI framework for cross-platform development)
 - Amadeus API (Global flight data management system)

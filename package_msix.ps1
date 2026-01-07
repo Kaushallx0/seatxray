@@ -9,7 +9,7 @@ Write-Host "=== SeatXray MSIX Packager ===" -ForegroundColor Cyan
 # 1. Config
 $buildDir = "build\windows"
 $sourceIcon = "src\assets\icon.png"
-$targetMsix = "build\SeatXray_0.2.0.msix"
+$targetMsix = "build\SeatXray_0.2.1.msix"
 $pfxPath = "build\SeatXray_Key.pfx"
 $publisher = "CN=33D8BA06-78D8-4319-B5F0-45A7789CD09B"
 $certPassword = "password"
@@ -31,7 +31,7 @@ $manifestContent = @"
   <Identity
     Name="SeatXray.SeatXray"
     Publisher="$publisher"
-    Version="0.2.0.0"
+    Version="0.2.1.0"
     ProcessorArchitecture="x64" />
 
   <Properties>

@@ -9,7 +9,7 @@ Actual conditions may differ due to airline circumstances such as aircraft chang
 
 ### 2. Use of Third-Party Services
 
-The App uses the Amadeus Developers system and operates in compliance with the service provider's terms and policies.
+The App uses the Amadeus for Developers system and operates in compliance with the service provider's terms and policies.
 Based on the terms, data storage is limited to temporary records within the App, and no redistribution or long-term storage is performed.
 Communication is performed using your own API keys, and the App does not store your information on external servers or redistribute it to third parties.
 
