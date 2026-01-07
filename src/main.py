@@ -68,9 +68,10 @@ async def main(page: ft.Page):
     page.padding = 0
 
     # Fonts configuration
+    # Note: Paths must be relative to assets_dir (no 'assets/' prefix)
     page.fonts = {
-        "NotoSansJP": "assets/fonts/NotoSansJP-Regular.ttf",
-        "NotoSansJP-Bold": "assets/fonts/NotoSansJP-Bold.ttf"
+        "NotoSansJP": "/fonts/NotoSansJP-Regular.ttf",
+        "NotoSansJP-Bold": "/fonts/NotoSansJP-Bold.ttf"
     }
     
     # Apply font to theme
