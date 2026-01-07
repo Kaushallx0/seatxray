@@ -70,13 +70,13 @@ async def main(page: ft.Page):
     # Fonts configuration
     # Note: Paths must be relative to assets_dir (no 'assets/' prefix)
     page.fonts = {
-        "NotoSansJP": "/fonts/NotoSansJP-Regular.ttf",
-        "NotoSansJP-Bold": "/fonts/NotoSansJP-Bold.ttf"
+        "IBMPlexSansJP": "/fonts/IBMPlexSansJP-Regular.ttf",
+        "IBMPlexSansJP-Bold": "/fonts/IBMPlexSansJP-Bold.ttf"
     }
     
     # Apply font to theme
-    page.theme = ft.Theme(font_family="NotoSansJP")
-    
+    # Use IBM Plex Sans JP for all platforms for consistent design
+    page.theme = ft.Theme(font_family="IBMPlexSansJP")
     # --- 3. State Initialization ---
     app_state = AppState()
     

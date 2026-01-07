@@ -282,7 +282,6 @@ class SettingsContent(ft.Column):
             ft.Container(
                 content=ft.Column([
                     ft.Text(tr("settings.title"), size=48, weight="bold", color=p["text"]),
-                    ft.Text(tr("settings.subtitle"), size=20, color=p["text_secondary"]),
                     ft.Divider(height=30, color="transparent"),
                     api_card,
                     appearance_card,

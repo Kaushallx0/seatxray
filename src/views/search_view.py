@@ -64,7 +64,6 @@ class SearchContent(ft.Column):
         # Header
         header = ft.Column([
             ft.Text(tr("search.header_title"), size=48, weight="bold", color=p["text"]),
-            ft.Text(tr("search.header_subtitle"), size=18, color=p["text_secondary"]),
         ], spacing=5)
         
         # Search Bar
@@ -112,7 +111,7 @@ class SearchContent(ft.Column):
                     ref=self.date_ref,
                     label=tr("common.date"), 
                     value=def_dat, 
-                    width=140,
+                    width=160,
                     border_color=p["border"],
                     color=p["text"],
                     text_size=18,
@@ -130,7 +129,7 @@ class SearchContent(ft.Column):
                     ref=self.window_ref,
                     label=tr("search.label_search_range"),
                     value=def_win,
-                    width=160,
+                    width=180,
                     border_color=p["border"],
                     color=p["text"],
                     text_size=18,
@@ -234,7 +233,6 @@ class SearchContent(ft.Column):
         inner_column = main_container.content
         header = inner_column.controls[0]  # ft.Column containing header texts
         header.controls[0].color = new_palette["text"]  # Title
-        header.controls[1].color = new_palette["text_secondary"]  # Subtitle
         
         # Update search bar background and border
         search_bar = inner_column.controls[2]  # ft.Container
