@@ -148,7 +148,7 @@ wheels = [
 
 [[package]]
 name = "flet"
-version = "0.80.0"
+version = "0.80.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "httpx", marker = "platform_system != 'Pyodide'" },
@@ -156,9 +156,9 @@ dependencies = [
     { name = "oauthlib", marker = "platform_system != 'Pyodide'" },
     { name = "repath" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/cd/ab/038c52c3dc5c3e330a582ae7bbd5e57697a8f583ed9fa2dc5b6bf144f0d7/flet-0.80.0.tar.gz", hash = "sha256:f2d4607d2e5d1e55286799c2a4c8188386b21641ac56481384d0fc58ec171cbd", size = 349614, upload-time = "2025-12-25T01:32:48.719Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0a/80/0dbf92f0d829729be0f22721fa7dd6cffbdaca6017e51379f96666f20d65/flet-0.80.1.tar.gz", hash = "sha256:1ecfa713e46051c3b4b856ac9d46bb69aa476c51d35823b518387cfb2d415d64", size = 349528, upload-time = "2026-01-02T21:40:32.697Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/25/be/59da1b8760a2e786d5efed9be9e53c1499508fdedba1f5f0e5ac5f413e4c/flet-0.80.0-py3-none-any.whl", hash = "sha256:06cf3bef89c6448c5ae285a5bfba4af23ce67897293ea4552a6f6f546f485916", size = 440670, upload-time = "2025-12-25T01:32:47.102Z" },
+    { url = "https://files.pythonhosted.org/packages/fe/20/085201355f6525756ab32fc766e26559983ca6cbc0bd24e073846cf5492f/flet-0.80.1-py3-none-any.whl", hash = "sha256:645dfa7e0ff9648b94a3a47b6e0f26944046200e631e25f397bd4c5295067b9d", size = 440587, upload-time = "2026-01-02T21:40:30.988Z" },
 ]
 
 [[package]]
@@ -261,15 +261,6 @@ wheels = [
 ]
 
 [[package]]
-name = "packaging"
-version = "25.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz", hash = "sha256:d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f", size = 165727, upload-time = "2025-04-19T11:48:59.673Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl", hash = "sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484", size = 66469, upload-time = "2025-04-19T11:48:57.875Z" },
-]
-
-[[package]]
 name = "pillow"
 version = "12.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -368,7 +359,6 @@ dependencies = [
     { name = "cryptography" },
     { name = "flet" },
     { name = "httpx" },
-    { name = "packaging" },
     { name = "pillow" },
     { name = "toml" },
 ]
@@ -377,9 +367,8 @@ dependencies = [
 requires-dist = [
     { name = "aiofiles", specifier = ">=25.1.0" },
     { name = "cryptography", specifier = ">=46.0.3" },
-    { name = "flet", specifier = "==0.80.0" },
+    { name = "flet", specifier = "==0.80.1" },
     { name = "httpx", specifier = ">=0.28.1" },
-    { name = "packaging" },
     { name = "pillow", specifier = ">=12.1.0" },
     { name = "toml", specifier = ">=0.10.2" },
 ]

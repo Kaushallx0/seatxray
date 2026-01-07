@@ -8,9 +8,6 @@
 
 # SeatXray
 
-**X-ray vision for flight seats.**
-**See beyond "Unavailable". Know if it's Occupied or Blocked.**
-
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![Flet](https://img.shields.io/badge/Flet-0.80.1-purple.svg)](https://flet.dev/)
 [![Amadeus API](https://img.shields.io/badge/Amadeus-Flight%20Offers%20%26%20SeatMap-blue)](https://developers.amadeus.com/)

@@ -2,11 +2,11 @@
     <a href="README.md">English</a> | <a href="README.ja.md">日本語</a>
 </div>
 
-# SeatXray
-
 <div align="center">
 
 <img src="src/assets/icon.png" width="128" alt="SeatXray Logo">
+
+# SeatXray
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![Flet](https://img.shields.io/badge/Flet-0.80.1-purple.svg)](https://flet.dev/)
