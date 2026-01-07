@@ -350,7 +350,7 @@ class SearchContent(ft.Column):
             
             # Vertical: Directly below the input field
             # Consider the entire search bar position
-            top_pos = 265  # Below the input field
+            top_pos = 232  # Below the input field (adjusted for subtitle removal)
             
             # Suggestion box
             suggestions_box = ft.Container(
