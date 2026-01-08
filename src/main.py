@@ -101,9 +101,17 @@ async def main(page: ft.Page):
     else:
         app_state.currency = get_default_currency(app_state.locale)
     
-    # Load Credentials for Global Service
-    key = await page.shared_preferences.get("amadeus_api_key")
-    secret = await page.shared_preferences.get("amadeus_api_secret")
+    # Load Credentials (encrypted, with auto-migration)
+    from utils.secure_storage import load_credential
+    key, key_failed = await load_credential(page, "amadeus_api_key")
+    secret, secret_failed = await load_credential(page, "amadeus_api_secret")
+    
+    # Set decryption failure flag for UI warning
+    app_state.decryption_failed = key_failed or secret_failed
+    
+    # Store decrypted credentials in app_state for settings display
+    app_state.api_key = key if key else ""
+    app_state.api_secret = secret if secret else ""
     
     # Global Service (Single Instance)
     amadeus = AmadeusClient(key, secret, page=page)

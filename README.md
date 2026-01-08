@@ -25,7 +25,8 @@ It uses the Amadeus Self-Service API to retrieve information more detailed than 
 > ### Notice
 >
 > This application is currently in the development stage and may contain unexpected bugs.
-> Be aware that optimization for the smartphone (Android) version is not yet complete, and issues such as reduced performance or layout glitches may occur.
+>
+> As the API key encryption feature is currently experimental, it may be unstable. Also, this feature does not guarantee that data is saved securely.
 >
 > Plans for iOS and macOS versions exist, but development is currently paused due to developer environment constraints.
 
@@ -41,8 +42,8 @@ It uses the Amadeus Self-Service API to retrieve information more detailed than 
 ### Windows
 Download and install from the Microsoft Store.
 
-<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge&mode=direct">
-    <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250" alt="Get it from Microsoft"/>
+<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250" alt="Get it from Microsoft"/>
 </a>
 
 ### Android

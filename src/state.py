@@ -28,6 +28,13 @@ class AppState:
         self.locale: str = "ja"  # Default: Japanese
         self.currency: str = "JPY"  # Default: Japanese Yen
         
+        # Decryption failure flag (for UI warning)
+        self.decryption_failed: bool = False
+        
+        # Cached credentials (decrypted, for settings display)
+        self.api_key: str = ""
+        self.api_secret: str = ""
+        
         # Seat map cache {key: (data, timestamp, ttl)}
         # Volatile: expires based on Cache-Control header or max 6 hours
         self._seatmap_cache: dict = {}

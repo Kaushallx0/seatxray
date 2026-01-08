@@ -75,6 +75,7 @@
         "msg_auth_error": "Auth Error: Please check your keys.",
         "msg_demo_reset": "Reset to Demo Mode.",
         "msg_empty_credentials": "Please enter API Key and Secret.",
+        "msg_decryption_failed": "Decryption failed. Please re-enter your API credentials.",
         "stat_unit": "{count} times"
     },
     "about": {

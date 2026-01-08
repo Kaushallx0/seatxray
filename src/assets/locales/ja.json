@@ -75,6 +75,7 @@
         "msg_auth_error": "認証エラー: キーを確認してください。",
         "msg_demo_reset": "デモモードにリセットしました。",
         "msg_empty_credentials": "APIキーとシークレットを入力してください。",
+        "msg_decryption_failed": "復号に失敗しました。APIキーを再設定してください。",
         "stat_unit": "{count} 回"
     },
     "about": {

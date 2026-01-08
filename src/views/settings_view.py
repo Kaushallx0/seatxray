@@ -9,6 +9,7 @@ from services.amadeus_client import AmadeusClient
 from theme import get_color_palette, COLOR_ACCENT
 import asyncio
 from utils.i18n import TranslationService
+from utils.secure_storage import save_credential, clear_credential
 
 
 from components.about_dialog import AboutDialog
@@ -70,7 +71,6 @@ class SettingsContent(ft.Column):
             horizontal_alignment=ft.CrossAxisAlignment.START,
         )
         
-        asyncio.create_task(self._load_settings())
         asyncio.create_task(self._refresh_stats())
 
     def _build_controls(self):
@@ -85,6 +85,7 @@ class SettingsContent(ft.Column):
                 ft.TextField(
                     ref=self.api_key_ref,
                     label=tr("settings.label_api_key"),
+                    value=self.app_state.api_key,
                     password=True,
                     can_reveal_password=True,
                     border_color=p["border"],
@@ -95,6 +96,7 @@ class SettingsContent(ft.Column):
                 ft.TextField(
                     ref=self.api_secret_ref,
                     label=tr("settings.label_api_secret"),
+                    value=self.app_state.api_secret,
                     password=True,
                     can_reveal_password=True,
                     border_color=p["border"],
@@ -282,6 +284,19 @@ class SettingsContent(ft.Column):
             ft.Container(
                 content=ft.Column([
                     ft.Text(tr("settings.title"), size=48, weight="bold", color=p["text"]),
+                    # Decryption failure warning banner
+                    ft.Container(
+                        content=ft.Text(
+                            tr("settings.msg_decryption_failed"),
+                            color=ft.Colors.WHITE,
+                            size=14,
+                        ),
+                        bgcolor=ft.Colors.RED_700,
+                        padding=12,
+                        border_radius=8,
+                        margin=ft.margin.only(top=10),
+                        visible=self.app_state.decryption_failed,
+                    ),
                     ft.Divider(height=30, color="transparent"),
                     api_card,
                     appearance_card,
@@ -355,8 +370,7 @@ class SettingsContent(ft.Column):
         self.controls.clear()
         self.controls.extend(new_controls)
         
-        # Reload data (because values are lost on UI reconstruction)
-        asyncio.create_task(self._load_settings())
+        # Reload stats (credentials are already loaded via app_state in _build_controls)
         asyncio.create_task(self._refresh_stats())
         
         try:
@@ -375,16 +389,6 @@ class SettingsContent(ft.Column):
             self.stats_seatmap_ref.current.value = self.i18n.tr("settings.stat_unit", count=m)
             self.stats_seatmap_ref.current.update()
 
-    async def _load_settings(self):
-        # Load immediately without delay
-        key = await self.page_ref.shared_preferences.get("amadeus_api_key")
-        sec = await self.page_ref.shared_preferences.get("amadeus_api_secret")
-        if self.api_key_ref.current:
-            self.api_key_ref.current.value = key if key else ""
-            self.api_key_ref.current.update()
-        if self.api_secret_ref.current:
-            self.api_secret_ref.current.value = sec if sec else ""
-            self.api_secret_ref.current.update()
 
     async def _on_save(self, e):
         key = self.api_key_ref.current.value.strip() if self.api_key_ref.current.value else ""
@@ -404,8 +408,12 @@ class SettingsContent(ft.Column):
         self.status_text_ref.current.color = self.palette["text"]
         self.status_container_ref.current.update()
         
-        await self.page_ref.shared_preferences.set("amadeus_api_key", key)
-        await self.page_ref.shared_preferences.set("amadeus_api_secret", sec)
+        # Save encrypted credentials
+        await save_credential(self.page_ref, "amadeus_api_key", key)
+        await save_credential(self.page_ref, "amadeus_api_secret", sec)
+        
+        # Clear decryption failure flag on successful save
+        self.app_state.decryption_failed = False
         
         self.amadeus.update_credentials(key, sec)
         success = await self.amadeus.authenticate()
@@ -413,6 +421,9 @@ class SettingsContent(ft.Column):
         if success:
             self.status_text_ref.current.value = self.i18n.tr("settings.msg_success")
             self.status_text_ref.current.color = ft.Colors.GREEN
+            # Update app_state for tab switching
+            self.app_state.api_key = key
+            self.app_state.api_secret = sec
         else:
             self.status_text_ref.current.value = self.i18n.tr("settings.msg_auth_error")
             self.status_text_ref.current.color = ft.Colors.RED
@@ -420,12 +431,16 @@ class SettingsContent(ft.Column):
         self.status_container_ref.current.update()
 
     async def _on_reset(self, e):
-        await self.page_ref.shared_preferences.remove("amadeus_api_key")
-        await self.page_ref.shared_preferences.remove("amadeus_api_secret")
+        await clear_credential(self.page_ref, "amadeus_api_key")
+        await clear_credential(self.page_ref, "amadeus_api_secret")
         self.api_key_ref.current.value = ""
         self.api_secret_ref.current.value = ""
         self.api_key_ref.current.update()
         self.api_secret_ref.current.update()
+        
+        # Update app_state for tab switching
+        self.app_state.api_key = ""
+        self.app_state.api_secret = ""
         
         self.amadeus.update_credentials(None, None)
         self.status_container_ref.current.visible = True

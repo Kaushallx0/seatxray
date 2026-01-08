@@ -25,10 +25,11 @@ Amadeus Self-Service APIを使用し、航空会社公式サイトよりも詳�
 
 > ### お知らせ
 >
-> 本アプリケーションは現在開発段階であり、予期せぬバグが含まれている可能性があります。
-> 特にスマートフォン（Android）版に関しては最適化が完了しておらず、パフォーマンスの低下や表示崩れなどの問題が発生する場合があります。予めご了承ください。
+> 本アプリケーションは現在開発段階であり、予期せぬ不具合が含まれている可能性があります。
 >
-> また、iOS版やmacOS版も計画しておりますが、開発者の環境の都合上当面の間は開発を進めることができません。
+> APIキーの暗号化機能は現在実験段階のため、動作が不安定になる可能性があります。また、本機能はデータが安全に保存されることを保証するものではありません。
+>
+> iOS版やmacOS版も計画しておりますが、開発者の環境の都合上当面の間は開発を進めることができません。
 
 ## 特長
 
@@ -42,7 +43,7 @@ Amadeus Self-Service APIを使用し、航空会社公式サイトよりも詳�
 ### Windows
 Microsoft Store からダウンロードしてインストールしてください。
 
-<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge&mode=direct">
+<a href="https://apps.microsoft.com/detail/9PB4V9J3LRQH?referrer=appbadge">
     <img src="https://get.microsoft.com/images/ja%20dark.svg" width="250" alt="Microsoft Storeから入手"/>
 </a>
 
